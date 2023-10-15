@@ -1,0 +1,22 @@
+# Archivos y directorios generados por Vivado
+/.Xil/
+/_xmsgs/
+/*.cache/
+/*.hw/
+/*.runs/
+/*.gen/
+/*.ip_user_files/
+/*.sim/
+*.log
+*.jou
+*.str
+
+# Configuraciones locales
+*.ini
+*.xclbin
+
+# Archivos de respaldo generados por editores de texto
+*~
+
+# Archivos de registro de compilación
+compile.log
