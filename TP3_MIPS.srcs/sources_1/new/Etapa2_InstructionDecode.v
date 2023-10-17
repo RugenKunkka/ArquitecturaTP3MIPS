@@ -52,7 +52,8 @@ module Etapa2_InstructionDecode#(
         output wire [6-1:0]o_controlALUOp,//este no se si lo vamos a sacar afuera
         output wire o_controlMemWrite,
         output wire o_controlALUSrc,
-        output wire o_controlRegWrite
+        output wire o_controlRegWrite,
+        output wire o_controlIsJALR
         
         
     );
