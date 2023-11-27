@@ -1,30 +1,10 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 10/07/2023 03:01:52 PM
-// Design Name: 
-// Module Name: E3_ALU
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
+`include "Macros.v"
 
 module E3_ALU
     // Parameters 
     #(
-        parameter   DATA_LENGTH = 32,//32
-                    OPERATORS_INPUT_SIZE = 4 
+        parameter   DATA_LENGTH = `ALU_LEN,//32
+                    OPERATORS_INPUT_SIZE = `OPERATORS_INPUT_SIZE 
     )
     // Ports
     (

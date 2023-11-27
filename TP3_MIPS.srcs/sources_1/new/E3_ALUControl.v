@@ -1,25 +1,6 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 10/07/2023 03:01:28 PM
-// Design Name: 
-// Module Name: E3_ALUControl
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
+`include "Macros.v"
 
-//este modulo en base al tipo de instruccion va a invocar o setear que operación debe de efectuar la ALU
+//este modulo en base al tipo de instruccion va a invocar o setear que operaciï¿½n debe de efectuar la ALU
 module E3_ALUControl(
         input wire [6-1:0] i_operationCode,//6 bits MSB de la isntruccion
         input wire [6-1:0] i_functionCode,//6 bits LSB de la instruccion

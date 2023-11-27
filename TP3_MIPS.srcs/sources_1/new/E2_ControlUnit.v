@@ -1,27 +1,7 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 10/06/2023 08:29:24 AM
-// Design Name: 
-// Module Name: E2_ControlUnit
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
+`include "Macros.v"
 
-
-module E2_ControlUnit(
-        input wire i_clock,
+module E2_ControlUnit
+(
         input wire i_reset,
         //6 bits MSB
         input wire [6-1:0] i_operationCode,// bits del 31-26 esto te indica el tipo de operacion por ejemplo si es R o de branch etc..
@@ -33,7 +13,7 @@ module E2_ControlUnit(
         
         //control el libro indica estos 9
         
-        //output reg o_controlMemRead,
+        output reg o_controlMemRead,
         
         output reg o_controlIsBNEQ,//te dice si es un branch not equal
         output reg o_controlIsBranch,//te dice si es un branch o no 
@@ -48,57 +28,14 @@ module E2_ControlUnit(
         output reg o_controlisJALRBit31,//te dice si es la instruccion JALR especificamente para poder guardar la direccion de retorno (PC+4) en la posicion 31 de la memoria de registros
         output reg o_controlALUSrc,//selecciona la fuente del dato 2 para la ALU, tiene un multiplexor
         
-        output reg [6-1:0]o_controlALUOp,//este no se si lo vamos a sacar afuera
+        output reg [4-1:0]o_controlALUOp,//este no se si lo vamos a sacar afuera
         
         
-        output reg o_controlHalt
+        output reg o_controlHalt,
+
+        output reg [3-1:0] o_control_whbLS
     );
-    //interface
-    /*
-        E2_ControlUnit#()
-        u_ControlUnit(
-            .i_clock(),
-            .i_reset(),
-            .i_operationCode(),
-            .i_bits20_16(),
-            .i_bits10_6(),
-            .i_bits20_6(),
-            .i_functionCode(),
-            
-            .o_controlRegDst(),
-            .o_controlMemRead(),
-            .o_controlMemtoReg(),
-            .o_controlALUOp(),
-            .o_controlMemWrite(),
-            .o_controlALUSrc(),
-            .o_controlRegWrite(),
-            
-            .o_controlIsBNEQ(),
-            .o_controlIsBranch(),
-            .o_controlIsJumpR(),
-            .o_controlIsJump(),
-            .o_controlIsJumpTipoR(),
-            
-            .o_controlHalt()
-        );
-    */
-    /*
-    o_controlRegDst=0;
-    o_controlMemRead=0;
-    o_controlMemtoReg=0;
-    o_controlALUOp=0;
-    o_controlMemWrite=0;
-    o_controlALUSrc=0;
-    o_controlRegWrite=0;
-            
-    o_controlIsBNEQ=0;
-    o_controlIsBranch=0;
-    o_controlIsJumpR=0;
-    o_controlIsJump=0;
-    o_controlIsJumpTipoR=0;
-           
-    o_controlHalt=0;
-    */
+ 
     
     always@(*) begin
         if(i_reset) begin
@@ -113,6 +50,7 @@ module E2_ControlUnit(
             o_controlIsJump=0;
             o_controlIsJumpTipoR=0;
             o_controlHalt=0;
+            o_control_whbLS = 0;
         end
         
         //JALR
@@ -140,7 +78,7 @@ module E2_ControlUnit(
             o_controlRegWrite=0;
             o_controlIsBNEQ=0;
             o_controlIsBranch=0;
-            o_controlIsJumpR=0;
+            //o_controlIsJumpR=0;
             o_controlIsJump=1;
             o_controlIsJumpTipoR=0;
             o_controlHalt=0;
@@ -157,7 +95,7 @@ module E2_ControlUnit(
             o_controlRegWrite=1;
             o_controlIsBNEQ=0;
             o_controlIsBranch=0;
-            o_controlIsJumpR=0;
+            //o_controlIsJumpR=0;
             o_controlIsJump=0;
             o_controlIsJumpTipoR=0;
             o_controlHalt=0;
@@ -199,7 +137,7 @@ module E2_ControlUnit(
                     o_controlRegWrite=0;
                     o_controlIsBNEQ=0;
                     o_controlIsBranch=0;
-                    o_controlIsJumpR=0;
+                    //o_controlIsJumpR=0;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
                     o_controlHalt=0;
@@ -218,7 +156,7 @@ module E2_ControlUnit(
                     o_controlRegWrite=0;
                     o_controlIsBNEQ=0;
                     o_controlIsBranch=0;
-                    o_controlIsJumpR=0;
+                    //o_controlIsJumpR=0;
                     o_controlIsJump=1;
                     o_controlIsJumpTipoR=0;
                     o_controlHalt=0;
@@ -235,7 +173,7 @@ module E2_ControlUnit(
                     o_controlRegWrite=0;
                     o_controlIsBNEQ=0;
                     o_controlIsBranch=0;
-                    o_controlIsJumpR=0;
+                    //o_controlIsJumpR=0;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
                     o_controlHalt=0;
@@ -250,7 +188,7 @@ module E2_ControlUnit(
                     o_controlRegWrite=0;
                     o_controlIsBNEQ=0;
                     o_controlIsBranch=0;
-                    o_controlIsJumpR=0;
+                    //o_controlIsJumpR=0;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
                     o_controlHalt=0;
@@ -265,7 +203,7 @@ module E2_ControlUnit(
                     o_controlRegWrite=0;
                     o_controlIsBNEQ=0;
                     o_controlIsBranch=0;
-                    o_controlIsJumpR=0;
+                    //o_controlIsJumpR=0;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
                     o_controlHalt=0;
@@ -282,7 +220,7 @@ module E2_ControlUnit(
                     o_controlRegWrite=0;
                     o_controlIsBNEQ=0;
                     o_controlIsBranch=0;
-                    o_controlIsJumpR=0;
+                    //o_controlIsJumpR=0;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
                     o_controlHalt=0;
@@ -297,7 +235,7 @@ module E2_ControlUnit(
                     o_controlRegWrite=0;
                     o_controlIsBNEQ=0;
                     o_controlIsBranch=0;
-                    o_controlIsJumpR=0;
+                    //o_controlIsJumpR=0;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
                     o_controlHalt=0;
@@ -312,7 +250,7 @@ module E2_ControlUnit(
                     o_controlRegWrite=0;
                     o_controlIsBNEQ=0;
                     o_controlIsBranch=0;
-                    o_controlIsJumpR=0;
+                    //o_controlIsJumpR=0;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
                     o_controlHalt=0;
@@ -327,7 +265,7 @@ module E2_ControlUnit(
                     o_controlRegWrite=0;
                     o_controlIsBNEQ=0;
                     o_controlIsBranch=0;
-                    o_controlIsJumpR=0;
+                    //o_controlIsJumpR=0;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
                     o_controlHalt=0;
@@ -342,7 +280,7 @@ module E2_ControlUnit(
                     o_controlRegWrite=0;
                     o_controlIsBNEQ=0;
                     o_controlIsBranch=0;
-                    o_controlIsJumpR=0;
+                    //o_controlIsJumpR=0;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
                     o_controlHalt=0;
@@ -373,7 +311,7 @@ module E2_ControlUnit(
                     o_controlRegWrite=0;
                     o_controlIsBNEQ=0;
                     o_controlIsBranch=0;
-                    o_controlIsJumpR=0;
+                    //o_controlIsJumpR=0;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
                     o_controlHalt=0;

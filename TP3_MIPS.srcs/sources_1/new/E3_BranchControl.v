@@ -1,26 +1,7 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 10/13/2023 12:10:56 PM
-// Design Name: 
-// Module Name: E3_BranchControl
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
+`include "Macros.v"
 
-
-module E3_BranchControl(
+module E3_BranchControl
+    (
         input wire i_zeroBit,
         input wire i_isBNEQ,//branch not equal
         input wire i_isBranch,//branch ==> esto lo pensamos por el BEQ
