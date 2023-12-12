@@ -72,7 +72,7 @@
 
 // For ALU
 `define ALU_LEN 32
-`define OPERATORS_INPUT_SIZE 4
+`define OPERATORS_INPUT_SIZE 6
 
 
 /******************

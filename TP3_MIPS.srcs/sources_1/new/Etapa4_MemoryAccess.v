@@ -20,35 +20,46 @@ module Etapa4_MemoryAccess
         parameter BYTE_LEN = `BYTE_LEN
     )
     (
-        // From/For Debugging
+        // Control Signals from Previous Stage
+        input wire          i_controlRegWrite,
+        input wire          i_controlMemWrite,
+        input wire          i_controlMemRead,
+        input wire          i_controlMemToReg,
+        input wire          i_controlPC4WB,
+        input wire [3-1:0]  i_controlWHBLS,
+        input wire          i_controlSignedLoad,
+        input wire          i_controlHalt,
+
+        // Data from The Previous Stage
+        input wire [INSMEM_ADDR_LEN-1:0]    i_pcMas4_fromE3ToMuxPC4,
+        input wire [DATMEM_ADDR_LEN-1:0]    i_ALUResult_fromE3ToE4,
+        input wire [DAT_LEN-1:0]            i_data_fromE3ToDatMem, 
+        input wire [REGFILE_ADDR_LEN-1:0]   i_rdToWrite_fromE3ToE4,
+
+        // To the next stage (There is no E5, just wired back to E2)
+        output wire                         o_RegWriteForWB_fromE4ToE5, 
+        output wire [DAT_LEN-1:0]           o_dataForWB_fromE4ToE5,     
+        output wire [REGFILE_ADDR_LEN-1:0]  o_rdForWB_fromE4ToE5,       
+
+        // For Hazard Unit
+        output wire                         o_MemToRegForHazard_fromE4ToE2, 
+        output wire [REGFILE_ADDR_LEN-1:0]  o_rdForHazard_fromE4ToE2,       
+
+        // For Forwarding
+        output wire                         o_RegWrite_fromE4ToFU,
+        output wire [REGFILE_ADDR_LEN-1:0]  o_rd_fromE4ToFU,
+        output wire [WORD_LEN-1:0]          o_dataToForward_fromE4ToE3,
+        output wire [WORD_LEN-1:0]          o_dataToForward_fromE5ToE3,  
+
+        // For/From Debug Unit
         input wire [DATMEM_ADDR_LEN-1:0]    i_addr_fromDUToDatMem, 
         output wire [DAT_LEN-1:0]           o_data_fromDatMemToDU, 
         input wire                          i_muxSel_fromDUToDatMemMux,
-    
-        input wire i_RegWrite_fromCUToE4,
-        output wire o_RegWrite_fromCUToE5,
+        input wire                          i_clockIgnore_fromDU,
+        output wire                         o_halt_fromE4ToDU,      
 
-        input wire          i_MemToReg_fromCUToE4,
-        input wire [3-1:0]  i_whbLS_fromCUToE4, // Word, Half or Byte Load/Store
-        input wire          i_signedLoad_fromCU,
-
-        input wire i_halt_fromCUToE4,
-        output wire o_halt_fromCUToDU,
-
-        input wire [INSMEM_ADDR_LEN-1:0] i_pcMas4_fromE3ToMuxPC4,
-        input wire [DATMEM_ADDR_LEN-1:0]  i_ALUResult_fromE3ToE4,  //  Resultado [31:0]
-        input wire [DAT_LEN-1:0]         i_data_fromE3ToDatMem, // Dato de Escritura [31:0]
-
-        output wire [DAT_LEN-1:0]           o_data_fromDatMemToE5, 
-        
-        input wire [REGFILE_ADDR_LEN-1:0]   i_rdToWrite_fromE3ToE4, //// Registro de Escritura [4:0]
-        output wire [REGFILE_ADDR_LEN-1:0]  o_rdToWrite_fromE4ToE5, 
-        
-        output wire                         o_RegWrite_fromE4ToFU,
-        output wire [32-1:0]  o_rd_fromE4ToFU,
-        
         input wire i_clock,
-        input wire i_reset
+        input wire i_reset    
     );
 
     wire [DATMEM_ADDR_LEN-1:0] w_addr_fromDUMuxToDatMem;
@@ -87,20 +98,20 @@ module Etapa4_MemoryAccess
         .i_addr_forWordMode         (w_addr_fromDUMuxToDatMem),     
         .i_data_forWordMode         (i_data_fromE3ToDatMem),   
         .o_data_forWordMode         (w_dataWord_fromDatMemToMuxWHB),
-        .i_writeEnable_forWordMode  (~i_whbLS_fromCUToE4[0]),  
-        .i_readEnable_forWordMode   (i_whbLS_fromCUToE4[0]),       
+        .i_writeEnable_forWordMode  (~i_controlWHBLS[0]),  
+        .i_readEnable_forWordMode   (i_controlWHBLS[0]),       
 
         .i_addr_forHalfMode         (i_ALUResult_fromE3ToE4),     
         .i_data_forHalfMode         (i_data_fromE3ToDatMem[16-1:0]),   
         .o_data_forHalfMode         (w_dataHalf_fromDatMemToExtenders),
-        .i_writeEnable_forHalfMode  (~i_whbLS_fromCUToE4[1]),  
-        .i_readEnable_forHalfMode   (i_whbLS_fromCUToE4[1]),       
+        .i_writeEnable_forHalfMode  (~i_controlWHBLS[1]),  
+        .i_readEnable_forHalfMode   (i_controlWHBLS[1]),       
         
         .i_addr_forByteMode         (i_ALUResult_fromE3ToE4),     
         .i_data_forByteMode         (i_data_fromE3ToDatMem[8-1:0]),   
         .o_data_forByteMode         (w_dataByte_fromDatMemToExtenders),
-        .i_writeEnable_forByteMode  (~i_whbLS_fromCUToE4[2]),  
-        .i_readEnable_forByteMode   (i_whbLS_fromCUToE4[2])
+        .i_writeEnable_forByteMode  (~i_controlWHBLS[2]),  
+        .i_readEnable_forByteMode   (i_controlWHBLS[2])
     );
 
     wire [DAT_LEN-1:0] w_extended_fromZeroExtHToMuxHalfSigned;
@@ -138,7 +149,7 @@ module Etapa4_MemoryAccess
     (
         .i_bus0     (w_extended_fromZeroExtHToMuxHalfSigned),
         .i_bus1     (w_extended_fromSignExtHToMuxHalfSigned),
-        .i_muxSel   (i_signedLoad_fromCU),
+        .i_muxSel   (i_controlSignedLoad),
         .o_bus      (w_extended_fromMuxHSigMuxWHB)
     );
 
@@ -177,7 +188,7 @@ module Etapa4_MemoryAccess
     (
         .i_bus0     (w_extended_fromZeroExtBToMuxByteSigned),
         .i_bus1     (w_extended_fromSignExtBToMuxByteSigned),
-        .i_muxSel   (i_signedLoad_fromCU),
+        .i_muxSel   (i_controlSignedLoad),
         .o_bus      (w_extended_fromMuxBSigMuxWHB)
     );
 
@@ -194,12 +205,12 @@ module Etapa4_MemoryAccess
         .i_bus001(w_dataWord_fromDatMemToMuxWHB),
         .i_bus010(w_extended_fromMuxHSigMuxWHB),
         .i_bus100(w_extended_fromMuxBSigMuxWHB),
-        .i_muxSel(i_whbLS_fromCUToE4),
+        .i_muxSel(i_controlWHBLS),
         .o_bus(w_data_fromMuxWHBToMuxForMemtoReg)
 
     );
 
-    wire [DAT_LEN-1:0] w_data_fromDatMemToE5;
+    wire [DAT_LEN-1:0] w_data_fromMuxWHBToMuxPC4;
 
     GenericMux2to1
     #(
@@ -210,24 +221,22 @@ module Etapa4_MemoryAccess
         .i_bus0     (i_data_fromE3ToDatMem),
         .i_bus1     (w_data_fromMuxWHBToMuxForMemtoReg),
         .i_muxSel   (i_MemToReg_fromCUToE4),
-        .o_bus      (w_data_fromDatMemToE5)
+        .o_bus      (w_data_fromMuxWHBToMuxPC4)
     );
     
-    /*
+    wire [WORD_LEN-1:0] w_data_fromMuxPC4ToE5;
+    
     GenericMux2to1
     #(
         .LEN(DAT_LEN)
     )
     MuxForPCMas4
     (
-        .i_bus1(),
-        .i_bus0(w_data_fromMuxWHBToMuxForPCMas4)
-        .i_muxSel(),
-        .o_bus()
+        .i_bus1 (i_pcMas4_fromE3ToMuxPC4),
+        .i_bus0 (w_data_fromMuxWHBToMuxPC4),
+        .i_muxSel(i_controlPC4WB),
+        .o_bus  (w_data_fromMuxPC4ToE5)
     );
-    
-
-*/
 
     E4_Reg_MEM_WB
     #(
@@ -235,21 +244,26 @@ module Etapa4_MemoryAccess
     )
     u_Reg_MEM_WB
     (
-        .i_RegWrite_fromCUToE4(i_RegWrite_fromCUToE4),
-        .o_RegWrite_fromCUToE5(o_RegWrite_fromCUToE5),
-        
-        .i_data_fromDatMemToE5      (w_data_fromDatMemToE5),
-        .o_data_fromDatMemToE5     (o_data_fromDatMemToE5), 
-        
-        .i_rdToWrite_fromE3ToE4   (i_rdToWrite_fromE3ToE4),    
-        .o_rdToWrite_fromE4ToE5   (o_rdToWrite_fromE4ToE5),   
+        .i_controlRegWrite      (i_controlRegWrite),
+        .i_data_fromDatMemToE5  (w_data_fromMuxPC4ToE5),
+        .i_rdToWrite_fromE3ToE4 (i_rdToWrite_fromE3ToE4), 
+
+        // To the next stage
+        .o_controlRegWrite      (o_RegWriteForWB_fromE4ToE5),
+        .o_data_fromDatMemToE5  (o_dataForWB_fromE4ToE5), 
+        .o_rdToWrite_fromE4ToE5 (o_rdForWB_fromE4ToE5),   
+
+        // For Debug Unit
+        .i_clockIgnore_fromDU(i_clockIgnore_fromDU),
 
         .i_clock(i_clock),
         .i_reset(i_reset)
     );
 
-    assign o_RegWrite_fromE4ToFU = i_RegWrite_fromCUToE4;
+    assign o_RegWrite_fromE4ToFU = i_controlRegWrite;
     assign o_rd_fromE4ToFU = i_rdToWrite_fromE3ToE4;
+    assign o_dataToForward_fromE4ToE3 = i_ALUResult_fromE3ToE4;
+    assign o_dataToForward_fromE5ToE3 = o_dataForWB_fromE4ToE5;
 
 
 endmodule

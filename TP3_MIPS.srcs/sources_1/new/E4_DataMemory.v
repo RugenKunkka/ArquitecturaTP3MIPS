@@ -28,9 +28,7 @@ module E4_DataMemory
         input  wire [8-1:0]      i_data_forByteMode,   
         output reg  [8-1:0]      o_data_forByteMode,
         input  wire              i_writeEnable_forByteMode,  
-        input  wire              i_readEnable_forByteMode,  
-
-        output reg  [DAT_LEN-1:0]     o_data
+        input  wire              i_readEnable_forByteMode
 
     );
     reg [DAT_ENTRY_LEN-1:0] reg_data_memory[DATMEM_DEPTH-1:0];

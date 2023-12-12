@@ -90,7 +90,6 @@ DebugUnit
     .o_muxSel_fromDUToDatMemMux     (w_muxSel_fromDUToDatMemMux) // Mux Selector
 );
 
-
 Etapas
 #(
 
@@ -100,29 +99,29 @@ u_Etapas
     // Multiple Etapas
     .i_globalClock          (i_clock_fromPin),
     .i_globalReset          (i_reset_fromPin),
-    .i_clockIgnore_fromDUToEtapas(w_clockIgnore_fromDUToEtapas),
+    .i_clockIgnore_fromDU   (w_clockIgnore_fromDUToEtapas),
 
     // For Etapa 1 (Program Counter)
-    .o_pc_fromPcToDU        (w_pc_fromPcToDU), 
+    .o_pc_fromE1ToDU        (w_pc_fromPcToDU), 
 
     // For Etapa 1 (Instructions Memory)
-    .i_we_fromDUToInsMem        (w_we_fromDUToInsMem),
-    .i_addr_fromDUToInsMem      (w_addr_fromDUToInsMem),
-    .i_data_fromDUToInsMem      (w_data_fromDUToInsMem), 
-    .i_muxSel_fromDUToInsMemMux (w_muxSel_fromDUToInsMemMux), // Mux Selector
+    .i_weForInsMem_fromDUToE1        (w_we_fromDUToInsMem),
+    .i_addrForInsMem_fromDUToE1      (w_addr_fromDUToInsMem),
+    .i_dataForInsMem_fromDUToE1      (w_data_fromDUToInsMem), 
+    .i_muxSelForInsMemMux_fromDUToE1 (w_muxSel_fromDUToInsMemMux), // Mux Selector
 
     // For Etapa 2 (Register File)
-    .i_addr_fromDUToRegFile     (w_addr_fromDUToRegFile), // Address to read from Register File
-    .o_data_fromRegFileToDU     (w_data_fromRegFileToDU), // Data read from Register File
-    .i_muxSel_fromDUToRegFileMux(w_muxSel_fromDUToRegFileMux), // Mux Selector
+    .i_addrForRegFile_fromDUToE2     (w_addr_fromDUToRegFile), // Address to read from Register File
+    .o_dataForRegFile_fromE2ToDU     (w_data_fromRegFileToDU), // Data read from Register File
+    .i_muxSelForRegFileMux_fromDUToE2(w_muxSel_fromDUToRegFileMux), // Mux Selector
 
     // For Etapa 2 (From Control Unit  to Debug Unit)
-    .o_halt_fromCUToDU      (w_halt_fromCUToDU),
+    .o_halt_fromE4ToDU      (w_halt_fromCUToDU),
     
     // For Etapa 4 (Data Memory)
-    .i_addr_fromDUToDatMem      (w_addr_fromDUToDatMem), // Address to read from Data Memory
-    .o_data_fromDatMemToDU      (w_data_fromDatMemToDU), // Data read from Data memory
-    .i_muxSel_fromDUToDatMemMux (w_muxSel_fromDUToDatMemMux) // Mux Selector
+    .i_addrForDatMem_fromDUToE4      (w_addr_fromDUToDatMem), // Address to read from Data Memory
+    .o_dataForDatMem_fromE4ToDU      (w_data_fromDatMemToDU), // Data read from Data memory
+    .i_muxSelForDatMemMux_fromDUToE4 (w_muxSel_fromDUToDatMemMux) // Mux Selector
 
 );
 

@@ -8,31 +8,32 @@ module Etapa1_InstructionFetch
         parameter INSMEM_DEPTH      = `INSMEM_DEPTH
     )
     ( 
-        input wire i_clock,//resolver el warning este [Synth 8-3848] Net i_clock in module/entity Etapa1_FetchInstruction does not have driver. ["D:/Facultad/Arquitectura de computadoras/MIS_TPS/TP3_MIPS/TP3_MIPS.srcs/sources_1/new/Etapa1FetchInstruction.v":27]
-        input wire i_reset,
-        
-        //input data To muxs
-        input wire [INS_LEN-1:0] i_dataPCJumpAddressToMux1,
-        input wire [INS_LEN-1:0] i_dataPCJumpAddressRToMux2,
-        input wire [INS_LEN-1:0] i_dataPCBranchAddressToMux3,
-        
-        //controll bits
-        //mux controll
-        input wire i_controlMux1JumpAddress,
-        input wire i_controlMux2JumpRAddress,
-        input wire i_controlMux3BranchAddress,
-        
-        //output de la etapa
+        // To  the next stage
         output wire [INS_LEN-1:0] o_pcMas4,
         output wire [INS_LEN-1:0] o_instruction,
+        
+        // For J, JAL, JR, JALR, BEQ, BNEQ
+        input wire i_controlMux1JumpAddress,   
+        input wire i_controlMux2JumpRAddress, 
+        input wire i_controlMux3BranchAddress,
+        input wire [INS_LEN-1:0] i_dataPCJumpAddressToMux1,
+        input wire [INS_LEN-1:0] i_dataPCJumpAddressRToMux2, 
+        input wire [INS_LEN-1:0] i_dataPCBranchAddressToMux3,
+        
+        // From Hazard Unit
+        input wire i_stallPC_fromHU,
+        input wire i_stallIFID_fromHU,
 
-        // For Debug Unit
-        input wire                          i_clockIgnore_fromDU,
-        output wire [INS_LEN-1:0]           o_pc_fromPcToDU, 
-        input wire                          i_we_fromDUToInsMem,
-        input wire [INSMEM_ADDR_LEN-1:0]    i_addr_fromDUToInsMem,
-        input wire [INSMEM_DAT_LEN-1:0]     i_data_fromDUToInsMem, 
-        input wire                          i_muxSel_fromDUToInsMemMux
+        // From/For Debug Unit
+        input wire                      i_we_fromDUToInsMem,       
+        input wire [INSMEM_ADDR_LEN-1:0]i_addr_fromDUToInsMem,     
+        input wire [INSMEM_DAT_LEN-1:0] i_data_fromDUToInsMem,     
+        input wire                      i_muxSel_fromDUToInsMemMux,
+        output wire [INS_LEN-1:0]       o_pc_fromPcToDU,           
+        input wire                      i_clockIgnore_fromDU,      
+
+        input wire i_clock,
+        input wire i_reset
 
     );
       
@@ -90,7 +91,8 @@ module Etapa1_InstructionFetch
         .i_clock(i_clock),
         .i_reset(i_reset),
         .i_pcAddressIn(wire_o_dataFromMux3ToPC),
-        .o_pcAddressOut(wire_pcAddressFromPCToInstructionMemoryAndSumadorMas4)
+        .o_pcAddressOut(wire_pcAddressFromPCToInstructionMemoryAndSumadorMas4),
+        .i_clockIgnore_fromDU(i_clockIgnore_fromDU)
     );
     
     GenericAdder

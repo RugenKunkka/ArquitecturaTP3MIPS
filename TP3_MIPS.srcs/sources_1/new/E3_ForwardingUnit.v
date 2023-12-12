@@ -1,6 +1,97 @@
 `include "Macros.v"
 
-module E3_ForwardingUnit(
+module E3_ForwardingUnit
+    #(
+        parameter REGFILE_ADDR_LEN = `REGFILE_ADDR_LEN   
+    )
+    (
+        // Inputs from Etapa 3
+        input wire [REGFILE_ADDR_LEN-1:0]   i_rs_fromE3ToFU,
+        input wire [REGFILE_ADDR_LEN-1:0]   i_rt_fromE3ToFU,
+        input wire                          i_MemWrite_fromE3ToFU,
+        input wire                          i_RegDst_fromE3ToFU,
+
+        // Inputs from Etapa 4
+        input wire                          i_RegWrite_fromE4ToFU,
+        input wire [REGFILE_ADDR_LEN-1:0]   i_rd_fromE4ToFU,
+        
+        // Inputs from Etapa 5
+        input wire                          i_RegWrite_fromE5ToFU,
+        input wire [REGFILE_ADDR_LEN-1:0]   i_rd_fromE5ToFU,
+
+        // Output
+        output reg [2-1:0] o_forwardA_muxSel,
+        output reg [2-1:0] o_forwardB_muxSel,
+        output reg [2-1:0] o_forwardC_muxSel
+    );
+
+    localparam NO_FORWARD       = 2'b00;
+    localparam FORWARD_FROM_E4  = 2'b10;
+    localparam FORWARD_FROM_E5  = 2'b01;
+    localparam HIGH             = `HIGH ; 
+
+    always @(*) begin
+        
+        /*
+            For Mux A
+        */
+        if( i_rs_fromE3ToFU == i_rd_fromE4ToFU &&
+            i_RegWrite_fromE4ToFU == HIGH &&
+            i_rd_fromE4ToFU != 5'b00000 )begin
+            o_forwardA_muxSel = FORWARD_FROM_E4;
+        end
+        else if (i_rs_fromE3ToFU == i_rd_fromE5ToFU &&
+                i_RegWrite_fromE5ToFU == HIGH && 
+                i_rd_fromE5ToFU != 5'b00000 ) begin
+            o_forwardA_muxSel = FORWARD_FROM_E5;
+        end
+        else begin
+            o_forwardA_muxSel = NO_FORWARD;
+        end
+        
+        /*
+            For Mux B
+        */
+        if(i_RegDst_fromE3ToFU) begin
+            if( i_rt_fromE3ToFU == i_rd_fromE4ToFU &&
+                i_RegWrite_fromE4ToFU == HIGH &&
+                i_rd_fromE4ToFU != 5'b00000 )begin
+                    o_forwardB_muxSel  = FORWARD_FROM_E4;
+            end else if (i_rt_fromE3ToFU == i_rd_fromE5ToFU &&   
+                        i_RegWrite_fromE5ToFU == HIGH && 
+                        i_rd_fromE5ToFU != 5'b00000) begin
+                            o_forwardB_muxSel = FORWARD_FROM_E5;
+            end else begin
+                o_forwardB_muxSel  = NO_FORWARD;
+            end
+        end
+        else begin
+            o_forwardB_muxSel  = NO_FORWARD;
+        end
+
+
+        /*
+            For Mux C
+        */
+        if( i_rt_fromE3ToFU == i_rd_fromE4ToFU &&
+            i_MemWrite_fromE3ToFU == HIGH) begin
+                o_forwardC_muxSel = FORWARD_FROM_E4;
+        end
+        else if (i_rt_fromE3ToFU == i_rd_fromE5ToFU &&
+                i_MemWrite_fromE3ToFU == HIGH) begin
+                    o_forwardC_muxSel = FORWARD_FROM_E5;
+        end
+        else begin
+            o_forwardC_muxSel = NO_FORWARD;
+        end
+    end
+endmodule
+
+    
+
+
+
+/*(
         input wire [5-1:0] i_rs,
         input wire [5-1:0] i_rt,
         
@@ -21,7 +112,7 @@ module E3_ForwardingUnit(
     );
     
     //interface
-    /*
+    
     E3_ForwardingUnit#()
     u1_E3_ForwardingUnit(
         .i_rs(),
@@ -88,4 +179,4 @@ module E3_ForwardingUnit(
     end
 
 */
-endmodule
+

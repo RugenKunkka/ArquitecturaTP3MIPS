@@ -2,9 +2,9 @@
 
 module Etapa2_InstructionDecode
     #(
+        // For Instruction Memory
         parameter INS_LEN = `INS_LEN,
         parameter INSMEM_ADDR_LEN = `INSMEM_ADDR_LEN,
-
 
         // For Register File
         parameter REGFILE_DEPTH =  `REGFILE_DEPTH,
@@ -12,68 +12,78 @@ module Etapa2_InstructionDecode
         parameter REGFILE_LEN =  `REGFILE_LEN
     )
     (
-        input wire i_clock,
-        input wire i_reset,
+        // Control Signals To The Next Stage
+        output wire         o_controlBNEQ,       
+        output wire         o_controlBranch,     
+        output wire         o_controlJumpR,      
+        output wire         o_controlRegWrite,   
+        output wire         o_controlMemWrite,   
+        output wire         o_controlMemRead,    
+        output wire         o_controlMemtoReg,   
+        output wire         o_controlRegDst,     
+        output wire         o_controlPC4WB,      
+        output wire         o_controlGpr31,      
+        output wire [3-1:0] o_controlWHBLS,      
+        output wire         o_controlSignedLoad, 
+        output wire         o_controlHalt,  
+        output wire [6-1:0] o_controlALUOp,      
+             
 
-        input wire [INS_LEN-1:0] i_instruction,
-        output wire [INS_LEN-1:0] o_instruction,
-        
-        input wire [REGFILE_ADDR_LEN-1:0] i_addressEscrituraToRegisterMemory, 
-        input wire [REGFILE_DEPTH-1:0] i_datoAEscribirToRegisterMemory,
-        
-        input wire i_controlRegWriteToRegisterMemory,
-        
-        //outputs wireados a otras etapas sin necesidad de reistro intermedio
-        //osea.. NO VA AL REGISTRO.. sale de one
-        output wire [32-1:0] o_incoditionalJumpAddress,
-        
-        //--------------REISTROS RELACIONADOS con el el registro intermedio------------------------ 
+        // Data to the next stage
         output wire [REGFILE_LEN-1:0] o_dataA,
         output wire [REGFILE_LEN-1:0] o_dataBFromMux,
+        output wire [REGFILE_LEN-1:0] o_ReadData2,
+
+        // For J, JAL (From E2 To E1)
+        output wire [INSMEM_ADDR_LEN-1:0]   o_incoditionalJumpAddress,
+        output wire                         o_controlJump,  
+
+        // Directly between stages
+        input  wire [INSMEM_ADDR_LEN-1:0]   i_pcMas4,
+        output wire [INSMEM_ADDR_LEN-1:0]   o_pcMas4, 
+        input wire [INS_LEN-1:0]            i_instruction,
+        output wire [INS_LEN-1:0]           o_instruction,
         
-        //control outputs
-        output wire o_controlRegDst,
-        output wire o_controlJump,
-        output wire o_controlBranch,
-        output wire o_controlMemRead,
-        output wire o_controlMemtoReg,
-        output wire [4-1:0] o_controlALUOp,//este no se si lo vamos a sacar afuera
-        output wire o_controlMemWrite,
-        //output wire o_controlALUSrc, //<- Esto me parece que no va. El Alusrc es interno a la etapa
-        output wire o_controlRegWrite,
-        output wire o_controlIsJALR,
-        output wire o_signedLoad_fromCUToE3,
+        // From E5 To E2
+        input wire                      i_controlRegWriteToRegisterMemory,
+        input wire [REGFILE_DEPTH-1:0]  i_datoAEscribirToRegisterMemory,
+        input wire [REGFILE_ADDR_LEN-1:0] i_addressEscrituraToRegisterMemory, 
+
+        //For Hazard Unit
+        output wire                         o_stallPC_fromHUToE1,
+        output wire                         o_stallIFID_fromHUToE1,
+        output wire                         o_flushEXMEM_fromHUToE3,
+        input wire                          i_MemToReg_fromE4ToHU,
+        input wire [REGFILE_ADDR_LEN-1:0]   i_rs_fromE3ToHU,
+        input wire [REGFILE_ADDR_LEN-1:0]   i_rt_fromE3ToHU,
+        input wire [REGFILE_ADDR_LEN-1:0]   i_rd_fromE4ToHU,
+        input wire                          i_RegDst_fromE3ToHU,
         
         //For/From Debug Unit
         input wire [REGFILE_ADDR_LEN-1:0]   i_addr_fromDUToRegFile,
         output wire [REGFILE_LEN-1:0]       o_data_fromRegFileToDU, 
         input wire                          i_muxSel_fromDUToRegFileMux,
+        input wire                          i_clockIgnore_fromDU,
 
-        output wire [REGFILE_LEN-1:0] o_ReadData2,
-
-        input  wire [INSMEM_ADDR_LEN-1:0]  i_pcMas4,
-        output wire [INSMEM_ADDR_LEN-1:0]  o_pcMas4, 
-
-        output wire o_halt_fromCUToE3,
-
-        output wire [3-1:0] o_whbLS_fromCUToE3,
-
-        output wire o_BNEQ_fromCUToE3
-        
+        input wire i_clock,
+        input wire i_reset        
     );
     
-    wire        o_wire_controlRegDst;
-    wire        o_wire_controlJump;
-    wire        o_wire_controlBranch;
-    wire        o_wire_controlMemRead;
-    wire        o_wire_controlMemtoReg;
-    wire [4-1:0] o_wire_controlALUOp;//este no se si lo vamos a sacar afuera
-    wire        o_wire_controlMemWrite;
-    wire        o_wire_controlALUSrc;
-    wire        o_wire_controlRegWrite;
-    wire        o_wire_controlHalt;
-    wire [3-1:0]o_wire_control_whbLS ;
-    wire        o_wire_controlBNEQ;
+    wire            o_wire_controlRegDst;
+    wire            o_wire_controlJump;
+    wire            o_wire_controlBranch;
+    wire            o_wire_controlMemRead;
+    wire            o_wire_controlMemtoReg;
+    wire [6-1:0]    o_wire_controlALUOp;//este no se si lo vamos a sacar afuera
+    wire            o_wire_controlMemWrite;
+    wire            o_wire_controlALUSrc;
+    wire            o_wire_controlRegWrite;
+    wire            o_wire_controlHalt;
+    wire [3-1:0]    o_wire_control_whbLS ;
+    wire            o_wire_controlBNEQ;
+    wire            o_wire_controlIsJumpTipoR;
+    
+    wire w_reset_fromHUToCU;
     
     E2_ControlUnit
     #(
@@ -84,21 +94,27 @@ module Etapa2_InstructionDecode
         .i_bits20_16        (i_instruction[20:15]),
         .i_bits10_6         (i_instruction[11:6]), 
         .i_bits20_6         (i_instruction[20:6]),
-        
-        .i_functionCode(i_instruction[5:0]),
-        
-        .o_controlRegDst    (o_wire_controlRegDst),
-        .o_controlIsJump      (o_controlJump),
-        .o_controlIsBranch    (o_wire_controlBranch),
-        .o_controlMemRead   (o_wire_controlMemRead),
-        .o_controlMemtoReg  (o_wire_controlMemtoReg),
-        .o_controlALUOp     (o_wire_controlALUOp),
-        .o_controlMemWrite  (o_wire_controlMemWrite),
-        .o_controlALUSrc    (o_wire_controlALUSrc),
-        .o_controlRegWrite  (o_wire_controlRegWrite),
-        .o_controlHalt      (o_wire_controlHalt),
-        .o_control_whbLS    (o_wire_control_whbLS),
-        .o_controlIsBNEQ      (o_wire_controlBNEQ)
+        .i_functionCode     (i_instruction[5:0]),
+
+        .o_controlIsBNEQ        (o_wire_controlBNEQ),
+        .o_controlIsBranch      (o_wire_controlBranch),
+        .o_controlIsJumpTipoR   (o_wire_controlIsJumpTipoR),
+        .o_controlIsJump        (o_controlJump),
+        .o_controlRegWrite      (o_wire_controlRegWrite),
+        .o_controlMemWrite      (o_wire_controlMemWrite),
+        .o_controlMemRead       (o_wire_controlMemRead),
+        .o_controlMemtoReg      (o_wire_controlMemtoReg),
+        .o_controlRegDst        (o_wire_controlRegDst),
+        .o_controlPC4WB         (o_wire_controlPC4WB),
+        .o_controlGpr31         (o_wire_controlGpr31),    
+        .o_controlWHBLS        (o_wire_control_whbLS),
+        .o_controlSignedLoad    (o_wire_controlSignedLoad),
+        .o_controlALUSrc        (o_wire_controlALUSrc),
+        .o_controlHalt          (o_wire_controlHalt),
+        .o_controlALUOp         (o_wire_controlALUOp),
+
+        .i_resetForHazard       (w_reset_fromHUToCU),
+        .i_reset(i_reset)
     );
     
     wire [32-1:0] wire_o_dataBFromRegisterMemoryToMuxALU;
@@ -178,6 +194,8 @@ module Etapa2_InstructionDecode
         .i_data(wire_shiftedInconditionalJumpAddress),
         .o_extendedSignedData(o_incoditionalJumpAddress)
     );
+    
+    wire w_stallIDEX_fromHUToE2;
 
     E2_Reg_ID_EX
     #(
@@ -185,58 +203,83 @@ module Etapa2_InstructionDecode
     )
     u_Reg_ID_EX
     (
-        .i_clock(i_clock),
-        .i_reset(i_reset),
-
-        //inputs normales
-        .i_instruction(i_instruction),
-        .i_dataA(w_dataA),
-        .i_dataBFromMux(w_dataBFromMux),
-        
-        //input control info
-        .i_controlRegDst    (o_wire_controlRegDst),
-        //.i_controlJump      (o_wire_controlJump),
+        .i_controlBNEQ      (o_wire_controlBNEQ),
         .i_controlBranch    (o_wire_controlBranch),
+        .i_controlJumpR     (o_wire_controlIsJumpTipoR),
+        .i_controlRegWrite  (o_wire_controlRegWrite),
+        .i_controlMemWrite  (o_wire_controlMemWrite),
         .i_controlMemRead   (o_wire_controlMemRead),
         .i_controlMemtoReg  (o_wire_controlMemtoReg),
-        .i_controlALUOp     (o_wire_controlALUOp),//este no se si lo vamos a sacar afuera
-        .i_controlMemWrite  (o_wire_controlMemWrite),
-        //.i_controlALUSrc    (),
-        .i_controlRegWrite  (o_wire_controlRegWrite),
-        
-        //outputs normales
-        .o_instruction  (o_instruction),//lo vamos a necesitar para sacar el rt y rd  
-        .o_dataA        (o_dataA),//va a la ALU
-        .o_dataBFromMux (o_dataBFromMux),//va a la ALU
-        
-        //output control info
-        .o_controlRegDst    (o_controlRegDst),
-        //.o_controlJump      (o_controlJump),
+        .i_controlRegDst    (o_wire_controlRegDst),
+        .i_controlPC4WB     (o_wire_controlPC4WB),
+        .i_controlGpr31     (o_wire_controlGpr31),
+        .i_controlWHBLS     (o_wire_control_whbLS),
+        .i_controlSignedLoad(o_wire_controlSignedLoad),
+        .i_controlHalt      (o_wire_controlHalt),
+        .i_controlALUOp     (o_wire_controlALUOp),
+
+        .i_pcMas4       (i_pcMas4),
+        .i_dataA        (w_dataA),
+        .i_dataBFromMux (w_dataBFromMux),
+        .i_ReadData2    (wire_o_dataBFromRegisterMemoryToMuxALU),
+        .i_instruction  (i_instruction),
+
+        .o_controlBNEQ      (o_controlBNEQ),
         .o_controlBranch    (o_controlBranch),
+        .o_controlJumpR     (o_controlJumpR),
+        .o_controlRegWrite  (o_controlRegWrite),
+        .o_controlMemWrite  (o_controlMemWrite),
         .o_controlMemRead   (o_controlMemRead),
         .o_controlMemtoReg  (o_controlMemtoReg),
-        .o_controlALUOp     (o_controlALUOp),//este no se si lo vamos a sacar afuera
-        .o_controlMemWrite  (o_controlMemWrite),
-        //.o_controlALUSrc    (),
-        .o_controlRegWrite  (o_controlRegWrite),
-        .o_signedLoad_fromCU(o_signedLoad_fromCUToE3),
+        .o_controlRegDst    (o_controlRegDst),
+        .o_controlPC4WB     (o_controlPC4WB),
+        .o_controlGpr31     (o_controlGpr31),
+        .o_controlWHBLS     (o_controlWHBLS),
+        .o_controlSignedLoad(o_controlSignedLoad),
+        .o_controlHalt      (o_controlHalt),
+        .o_controlALUOp     (o_controlALUOp),
 
-        .i_ReadData2    (wire_o_dataBFromRegisterMemoryToMuxALU),
+        .o_pcMas4       (o_pcMas4),
+        .o_dataA        (o_dataA),
+        .o_dataBFromMux (o_dataBFromMux),
         .o_ReadData2    (o_ReadData2),
+        .o_instruction  (o_instruction),
+                
+        // From Hazard Detection Unit        
+        .i_stall_fromHU (w_stallIDEX_fromHUToE2),
 
-        .i_pcMas4 (i_pcMas4),
-        .o_pcMas4 (o_pcMas4),
+        // Form Debug Unit
+        .i_clockIgnore_fromDU (i_clockIgnore_fromDU),
 
-        .i_halt_fromCU  (o_wire_controlHalt),
-        .o_halt_fromCUToE3  (o_halt_fromCUToE3),
+        .i_clock(i_clock),
+        .i_reset(i_reset)
 
-        .i_whbLS_fromCU (o_wire_control_whbLS),
-        .o_whbLS_fromCUToE3 (o_whbLS_fromCUToE3),
-
-        .i_BNEQ_fromCU (o_wire_controlBNEQ),
-        .o_BNEQ_fromCUToE3 (o_BNEQ_fromCUToE3)
     );  
     
-    // assign o_data_fromRegFileToDU = 
+    wire w_stallPC_fromHUToE1;
+    wire w_stallIFID_fromHUToE1;
+    
+    E2_HazardUnit
+    #(
+
+    )
+    u_HazardUnit
+    (
+        .o_stallPC_fromHUToE1   (o_stallPC_fromHUToE1),
+        .o_stallIFID_fromHUToE1 (o_stallIFID_fromHUToE1),
+        .o_stallIDEX_fromHUToE2 (w_stallIDEX_fromHUToE2),
+        .o_reset_fromHUToCU     (w_reset_fromHUToCU),
+    
+        .i_takeJumpR_fromE2ToHU (o_wire_controlIsJumpTipoR),  
+        .i_controlBranch_fromE2ToHU(o_wire_controlBranch),
+    
+        .i_MemToReg_fromE4ToHU  (i_MemToReg_fromE4ToHU),
+        .i_rs_fromE3ToHU        (i_rs_fromE3ToHU),
+        .i_rt_fromE3ToHU        (i_rt_fromE3ToHU),
+        .i_rd_fromE4ToHU        (i_rd_fromE4ToHU),
+        .i_RegDst_fromE3ToHU    (i_RegDst_fromE3ToHU),
+
+        .i_reset(i_reset)
+    );
     
 endmodule

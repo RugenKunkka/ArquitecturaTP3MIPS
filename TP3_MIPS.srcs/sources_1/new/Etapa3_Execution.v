@@ -2,75 +2,82 @@
 
 module Etapa3_Execution
     #(
-        parameter INSMEM_ADDR_LEN = `INSMEM_ADDR_LEN
+        parameter INSMEM_ADDR_LEN = `INSMEM_ADDR_LEN,
+        parameter INS_LEN = `INS_LEN,
+
+        parameter REGFILE_ADDR_LEN = `REGFILE_ADDR_LEN,
+        parameter REGFILE_LEN = `REGFILE_LEN,
+
+        parameter ALU_LEN = `ALU_LEN,
+
+        parameter WORD_LEN = `WORD_LEN,
+        parameter DAT_LEN = `DAT_LEN
     )   
     (
-        /*
-            Direct Connection between stages
-        */
-        input wire [INSMEM_ADDR_LEN-1:0] i_pcMas4,
-        output wire [INSMEM_ADDR_LEN-1:0] o_programCounterMas4,
+        //Control Signal from Previous Stage
+        input wire          i_controlIsBNEQ,        
+        input wire          i_controlIsBranch,      
+        input wire          i_controlIsJumpR,       
+        input wire          i_controlRegWrite,      
+        input wire          i_controlMemWrite,      
+        input wire          i_controlMemRead,       
+        input wire          i_controlMemtoReg,      
+        input wire          i_controlRegDst,        
+        input wire          i_controlPC4WB,         
+        input wire          i_controlGpr31,         
+        input wire [3-1:0]  i_controlWHBLS,         
+        input wire          i_controlSignedLoad,    
+        input wire [6-1:0]  i_controlALUOperationCode,
+        input wire          i_controlHalt,          
 
-        input wire i_controlMemWrite,
-        output wire o_controlMemWrite,
+        // Data from Previous Stage
+        input wire [INSMEM_ADDR_LEN-1:0]i_pcMas4,
+        input wire [ALU_LEN-1:0]        i_dataAToALUMux,
+        input wire [ALU_LEN-1:0]        i_dataBToALUMux,
+        input wire [REGFILE_LEN-1:0]    i_dataBFromRegisterMemory,
+        input wire [INS_LEN-1:0]        i_instruction,
+ 
+        // Control Signals to the next stage
+        output wire         o_controlRegWrite,
+        output wire         o_controlMemWrite,
+        output wire         o_controlMemRead,
+        output wire         o_controlMemtoReg,
+        output wire         o_controlPC4WB,
+        output wire [3-1:0] o_controlWHBLS,
+        output wire         o_controlSignedLoad,
+        output wire         o_controlHalt,
 
-        input wire i_halt_fromCU,
-        output wire o_halt_fromCU,
+        // Data to the next stage
+        output wire [INSMEM_ADDR_LEN-1:0]   o_programCounterMas4,
+        output wire [ALU_LEN-1:0]           o_ALUResult,
+        output wire [DAT_LEN-1:0]           o_dataQueQuieroEscribirEnMemoriaDeDatos,
+        output wire [REGFILE_ADDR_LEN-1:0]  o_rdToWrite,
 
-        input wire [3-1:0] i_whbLS_fromCUToE3,
-        output wire [3-1:0] o_whbLS_fromCUToE4,
+        // From E3 To E1 , (For BEQ, BNEQ, JAR, JALR)
+        output wire                         o_controlIsBranchControlUnit,
+        output wire                         o_controlIsJumpR,
+        output wire [INSMEM_ADDR_LEN-1:0]   o_branchAddress,
+        output wire [INSMEM_ADDR_LEN-1:0]   o_jumpRAddress,
 
-        input wire i_controlMemtoReg,
-        output wire o_controlMemtoReg,
+        // For Forwarding
+        input wire                          i_RegWrite_fromE4ToFU,
+        input wire [REGFILE_ADDR_LEN-1:0]   i_rd_fromE4ToFU,
+        input wire                          i_RegWrite_fromE5ToFU,
+        input wire [REGFILE_ADDR_LEN-1:0]   i_rd_fromE5ToFU,
+        input wire [WORD_LEN-1:0]           i_dataForwarded_fromE4ToE3,
+        input wire [WORD_LEN-1:0]           i_dataForwarded_fromE5ToE3,
+        
+        // From/For Hazard Unit
+        output wire [REGFILE_ADDR_LEN-1:0]  o_rsForHazard_fromE3ToE2,     
+        output wire [REGFILE_ADDR_LEN-1:0]  o_rtForHazard_fromE3ToE2,     
+        output wire                         o_RegDstForHazard_fromE3ToE2, 
+        input wire                          i_flushEXMEM_fromHU,          
 
-        input wire i_controlRegWrite,
-        output wire o_controlRegWrite,
-
-        input wire  i_signedLoad_fromCUToE3,
-        output wire  o_signedLoad_fromCUToE4,
-
-        // Input For Each Mux
-        input wire [32-1:0] i_dataAToALUMux,
-        input wire [32-1:0] i_dataBToALUMux,
-        input wire [32-1:0] i_dataBFromRegisterMemory,
-
-        // Common for 3 Muxes 3To1
-        input wire [32-1:0] i_rdFromEtapa5Reg_MEM_WB, // RENOMBRAR !! No son rd
-        input wire [32-1:0] i_rdFromEtapa4Reg_Ex_MEM, // RENOMBRAR !! No son rd
-
-        // For ALU
-        input wire [4-1:0] i_controlALUOperationCode,
-
-        // For BranchControlUnit
-        input wire i_controlIsBNEQ,
-        input wire i_controlIsBranch,
-        output wire o_controlIsBranchControlUnit,
-
-        // For RegDest Mux
-        input wire i_controlRegDst,
-        input wire [32-1:0] i_instruction,
-           
-        input wire i_controlIsJALR, // GPR31?
-  
-        input wire i_controlIsJumpR, // TakeJumpR
-        output wire o_controlIsJumpR, // TakeJumpR
-
-        output wire  [32-1:0]   o_branchAddress,
-        output wire [32-1:0]    o_jumpRAddress,
-
-        output wire [32-1:0] o_ALUResult,
-        output wire [32-1:0] o_dataQueQuieroEscribirEnMemoriaDeDatos,
-        output wire [5-1:0] o_rdToWrite,
-
-        // For Forwarding Unit
-        input wire i_controlRegWriteFromEtapa4RegEX_MEM,
-        input wire i_controlRegWriteFromEtapa5RegMEM_WB,
+        // From Debug Unit
+        input wire i_clockIgnore_fromDU,
 
         input wire i_clock,
         input wire i_reset
-
-
-        
     );
 
     wire [2-1:0] o_controlForwarding1;
@@ -83,8 +90,8 @@ module Etapa3_Execution
     u1_Mux3Frowarding1DataAToALU
     (
         .i_bus00   (i_dataAToALUMux),
-        .i_bus01   (i_rdFromEtapa5Reg_MEM_WB),
-        .i_bus10   (i_rdFromEtapa4Reg_Ex_MEM),
+        .i_bus01   (i_dataForwarded_fromE5ToE3),
+        .i_bus10   (i_dataForwarded_fromE4ToE3),
         .i_muxSel   (o_controlForwarding1),
         .o_bus     (wire_o_dataAFromMux3ToALU)
     );
@@ -99,8 +106,8 @@ module Etapa3_Execution
     u1_Mux3Frowarding2DataBToALU
     (
         .i_bus00    (i_dataBToALUMux),
-        .i_bus01    (i_rdFromEtapa5Reg_MEM_WB),
-        .i_bus10    (i_rdFromEtapa4Reg_Ex_MEM),
+        .i_bus01   (i_dataForwarded_fromE5ToE3),
+        .i_bus10   (i_dataForwarded_fromE4ToE3),
         .i_muxSel   (o_controlForwarding2),
         .o_bus      (wire_o_dataBFromMux3ToALU)
     );
@@ -115,8 +122,8 @@ module Etapa3_Execution
     u1_Mux3DataQueQuieroEscribirEnMemoriaDeDatos
     (
         .i_bus00    (i_dataBFromRegisterMemory),
-        .i_bus01    (i_rdFromEtapa5Reg_MEM_WB),
-        .i_bus10    (i_rdFromEtapa4Reg_Ex_MEM),
+        .i_bus01    (i_dataForwarded_fromE5ToE3),
+        .i_bus10    (i_dataForwarded_fromE4ToE3),
         .i_muxSel   (o_controlForwarding3),
         .o_bus      (o_dataQueQuieroEscribirEnMemoriaDeDatosToReg_EX_MEM)
     );
@@ -127,7 +134,7 @@ module Etapa3_Execution
     E3_ALU
     #(
         .DATA_LENGTH(32),
-        .OPERATORS_INPUT_SIZE(4)
+        .OPERATORS_INPUT_SIZE(6)
     )
     u1_ALU
     (
@@ -219,7 +226,7 @@ module Etapa3_Execution
     (
         .i_bus0(wire_o_dataToJALRMux),
         .i_bus1(5'b11111),
-        .i_muxSel(i_controlIsJALR),
+        .i_muxSel(i_controlGpr31),
         .o_bus(wire_o_addressDeEscrituraRegisterMemory)
     );
 
@@ -229,37 +236,43 @@ module Etapa3_Execution
     )
     u_Reg_EX_MEM
     (
-
-        .i_clock(i_clock),
-        .i_reset(i_reset),
+        .i_controlRegWrite  (i_controlRegWrite),
+        .i_controlMemWrite  (i_controlMemWrite),
+        .i_controlMemRead   (i_controlMemRead),
+        .i_controlMemtoReg  (i_controlMemtoReg),
+        .i_controlPC4WB     (i_controlPC4WB),
+        .i_controlWHBLS     (i_controlWHBLS),
+        .i_controlSignedLoad(i_controlSignedLoad),
+        .i_controlHalt      (i_controlHalt),
 
         .i_PcMas4(i_pcMas4),
-        .i_ALUResult(wire_o_ALUResultToEX_MEM),
-        
+        .i_ALUResult(wire_o_ALUResultToEX_MEM),       
         .i_dataQueQuieroEscribirEnMemoriaDeDatos(o_dataQueQuieroEscribirEnMemoriaDeDatosToReg_EX_MEM),
         .i_addressDeEscrituraRegisterMemory(wire_o_addressDeEscrituraRegisterMemory),
 
-        .i_controlRegWrite(i_controlRegWrite),
-        .i_controlMemWrite(i_controlMemWrite),
-        .i_controlMemtoReg(i_controlMemtoReg),
-        .o_controlRegWrite(o_controlRegWrite),
-        .o_controlMemWrite(o_controlMemWrite),
-        .o_controlMemtoReg(o_controlMemtoReg),
-    
+        .o_controlRegWrite  (o_controlRegWrite),
+        .o_controlMemWrite  (o_controlMemWrite),
+        .o_controlMemRead   (o_controlMemRead),
+        .o_controlMemtoReg  (o_controlMemtoReg),
+        .o_controlPC4WB     (o_controlPC4WB),
+        .o_controlWHBLS     (o_controlWHBLS),
+        .o_controlSignedLoad(o_controlSignedLoad),
+        .o_controlHalt      (o_controlHalt),
+        
         .o_PcMas4(o_programCounterMas4),
         .o_ALUResult(o_ALUResult),
-
-        .i_halt_fromCU(i_halt_fromCU),
-        .o_halt_fromCU(o_halt_fromCU),
-        
         .o_dataQueQuieroEscribirEnMemoriaDeDatos(o_dataQueQuieroEscribirEnMemoriaDeDatos),
         .o_addressDeEscrituraRegisterMemory(o_rdToWrite),
 
-        .i_signedLoad_fromCUToE3 (i_signedLoad_fromCUToE3),
-        .o_signedLoad_fromCUToE4 (o_signedLoad_fromCUToE4)
+        // For Hazard Unit
+        .i_flushEXMEM_fromHU    (i_flushEXMEM_fromHU),
+
+        // For Debug Unit
+        .i_clockIgnore_fromDU (i_clockIgnore_fromDU),  
+        
+        .i_clock(i_clock),
+        .i_reset(i_reset)
     );
-
-
 
     assign o_controlIsJumpR = i_controlIsJumpR;
     assign o_jumpRAddress = wire_o_dataAFromMux3ToALU;
@@ -270,23 +283,23 @@ module Etapa3_Execution
     )
     u1_E3_ForwardingUnit
     (
-        .i_rs(i_instruction[15:11]),
-        .i_rt(i_instruction[20:16]),
-        
-        //.i_rdFromEtapa5RegMEM_WB(i_rdFromEtapa5Reg_MEM_WB),
-        //.i_rdFromEtapa4RegEX_MEM(i_rdFromEtapa4Reg_EX_MEM),
-        .i_rdFromEtapa5RegMEM_WB(),
-        .i_rdFromEtapa4RegEX_MEM(),
-        
-        .i_controlRegWriteFromEtapa4RegEX_MEM(i_controlRegWriteFromEtapa4RegEX_MEM),
-        .i_controlRegWriteFromEtapa5RegMEM_WB(i_controlRegWriteFromEtapa5RegMEM_WB),
-        
-        .i_controlRegDst(i_controlRegDst),
-        .i_controlMemWrite(i_controlMemWrite),
-        
-        .o_forwardA(o_controlForwarding1),
-        .o_forwardB(o_controlForwarding2),
-        .o_forwardC(o_controlForwarding3)
+        // Inputs from Etapa 3
+        .i_rs_fromE3ToFU        (i_instruction[15:11]),
+        .i_rt_fromE3ToFU        (i_instruction[20:16]),
+        .i_MemWrite_fromE3ToFU  (i_controlMemWrite),
+        .i_RegDst_fromE3ToFU    (i_controlRegDst),
+
+        // Inputs from Etapa 4
+        .i_RegWrite_fromE4ToFU  (i_RegWrite_fromE4ToFU),
+        .i_rd_fromE4ToFU        (i_rd_fromE4ToFU),
+
+        // Inputs from Etapa 5    
+        .i_RegWrite_fromE5ToFU  (i_RegWrite_fromE5ToFU),
+        .i_rd_fromE5ToFU        (i_rd_fromE5ToFU),
+
+        .o_forwardA_muxSel  (o_controlForwarding1),
+        .o_forwardB_muxSel  (o_controlForwarding2),
+        .o_forwardC_muxSel  (o_controlForwarding3)
     );
 
 

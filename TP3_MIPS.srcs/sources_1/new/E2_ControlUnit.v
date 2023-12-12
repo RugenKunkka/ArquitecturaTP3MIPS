@@ -1,42 +1,37 @@
 `include "Macros.v"
 
 module E2_ControlUnit
-(
-        input wire i_reset,
+    (
         //6 bits MSB
-        input wire [6-1:0] i_operationCode,// bits del 31-26 esto te indica el tipo de operacion por ejemplo si es R o de branch etc..
-        input wire [6-1:0] i_bits20_16,//se usa en algunas instrucciones como JALR
-        input wire [6-1:0] i_bits10_6,//se usa en algunas instrucciones como JALR
+        input wire [6-1:0]  i_operationCode,// bits del 31-26 esto te indica el tipo de operacion por ejemplo si es R o de branch etc..
+        input wire [6-1:0]  i_bits20_16,//se usa en algunas instrucciones como JALR
+        input wire [6-1:0]  i_bits10_6,//se usa en algunas instrucciones como JALR
         input wire [15-1:0] i_bits20_6,//este rango de bits se usa para un registro en especifico (JR) 
         //6 bits LSB
-        input wire [6-1:0]i_functionCode,//bits del 5-0 este te dice que operacion es por ejemplo si es suma, un salto, resta, desplazamiento etc...
-        
-        //control el libro indica estos 9
-        
-        output reg o_controlMemRead,
-        
-        output reg o_controlIsBNEQ,//te dice si es un branch not equal
-        output reg o_controlIsBranch,//te dice si es un branch o no 
-        output reg o_controlIsJumpTipoR,//te dice si es un jump tipo R te sirve para el multiplexor
-        output reg o_controlIsJump,//te dice si es un Jump nomas para el multiplexor sirve
-        
-        output reg o_controlRegWrite,//te dice si vas a escribir el resultado en la memoria de registros de la etapa 2
-        output reg o_controlMemWrite,//se pone en 1 si la instruccion va a guardar en la memoria de datos.. por ahora son las instrucciones tipo save
-        output reg o_controlMemtoReg,//es para ver que dato guardas en el registro, si el resuultado de la ALU o la salida d ela memoria de datos
-        output reg o_controlRegDst,//en base a la instruccion te dice si el registro de destino es rt o rd
-        
-        output reg o_controlisJALRBit31,//te dice si es la instruccion JALR especificamente para poder guardar la direccion de retorno (PC+4) en la posicion 31 de la memoria de registros
-        output reg o_controlALUSrc,//selecciona la fuente del dato 2 para la ALU, tiene un multiplexor
-        
-        output reg [4-1:0]o_controlALUOp,//este no se si lo vamos a sacar afuera
-        
-        
-        output reg o_controlHalt,
+        input wire [6-1:0]  i_functionCode,//bits del 5-0 este te dice que operacion es por ejemplo si es suma, un salto, resta, desplazamiento etc...
 
-        output reg [3-1:0] o_control_whbLS
+        output reg          o_controlIsBNEQ,//te dice si es un branch not equal
+        output reg          o_controlIsBranch,//te dice si es un branch o no   
+        output reg          o_controlIsJumpTipoR,//te dice si es un jump tipo R te sirve para el multiplexor      
+        output reg          o_controlIsJump,//te dice si es un Jump nomas para el multiplexor sirve
+        output reg          o_controlRegWrite,//te dice si vas a escribir el resultado en la memoria de registros de la etapa 2
+        output reg          o_controlMemWrite,//se pone en 1 si la instruccion va a guardar en la memoria de datos.. por ahora son las instrucciones tipo save
+        output reg          o_controlMemRead,
+        output reg          o_controlMemtoReg,//es para ver que dato guardas en el registro, si el resuultado de la ALU o la salida d ela memoria de datos
+        output reg          o_controlRegDst,//en base a la instruccion te dice si el registro de destino es rt o rd
+        output reg          o_controlPC4WB,
+        output reg          o_controlGpr31,
+        output reg [3-1:0]  o_controlWHBLS,
+        output reg          o_controlSignedLoad,
+        output reg          o_controlALUSrc,//selecciona la fuente del dato 2 para la ALU, tiene un multiplexor
+        output reg          o_controlHalt,
+        output reg [6-1:0]  o_controlALUOp,//este no se si lo vamos a sacar afuera
+           
+        //output reg o_controlisJALRBit31,//te dice si es la instruccion JALR especificamente para poder guardar la direccion de retorno (PC+4) en la posicion 31 de la memoria de registros
+        input wire i_resetForHazard,
+        input wire i_reset
     );
  
-    
     always@(*) begin
         if(i_reset) begin
             o_controlRegDst=0;
@@ -50,7 +45,7 @@ module E2_ControlUnit
             o_controlIsJump=0;
             o_controlIsJumpTipoR=0;
             o_controlHalt=0;
-            o_control_whbLS = 0;
+            o_controlWHBLS = 0;
         end
         
         //JALR

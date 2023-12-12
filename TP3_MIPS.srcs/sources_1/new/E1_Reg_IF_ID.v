@@ -2,16 +2,17 @@
 
 module E1_Reg_IF_ID
     #(
-        parameter INS_LEN = `INS_LEN 
+        parameter INS_LEN = `INS_LEN,
+        parameter INSMEM_ADDR_LEN = `INSMEM_ADDR_LEN
     )
     (
         input wire i_clock,
         input wire i_reset,
-        input wire [32-1:0] i_instruction,
-        input wire [32-1:0] i_pcMas4,
+        input wire [INS_LEN-1:0]            i_instruction,
+        input wire [INSMEM_ADDR_LEN-1:0]    i_pcMas4,
         
-        output reg [32-1:0] o_instruction,
-        output reg [32-1:0] o_pcMas4
+        output reg [INS_LEN-1:0]            o_instruction,
+        output reg [INSMEM_ADDR_LEN-1:0]    o_pcMas4
     );
     
     //no se si resetear la instruccion pero lo pongo por las dudas
