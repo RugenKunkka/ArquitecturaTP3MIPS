@@ -116,9 +116,23 @@ module Etapa2_InstructionDecode
         .i_resetForHazard       (w_reset_fromHUToCU),
         .i_reset(i_reset)
     );
-    
+
+    wire [REGFILE_ADDR_LEN-1:0] w_addr_fromMuxForDUToRegFile;
+
+    GenericMux2to1 
+    #(
+        .LEN(REGFILE_ADDR_LEN)
+    ) 
+    u1_MuxForDU 
+    (
+        .i_bus0 (i_instruction[25:21]),
+        .i_bus1 (i_addr_fromDUToRegFile),
+        .i_muxSel(i_muxSel_fromDUToRegFileMux),
+        .o_bus  (w_addr_fromMuxForDUToRegFile)
+    );
+      
     wire [32-1:0] wire_o_dataBFromRegisterMemoryToMuxALU;
-    wire [32-1:0] w_dataA;
+    wire [REGFILE_LEN-1:0] w_dataA;
     //wire o_wire_dataA
     E2_RegisterMemory
     #(
@@ -129,16 +143,17 @@ module Etapa2_InstructionDecode
     u_RegisterMemory
     (
         .i_clock(i_clock),
-        .i_reset(i_reset),  
+        .i_reset(i_reset),
+        .i_clockIgnore_fromDU (i_clockIgnore_fromDU),  
 
         .i_RegWrite_fromControl(i_controlRegWriteToRegisterMemory),
         
-        .i_AddressLecturaA  (i_instruction[25:21]),
+        .i_AddressLecturaA  (w_addr_fromMuxForDUToRegFile),
         .i_AddressLecturaB  (i_instruction[20:16]),
         .i_AddressEscritura (i_addressEscrituraToRegisterMemory),
         .i_DatoAEscribir    (i_datoAEscribirToRegisterMemory),
         
-        .o_dataA    (o_dataA),
+        .o_dataA    (w_dataA),
         .o_dataB    (wire_o_dataBFromRegisterMemoryToMuxALU)
     );
     
@@ -269,6 +284,7 @@ module Etapa2_InstructionDecode
         .o_stallIFID_fromHUToE1 (o_stallIFID_fromHUToE1),
         .o_stallIDEX_fromHUToE2 (w_stallIDEX_fromHUToE2),
         .o_reset_fromHUToCU     (w_reset_fromHUToCU),
+        .o_flushEXMEM_fromHUToE3(o_flushEXMEM_fromHUToE3),
     
         .i_takeJumpR_fromE2ToHU (o_wire_controlIsJumpTipoR),  
         .i_controlBranch_fromE2ToHU(o_wire_controlBranch),
@@ -281,5 +297,6 @@ module Etapa2_InstructionDecode
 
         .i_reset(i_reset)
     );
+    assign o_data_fromRegFileToDU = o_dataA;
     
 endmodule

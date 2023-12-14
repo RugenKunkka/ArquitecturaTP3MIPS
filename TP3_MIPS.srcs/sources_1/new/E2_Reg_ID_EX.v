@@ -87,29 +87,31 @@ module E2_Reg_ID_EX
             o_instruction   <= 0;
 
         end else begin
-            if (i_stall_fromHU == LOW) begin
+            if(i_clockIgnore_fromDU == LOW) begin
+                if (i_stall_fromHU == LOW) begin
 
-                o_controlBNEQ       <= i_controlBNEQ;
-                o_controlBranch     <= i_controlBranch;
-                o_controlJumpR      <= i_controlJumpR;
-                o_controlRegWrite   <= i_controlRegWrite;
-                o_controlMemWrite   <= i_controlMemWrite;
-                o_controlMemRead    <= i_controlMemRead;
-                o_controlMemtoReg   <= i_controlMemtoReg;
-                o_controlRegDst     <= i_controlRegDst;
-                o_controlPC4WB      <= i_controlPC4WB;
-                o_controlGpr31      <= i_controlGpr31;
-                o_controlWHBLS      <= i_controlWHBLS;
-                o_controlSignedLoad <= i_controlSignedLoad;
-                o_controlHalt       <= i_controlHalt;
-                o_controlALUOp      <= i_controlALUOp;
+                    o_controlBNEQ       <= i_controlBNEQ;
+                    o_controlBranch     <= i_controlBranch;
+                    o_controlJumpR      <= i_controlJumpR;
+                    o_controlRegWrite   <= i_controlRegWrite;
+                    o_controlMemWrite   <= i_controlMemWrite;
+                    o_controlMemRead    <= i_controlMemRead;
+                    o_controlMemtoReg   <= i_controlMemtoReg;
+                    o_controlRegDst     <= i_controlRegDst;
+                    o_controlPC4WB      <= i_controlPC4WB;
+                    o_controlGpr31      <= i_controlGpr31;
+                    o_controlWHBLS      <= i_controlWHBLS;
+                    o_controlSignedLoad <= i_controlSignedLoad;
+                    o_controlHalt       <= i_controlHalt;
+                    o_controlALUOp      <= i_controlALUOp;
 
-                o_pcMas4        <= i_pcMas4;
-                o_dataA         <= i_dataA;
-                o_dataBFromMux  <= i_dataBFromMux;
-                o_ReadData2     <= i_ReadData2;
-                o_instruction   <= i_instruction;
-                
+                    o_pcMas4        <= i_pcMas4;
+                    o_dataA         <= i_dataA;
+                    o_dataBFromMux  <= i_dataBFromMux;
+                    o_ReadData2     <= i_ReadData2;
+                    o_instruction   <= i_instruction;
+                    
+                end
             end
         end
     end

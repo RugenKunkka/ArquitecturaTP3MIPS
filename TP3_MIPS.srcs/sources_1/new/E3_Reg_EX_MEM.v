@@ -51,41 +51,59 @@ module E3_Reg_EX_MEM
 
     );
     
-    always @(i_clock)begin
+    always @(posedge i_clock)begin
         if(i_reset) begin
 
-            o_controlRegWrite = 0;
-            o_controlMemWrite = 0;
-            o_controlMemRead =  0;
-            o_controlMemtoReg = 0;
-            o_controlPC4WB =    0;
-            o_controlWHBLS =    0;
-            o_controlSignedLoad = 0;
-            o_controlHalt =     0;
+            o_controlRegWrite <= 0;
+            o_controlMemWrite <= 0;
+            o_controlMemRead <=  0;
+            o_controlMemtoReg <= 0;
+            o_controlPC4WB <=    0;
+            o_controlWHBLS <=    0;
+            o_controlSignedLoad <= 0;
+            o_controlHalt <=     0;
 
-            o_PcMas4 = 0;
-            o_ALUResult = 0;
-            o_dataQueQuieroEscribirEnMemoriaDeDatos = 0;
-            o_addressDeEscrituraRegisterMemory = 0;
+            o_PcMas4 <= 0;
+            o_ALUResult <= 0;
+            o_dataQueQuieroEscribirEnMemoriaDeDatos <= 0;
+            o_addressDeEscrituraRegisterMemory <= 0;
 
 
         end
         else begin
+            if(~i_clockIgnore_fromDU) begin 
 
-            o_controlRegWrite   <= i_controlRegWrite;
-            o_controlMemWrite   <= i_controlMemWrite;
-            o_controlMemRead    <= i_controlMemRead;
-            o_controlMemtoReg   <= i_controlMemtoReg;
-            o_controlPC4WB      <= i_controlPC4WB;
-            o_controlWHBLS      <= i_controlWHBLS;
-            o_controlSignedLoad <= i_controlSignedLoad;
-            o_controlHalt       <= i_controlHalt;
+                if (i_flushEXMEM_fromHU)begin
+                    o_controlRegWrite <= 0;
+                    o_controlMemWrite <= 0;
+                    o_controlMemRead <=  0;
+                    o_controlMemtoReg <= 0;
+                    o_controlPC4WB <=    0;
+                    o_controlWHBLS <=    0;
+                    o_controlSignedLoad <= 0;
+                    o_controlHalt <=     0;
 
-            o_PcMas4 <= i_PcMas4;
-            o_ALUResult <= o_ALUResult;
-            o_dataQueQuieroEscribirEnMemoriaDeDatos <= i_dataQueQuieroEscribirEnMemoriaDeDatos;
-            o_addressDeEscrituraRegisterMemory <= i_addressDeEscrituraRegisterMemory;
+                    o_PcMas4 <= 0;
+                    o_ALUResult <= 0;
+                    o_dataQueQuieroEscribirEnMemoriaDeDatos <= 0;
+                    o_addressDeEscrituraRegisterMemory <= 0;
 
+                end else begin 
+                    o_controlRegWrite   <= i_controlRegWrite;
+                    o_controlMemWrite   <= i_controlMemWrite;
+                    o_controlMemRead    <= i_controlMemRead;
+                    o_controlMemtoReg   <= i_controlMemtoReg;
+                    o_controlPC4WB      <= i_controlPC4WB;
+                    o_controlWHBLS      <= i_controlWHBLS;
+                    o_controlSignedLoad <= i_controlSignedLoad;
+                    o_controlHalt       <= i_controlHalt;
+
+                    o_PcMas4 <= i_PcMas4;
+                    o_ALUResult <= i_ALUResult;
+                    o_dataQueQuieroEscribirEnMemoriaDeDatos <= i_dataQueQuieroEscribirEnMemoriaDeDatos;
+                    o_addressDeEscrituraRegisterMemory <= i_addressDeEscrituraRegisterMemory;
+                end
+            end
         end
     end
 endmodule

@@ -300,7 +300,7 @@ module Etapas
         .i_controlRegWrite  (w_RegWrite_fromE3ToE4),
         .i_controlMemWrite  (w_MemWrite_fromE3ToE4),
         .i_controlMemRead   (w_MemRead_fromE3ToE4),
-        .i_controlMemToReg  (w_MemToReg_fromE3ToE4),
+        .i_controlMemToReg  (w_MemtoReg_fromE3ToE4),
         .i_controlPC4WB     (w_pc4WB_fromE3ToE4),
         .i_controlWHBLS     (w_whbLS_fromE3ToE4),
         .i_controlSignedLoad(w_signedLoad_fromE3ToE4),
@@ -324,6 +324,8 @@ module Etapas
         // For Forwarding
         .o_RegWrite_fromE4ToFU          (w_RegWriteForFU_fromE4ToE3),
         .o_rd_fromE4ToFU                (w_rdForFU_fromE4ToE3),
+        .o_RegWrite_fromE5ToFU          (w_RegWriteForFU_fromE5ToE3),
+        .o_rd_fromE5ToFU                (w_rdForFU_fromE5ToE3),
         .o_dataToForward_fromE4ToE3     (w_dataForwarded_fromE4ToE3),
         .o_dataToForward_fromE5ToE3     (w_dataForwarded_fromE5ToE3), 
         

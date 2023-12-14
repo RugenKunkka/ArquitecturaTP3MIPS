@@ -9,6 +9,7 @@ module E2_HazardUnit
         output wire o_stallIFID_fromHUToE1,
         output wire o_stallIDEX_fromHUToE2,
         output wire o_reset_fromHUToCU,
+        output wire o_flushEXMEM_fromHUToE3,
         
         input wire i_takeJumpR_fromE2ToHU,  
         input wire i_controlBranch_fromE2ToHU,
@@ -84,7 +85,9 @@ module E2_HazardUnit
     */
     assign o_stallPC_fromHUToE1 =  stall_PC_a |  stall_PC_b;
     assign o_stallIFID_fromHUToE1 = stall_IFID_a | stall_IFID_b;
+    assign o_stallIDEX_fromHUToE2 = stall_IDEX_a;
     assign o_reset_fromHUToCU = reset_CU;
+    assign o_flushEXMEM_fromHUToE3 = flush_EXMEM_a ;
 
 
 endmodule

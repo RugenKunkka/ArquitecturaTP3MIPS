@@ -8,11 +8,16 @@ module E1_Reg_IF_ID
     (
         input wire i_clock,
         input wire i_reset,
+
         input wire [INS_LEN-1:0]            i_instruction,
         input wire [INSMEM_ADDR_LEN-1:0]    i_pcMas4,
         
         output reg [INS_LEN-1:0]            o_instruction,
-        output reg [INSMEM_ADDR_LEN-1:0]    o_pcMas4
+        output reg [INSMEM_ADDR_LEN-1:0]    o_pcMas4,
+
+        input wire i_stallIFID_fromHU,
+
+        input wire i_clockIgnore_fromDU
     );
     
     //no se si resetear la instruccion pero lo pongo por las dudas
@@ -25,7 +30,11 @@ module E1_Reg_IF_ID
             o_pcMas4<={32{1'b0}};
         end
         else begin
-            o_pcMas4<=i_pcMas4;
+            if (~i_clockIgnore_fromDU) begin
+                if (~i_stallIFID_fromHU) begin
+                    o_pcMas4 <= i_pcMas4;
+                end 
+            end
         end
     end
 endmodule

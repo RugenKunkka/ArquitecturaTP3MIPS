@@ -33,19 +33,23 @@ module E2_ControlUnit
     );
  
     always@(*) begin
-        if(i_reset) begin
-            o_controlRegDst=0;
-            o_controlMemtoReg=0;
-            o_controlALUOp=0;
-            o_controlMemWrite=0;
-            o_controlALUSrc=0;
-            o_controlRegWrite=0;
-            o_controlIsBNEQ=0;
-            o_controlIsBranch=0;
-            o_controlIsJump=0;
-            o_controlIsJumpTipoR=0;
-            o_controlHalt=0;
-            o_controlWHBLS = 0;
+        if(i_reset | i_resetForHazard) begin
+            o_controlIsBNEQ     = 0;
+            o_controlIsBranch   = 0;
+            o_controlIsJumpTipoR= 0;
+            o_controlIsJump     = 0;
+            o_controlRegWrite   = 0;
+            o_controlMemWrite   = 0;
+            o_controlMemRead    = 0;
+            o_controlMemtoReg   = 0;
+            o_controlRegDst     = 0;
+            o_controlPC4WB      = 0;
+            o_controlGpr31      = 0;
+            o_controlWHBLS      = 0;
+            o_controlSignedLoad = 0;
+            o_controlALUSrc     = 0;
+            o_controlHalt       = 0;
+            o_controlALUOp      = 0;
         end
         
         //JALR

@@ -5,15 +5,14 @@ module Etapa4_MemoryAccess
         /*
             Parameters
         */  
+        parameter REGFILE_ADDR_LEN = `REGFILE_ADDR_LEN, 
+        
+        parameter INSMEM_ADDR_LEN = `INSMEM_ADDR_LEN,
+
         parameter DAT_LEN = `DAT_LEN,
         parameter DATMEM_ADDR_LEN = `DATMEM_ADDR_LEN,
         parameter DATMEM_DEPTH = `DATMEM_DEPTH,
         parameter DAT_ENTRY_LEN = `DAT_ENTRY_LEN,
-
-
-        parameter REGFILE_ADDR_LEN = `REGFILE_ADDR_LEN, 
-        
-        parameter INSMEM_ADDR_LEN = `INSMEM_ADDR_LEN,
         
         parameter WORD_LEN = `WORD_LEN,
         parameter HALF_LEN = `HALF_LEN,
@@ -48,6 +47,8 @@ module Etapa4_MemoryAccess
         // For Forwarding
         output wire                         o_RegWrite_fromE4ToFU,
         output wire [REGFILE_ADDR_LEN-1:0]  o_rd_fromE4ToFU,
+        output wire                         o_RegWrite_fromE5ToFU,
+        output wire [REGFILE_ADDR_LEN-1:0]  o_rd_fromE5ToFU,
         output wire [WORD_LEN-1:0]          o_dataToForward_fromE4ToE3,
         output wire [WORD_LEN-1:0]          o_dataToForward_fromE5ToE3,  
 
@@ -98,20 +99,20 @@ module Etapa4_MemoryAccess
         .i_addr_forWordMode         (w_addr_fromDUMuxToDatMem),     
         .i_data_forWordMode         (i_data_fromE3ToDatMem),   
         .o_data_forWordMode         (w_dataWord_fromDatMemToMuxWHB),
-        .i_writeEnable_forWordMode  (~i_controlWHBLS[0]),  
-        .i_readEnable_forWordMode   (i_controlWHBLS[0]),       
+        .i_writeEnable_forWordMode  (i_controlMemWrite),  
+        .i_readEnable_forWordMode   (i_controlMemRead),       
 
         .i_addr_forHalfMode         (i_ALUResult_fromE3ToE4),     
         .i_data_forHalfMode         (i_data_fromE3ToDatMem[16-1:0]),   
         .o_data_forHalfMode         (w_dataHalf_fromDatMemToExtenders),
-        .i_writeEnable_forHalfMode  (~i_controlWHBLS[1]),  
-        .i_readEnable_forHalfMode   (i_controlWHBLS[1]),       
+        .i_writeEnable_forHalfMode  (i_controlMemWrite),  
+        .i_readEnable_forHalfMode   (i_controlMemRead),       
         
         .i_addr_forByteMode         (i_ALUResult_fromE3ToE4),     
         .i_data_forByteMode         (i_data_fromE3ToDatMem[8-1:0]),   
         .o_data_forByteMode         (w_dataByte_fromDatMemToExtenders),
-        .i_writeEnable_forByteMode  (~i_controlWHBLS[2]),  
-        .i_readEnable_forByteMode   (i_controlWHBLS[2])
+        .i_writeEnable_forByteMode  (i_controlMemWrite),  
+        .i_readEnable_forByteMode   (i_controlMemRead)
     );
 
     wire [DAT_LEN-1:0] w_extended_fromZeroExtHToMuxHalfSigned;
@@ -220,7 +221,7 @@ module Etapa4_MemoryAccess
     (
         .i_bus0     (i_data_fromE3ToDatMem),
         .i_bus1     (w_data_fromMuxWHBToMuxForMemtoReg),
-        .i_muxSel   (i_MemToReg_fromCUToE4),
+        .i_muxSel   (i_controlMemToReg),
         .o_bus      (w_data_fromMuxWHBToMuxPC4)
     );
     
@@ -260,10 +261,23 @@ module Etapa4_MemoryAccess
         .i_reset(i_reset)
     );
 
-    assign o_RegWrite_fromE4ToFU = i_controlRegWrite;
-    assign o_rd_fromE4ToFU = i_rdToWrite_fromE3ToE4;
+    // To Forward Unit
+    assign o_RegWrite_fromE4ToFU    = i_controlRegWrite;
+    assign o_rd_fromE4ToFU          = i_rdToWrite_fromE3ToE4;
+    assign o_RegWrite_fromE5ToFU    = o_RegWriteForWB_fromE4ToE5;          
+    assign o_rd_fromE5ToFU          = o_rdForWB_fromE4ToE5;                
+    
+    // To Forward
     assign o_dataToForward_fromE4ToE3 = i_ALUResult_fromE3ToE4;
     assign o_dataToForward_fromE5ToE3 = o_dataForWB_fromE4ToE5;
+    
+    // To Hazard Unit
+    assign o_MemToRegForHazard_fromE4ToE2 = i_controlMemToReg; 
+    assign o_rdForHazard_fromE4ToE2 = i_rdToWrite_fromE3ToE4; 
+
+    // For Debug Unit
+    assign o_data_fromDatMemToDU = w_dataWord_fromDatMemToMuxWHB;
+    assign o_halt_fromE4ToDU = i_controlHalt;
 
 
 endmodule

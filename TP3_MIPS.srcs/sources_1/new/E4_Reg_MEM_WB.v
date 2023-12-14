@@ -25,17 +25,18 @@ module E4_Reg_MEM_WB
     );
     localparam  ZERO = `ZERO;
 
-    always @(i_clock)begin
+    always @(posedge i_clock) begin
         if(i_reset) begin
             o_controlRegWrite       <= ZERO;
-            o_data_fromDatMemToE5      <= {DAT_LEN{ZERO}};
-            o_rdToWrite_fromE4ToE5      <= ZERO;
+            o_data_fromDatMemToE5   <= {DAT_LEN{ZERO}};
+            o_rdToWrite_fromE4ToE5  <= ZERO;
         end
-        else begin
-            o_controlRegWrite           <= i_controlRegWrite;
-            o_data_fromDatMemToE5      <= i_data_fromDatMemToE5;
-            o_rdToWrite_fromE4ToE5      <= i_rdToWrite_fromE3ToE4;
-
+        else begin            
+            if (~i_clockIgnore_fromDU) begin
+                o_controlRegWrite       <= i_controlRegWrite;
+                o_data_fromDatMemToE5   <= i_data_fromDatMemToE5;
+                o_rdToWrite_fromE4ToE5  <= i_rdToWrite_fromE3ToE4;
+            end
         end
     end
     

@@ -5,30 +5,33 @@ module E4_DataMemory
         parameter DATMEM_DEPTH = `DATMEM_DEPTH,
         parameter DAT_ENTRY_LEN = `DAT_ENTRY_LEN,
         parameter DAT_LEN = `DAT_LEN,
-        parameter DATMEM_ADDR_LEN = `DATMEM_ADDR_LEN
+        parameter DATMEM_ADDR_LEN = `DATMEM_ADDR_LEN,
+        parameter WORD_LEN = `WORD_LEN,
+        parameter HALF_LEN = `HALF_LEN,
+        parameter BYTE_LEN = `BYTE_LEN
     )
     (
         input wire i_clock,
         input wire i_reset,
         input wire i_clockIgnore_fromDU,
 
-        input  wire [32-1:0]     i_addr_forWordMode,     
-        input  wire [32-1:0]     i_data_forWordMode,   
-        output reg  [32-1:0]     o_data_forWordMode,
-        input  wire              i_writeEnable_forWordMode,  
-        input  wire              i_readEnable_forWordMode,  
+        input  wire [DATMEM_ADDR_LEN-1:0]   i_addr_forWordMode,     
+        input  wire [WORD_LEN-1:0]          i_data_forWordMode,   
+        output reg  [WORD_LEN-1:0]          o_data_forWordMode,
+        input  wire                         i_writeEnable_forWordMode,  
+        input  wire                         i_readEnable_forWordMode,  
 
-        input  wire [32-1:0]     i_addr_forHalfMode,     
-        input  wire [16-1:0]     i_data_forHalfMode,   
-        output reg  [16-1:0]     o_data_forHalfMode,
-        input  wire              i_writeEnable_forHalfMode,  
-        input  wire              i_readEnable_forHalfMode,  
+        input  wire [DATMEM_ADDR_LEN-1:0]   i_addr_forHalfMode,     
+        input  wire [HALF_LEN-1:0]          i_data_forHalfMode,   
+        output reg  [HALF_LEN-1:0]          o_data_forHalfMode,
+        input  wire                         i_writeEnable_forHalfMode,  
+        input  wire                         i_readEnable_forHalfMode,  
 
-        input  wire [32-1:0]     i_addr_forByteMode,     
-        input  wire [8-1:0]      i_data_forByteMode,   
-        output reg  [8-1:0]      o_data_forByteMode,
-        input  wire              i_writeEnable_forByteMode,  
-        input  wire              i_readEnable_forByteMode
+        input  wire [DATMEM_ADDR_LEN-1:0]   i_addr_forByteMode,     
+        input  wire [BYTE_LEN-1:0]          i_data_forByteMode,   
+        output reg  [BYTE_LEN-1:0]          o_data_forByteMode,
+        input  wire                         i_writeEnable_forByteMode,  
+        input  wire                         i_readEnable_forByteMode
 
     );
     reg [DAT_ENTRY_LEN-1:0] reg_data_memory[DATMEM_DEPTH-1:0];
@@ -45,7 +48,7 @@ module E4_DataMemory
             end
         end else begin 
             if (~i_clockIgnore_fromDU) begin  
-                if (i_writeEnable_forWordMode == HIGH) begin
+                if (i_writeEnable_forWordMode == HIGH) begin // LW
                     reg_data_memory[i_addr_forWordMode + 0] <= i_data_forWordMode[ 0 * DAT_ENTRY_LEN  +: DAT_ENTRY_LEN ]; 
                     reg_data_memory[i_addr_forWordMode + 1] <= i_data_forWordMode[ 1 * DAT_ENTRY_LEN  +: DAT_ENTRY_LEN ]; 
                     reg_data_memory[i_addr_forWordMode + 2] <= i_data_forWordMode[ 2 * DAT_ENTRY_LEN  +: DAT_ENTRY_LEN ]; 

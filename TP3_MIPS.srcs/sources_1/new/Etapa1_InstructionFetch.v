@@ -13,12 +13,12 @@ module Etapa1_InstructionFetch
         output wire [INS_LEN-1:0] o_instruction,
         
         // For J, JAL, JR, JALR, BEQ, BNEQ
-        input wire i_controlMux1JumpAddress,   
-        input wire i_controlMux2JumpRAddress, 
-        input wire i_controlMux3BranchAddress,
-        input wire [INS_LEN-1:0] i_dataPCJumpAddressToMux1,
-        input wire [INS_LEN-1:0] i_dataPCJumpAddressRToMux2, 
-        input wire [INS_LEN-1:0] i_dataPCBranchAddressToMux3,
+        input wire                  i_controlMux1JumpAddress,   
+        input wire                  i_controlMux2JumpRAddress, 
+        input wire                  i_controlMux3BranchAddress,
+        input wire [INS_LEN-1:0]    i_dataPCJumpAddressToMux1,
+        input wire [INS_LEN-1:0]    i_dataPCJumpAddressRToMux2, 
+        input wire [INS_LEN-1:0]    i_dataPCBranchAddressToMux3,
         
         // From Hazard Unit
         input wire i_stallPC_fromHU,
@@ -92,6 +92,7 @@ module Etapa1_InstructionFetch
         .i_reset(i_reset),
         .i_pcAddressIn(wire_o_dataFromMux3ToPC),
         .o_pcAddressOut(wire_pcAddressFromPCToInstructionMemoryAndSumadorMas4),
+        .i_stallPC_fromHU(i_stallPC_fromHU),
         .i_clockIgnore_fromDU(i_clockIgnore_fromDU)
     );
     
@@ -140,9 +141,9 @@ module Etapa1_InstructionFetch
         .o_instruction(wire_o_intructionFromMemoryToReg_IF_ID),
 
         // For Debug Unit (Programming)
-        .i_writeEnable_fromDU(i_writeEnable_fromDU),
-        .i_data_fromDU(i_data_fromDUToInsMem), 
-        .i_clockIgnore_fromDU(i_clockIgnore_fromDU)
+        .i_writeEnable_fromDU   (i_we_fromDUToInsMem),
+        .i_data_fromDU          (i_data_fromDUToInsMem), 
+        .i_clockIgnore_fromDU   (i_clockIgnore_fromDU)
 
     );
     
@@ -157,10 +158,15 @@ module Etapa1_InstructionFetch
 
         .i_instruction(wire_o_intructionFromMemoryToReg_IF_ID),
         .i_pcMas4(wire_pcSumadorResultFromSumadorMas4ToMuxAndReg_IF_ID),
+
+        .i_stallIFID_fromHU(i_stallIFID_fromHU),
+        
+        .i_clockIgnore_fromDU (i_clockIgnore_fromDU),
         
         .o_instruction(o_instruction),
         .o_pcMas4(o_pcMas4)
     );
     
+    assign o_pc_fromPcToDU = wire_pcAddressFromPCToInstructionMemoryAndSumadorMas4;
     
 endmodule

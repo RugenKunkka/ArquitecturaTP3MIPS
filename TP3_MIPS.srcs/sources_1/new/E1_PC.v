@@ -5,11 +5,15 @@ module E1_PC
         parameter INS_LEN = `INS_LEN
     )
     (
-        input                   i_clock,
-        input                   i_reset,
-        input [INS_LEN-1:0]      i_pcAddressIn,
+        input wire                  i_clock,
+        input wire                  i_reset,
+        
+        input wire [INS_LEN-1:0] i_pcAddressIn,
         output reg [INS_LEN-1:0] o_pcAddressOut,
-        input wire              i_clockIgnore_fromDU
+
+        input wire  i_stallPC_fromHU,
+        
+        input wire  i_clockIgnore_fromDU
     );
     localparam ZERO = `ZERO;
 
@@ -18,7 +22,9 @@ module E1_PC
             o_pcAddressOut <= {INS_LEN{ZERO}};            
         end else begin
             if (~i_clockIgnore_fromDU) begin
-                o_pcAddressOut <= i_pcAddressIn;
+                if (~i_stallPC_fromHU) begin
+                    o_pcAddressOut <= i_pcAddressIn;
+                end
             end
         end
     end
