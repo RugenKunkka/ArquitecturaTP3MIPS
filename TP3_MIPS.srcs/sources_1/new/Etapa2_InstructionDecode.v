@@ -185,12 +185,12 @@ module Etapa2_InstructionDecode
         .o_bus  (w_dataBFromMux)
     );
     
-    wire [26-1:0] wire_shiftedInconditionalJumpAddress; // Len 26 o 28 ?
+    wire [28-1:0] wire_shiftedInconditionalJumpAddress;
 
     GenericShifter
     #(
         .IN_LEN(26),
-        .OUT_LEN(26),
+        .OUT_LEN(28),
         .NUM_TO_SHIFT(2)
     )
     u1_Shift2Unit
@@ -201,7 +201,7 @@ module Etapa2_InstructionDecode
     
     GenericSignExtender
     #(
-        .SIGNEXT_IN_LEN(26),
+        .SIGNEXT_IN_LEN(28),
         .SIGNEXT_OUT_LEN(32)
     )
     u1_ExtensorDeSigno
