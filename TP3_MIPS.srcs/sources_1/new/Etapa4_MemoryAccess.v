@@ -56,6 +56,7 @@ module Etapa4_MemoryAccess
         input wire [DATMEM_ADDR_LEN-1:0]    i_addr_fromDUToDatMem, 
         output wire [DAT_LEN-1:0]           o_data_fromDatMemToDU, 
         input wire                          i_muxSel_fromDUToDatMemMux,
+        input wire                          i_re_fromDUToDatMem,
         input wire                          i_clockIgnore_fromDU,
         output wire                         o_halt_fromE4ToDU,      
 
@@ -100,7 +101,7 @@ module Etapa4_MemoryAccess
         .i_data_forWordMode         (i_data_fromE3ToDatMem),   
         .o_data_forWordMode         (w_dataWord_fromDatMemToMuxWHB),
         .i_writeEnable_forWordMode  (i_controlMemWrite),  
-        .i_readEnable_forWordMode   (i_controlMemRead),       
+        .i_readEnable_forWordMode   (i_controlMemRead | i_re_fromDUToDatMem),       
 
         .i_addr_forHalfMode         (i_ALUResult_fromE3ToE4),     
         .i_data_forHalfMode         (i_data_fromE3ToDatMem[16-1:0]),   
