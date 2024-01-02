@@ -48,30 +48,30 @@ module E4_DataMemory
             end
         end else begin 
             if (~i_clockIgnore_fromDU) begin  
-                if (i_writeEnable_forWordMode == HIGH) begin // LW
+                if (i_writeEnable_forWordMode == HIGH) begin // SW
                     reg_data_memory[i_addr_forWordMode + 0] <= i_data_forWordMode[ 0 * DAT_ENTRY_LEN  +: DAT_ENTRY_LEN ]; 
                     reg_data_memory[i_addr_forWordMode + 1] <= i_data_forWordMode[ 1 * DAT_ENTRY_LEN  +: DAT_ENTRY_LEN ]; 
                     reg_data_memory[i_addr_forWordMode + 2] <= i_data_forWordMode[ 2 * DAT_ENTRY_LEN  +: DAT_ENTRY_LEN ]; 
                     reg_data_memory[i_addr_forWordMode + 3] <= i_data_forWordMode[ 3 * DAT_ENTRY_LEN  +: DAT_ENTRY_LEN ]; 
 
-                end else if(i_readEnable_forWordMode == HIGH) begin
+                end else if(i_readEnable_forWordMode == HIGH) begin // LW, LWU
                     o_data_forWordMode[ 0 * DAT_ENTRY_LEN  +: DAT_ENTRY_LEN ] <= reg_data_memory[i_addr_forWordMode + 0];
                     o_data_forWordMode[ 1 * DAT_ENTRY_LEN  +: DAT_ENTRY_LEN ] <= reg_data_memory[i_addr_forWordMode + 1];
                     o_data_forWordMode[ 2 * DAT_ENTRY_LEN  +: DAT_ENTRY_LEN ] <= reg_data_memory[i_addr_forWordMode + 2];
                     o_data_forWordMode[ 3 * DAT_ENTRY_LEN  +: DAT_ENTRY_LEN ] <= reg_data_memory[i_addr_forWordMode + 3];
 
-                end else if (i_writeEnable_forHalfMode == HIGH) begin
+                end else if (i_writeEnable_forHalfMode == HIGH) begin // SH
                     reg_data_memory[i_addr_forHalfMode + 0] <= i_data_forHalfMode[ 0 * DAT_ENTRY_LEN  +: DAT_ENTRY_LEN ]; 
                     reg_data_memory[i_addr_forHalfMode + 1] <= i_data_forHalfMode[ 1 * DAT_ENTRY_LEN  +: DAT_ENTRY_LEN ]    ; 
 
-                end else if(i_readEnable_forHalfMode == HIGH) begin
+                end else if(i_readEnable_forHalfMode == HIGH) begin // LH, LHU
                     o_data_forHalfMode[ 0 * DAT_ENTRY_LEN  +: DAT_ENTRY_LEN ] <= reg_data_memory[i_addr_forHalfMode + 0];
                     o_data_forHalfMode[ 1 * DAT_ENTRY_LEN  +: DAT_ENTRY_LEN ] <= reg_data_memory[i_addr_forHalfMode + 1];
 
-                end else if(i_writeEnable_forByteMode == HIGH) begin
+                end else if(i_writeEnable_forByteMode == HIGH) begin // SB
                     reg_data_memory[i_addr_forByteMode + 0] <= i_data_forByteMode[ 0 * DAT_ENTRY_LEN  +: DAT_ENTRY_LEN ]; 
                     
-                end else if(i_readEnable_forByteMode == HIGH) begin
+                end else if(i_readEnable_forByteMode == HIGH) begin // LB, LBU
                     o_data_forByteMode[ 0 * DAT_ENTRY_LEN  +: DAT_ENTRY_LEN ] <= reg_data_memory[i_addr_forByteMode + 0];
                 end
             end 
