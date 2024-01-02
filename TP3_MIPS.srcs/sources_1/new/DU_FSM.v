@@ -64,6 +64,7 @@ module DU_FSM
         output wire [DATMEM_ADDR_LEN-1:0]    o_addr_fromDUFSMToDatMem, // Address to read from Data Memory
         input wire [DAT_LEN-1:0]            i_data_fromDatMemToDUFSM, // Data read from Data memory
         output wire                          o_muxSel_fromDUFSMToDatMemMux, //Mux Selector to handle extra mux for Data memory
+        output wire                         o_re_fromDUFSMToDatMem, // Read Enable for Data Memory
 
         // Other IO Ports
         input wire i_halt_fromCUToDUFSM,            // Halt coming from Control Unit
@@ -129,6 +130,7 @@ module DU_FSM
     // For Data Memory
     reg [DATMEM_ADDR_LEN-1:0]   reg_addr_fromDUFSMToDatMem, reg_addr_fromDUFSMToDatMem_next;
     reg                         reg_muxSel_fromDUFSMToDatMemMux, reg_muxSel_fromDUFSMToDatMemMux_next;
+    reg                         reg_re_fromDUFSMToDatMem, reg_re_fromDUFSMToDatMem_next;
 
     // For FSM
     reg [4-1:0] regCurrentState, regNextState;
@@ -157,6 +159,7 @@ module DU_FSM
     // For Data Memory
     assign  o_addr_fromDUFSMToDatMem  = reg_addr_fromDUFSMToDatMem ;
     assign o_muxSel_fromDUFSMToDatMemMux = reg_muxSel_fromDUFSMToDatMemMux;
+    assign o_re_fromDUFSMToDatMem = reg_re_fromDUFSMToDatMem;
     
     /*
         Procedural Blocks
@@ -190,6 +193,7 @@ module DU_FSM
             // For Data Memory
             reg_addr_fromDUFSMToDatMem <= {DATMEM_ADDR_LEN{ZERO}};
             reg_muxSel_fromDUFSMToDatMemMux <= LOW;
+            reg_re_fromDUFSMToDatMem <= LOW;
 
             // For FSM
             regCurrentState         <= IDLE_STATE;  
@@ -221,6 +225,7 @@ module DU_FSM
             // For Data Memory
             reg_addr_fromDUFSMToDatMem <= reg_addr_fromDUFSMToDatMem_next;
             reg_muxSel_fromDUFSMToDatMemMux <= reg_muxSel_fromDUFSMToDatMemMux_next;
+            reg_re_fromDUFSMToDatMem <= reg_re_fromDUFSMToDatMem_next;
 
             // For FSM
             regCurrentState          <= regNextState;
@@ -253,6 +258,7 @@ module DU_FSM
         // For Data Memory
         reg_addr_fromDUFSMToDatMem_next = reg_addr_fromDUFSMToDatMem;
         reg_muxSel_fromDUFSMToDatMemMux_next = reg_muxSel_fromDUFSMToDatMemMux;
+        reg_re_fromDUFSMToDatMem_next = reg_re_fromDUFSMToDatMem;
 
         // For FSM
         regNextState = regCurrentState;
@@ -365,11 +371,13 @@ module DU_FSM
                 if (regIndexToSend1 < DATMEM_DEPTH) begin 
                     regClockIgnore_next = LOW;
                     reg_muxSel_fromDUFSMToDatMemMux_next = HIGH;
+                    reg_re_fromDUFSMToDatMem_next = HIGH; // Read Enable
                     reg_addr_fromDUFSMToDatMem_next = regIndexToSend1;
-                    regIndexToSend1_next = regIndexToSend1 + 1 ;
+                    regIndexToSend1_next = regIndexToSend1 + 4 ;
                     regNextState = SENDING_DATMEM_STATE;
                 end else begin  
                     reg_muxSel_fromDUFSMToDatMemMux_next = LOW;
+                    reg_re_fromDUFSMToDatMem_next = LOW;
                     regIndexToSend1_next = {INDEX_TO_SEND_LEN{ZERO}};
                     regNextState = READY_STATE;
                 end 
