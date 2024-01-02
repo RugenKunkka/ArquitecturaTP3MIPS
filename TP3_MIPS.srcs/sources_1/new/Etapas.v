@@ -42,7 +42,8 @@ module Etapas
         // For Etapa 4 (Data Memory)
         input wire [DATMEM_ADDR_LEN-1:0]    i_addrForDatMem_fromDUToE4, // Address to read from Data Memory
         output wire [DAT_LEN-1:0]           o_dataForDatMem_fromE4ToDU, // Data read from Data memory
-        input wire                          i_muxSelForDatMemMux_fromDUToE4
+        input wire                          i_muxSelForDatMemMux_fromDUToE4,
+        input wire                          i_reForDatMem_fromDUToE4
 
     );
 
@@ -334,6 +335,7 @@ module Etapas
         .i_addr_fromDUToDatMem      (i_addrForDatMem_fromDUToE4), 
         .o_data_fromDatMemToDU      (o_dataForDatMem_fromE4ToDU), 
         .i_muxSel_fromDUToDatMemMux (i_muxSelForDatMemMux_fromDUToE4),
+        .i_re_fromDUToDatMem        (i_reForDatMem_fromDUToE4),
         .i_clockIgnore_fromDU       (i_clockIgnore_fromDU),
         
         .i_clock(i_globalClock),

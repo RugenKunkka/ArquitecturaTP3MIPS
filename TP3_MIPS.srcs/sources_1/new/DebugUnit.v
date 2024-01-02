@@ -46,6 +46,7 @@ module DebugUnit
         output wire [DATMEM_ADDR_LEN-1:0]   o_addr_fromDUToDatMem, // Address to read from Data Memory
         input wire [DAT_LEN-1:0]            i_data_fromDatMemToDU, // Data read from Data memory
         output wire                         o_muxSel_fromDUToDatMemMux,
+        output wire                         o_re_fromDUToDatMem,
 
         // Other IO Ports
         input wire i_halt_fromCUToDU,
@@ -135,6 +136,7 @@ module DebugUnit
         .o_addr_fromDUFSMToDatMem   (o_addr_fromDUToDatMem), // Address to read from Data Memory
         .i_data_fromDatMemToDUFSM       (i_data_fromDatMemToDU), // Data read from Data memory
         .o_muxSel_fromDUFSMToDatMemMux (o_muxSel_fromDUToDatMemMux), // Mux Selector
+        .o_re_fromDUFSMToDatMem         (o_re_fromDUToDatMem),
 
         // Other IO Ports
         .i_halt_fromCUToDUFSM           (i_halt_fromCUToDU),

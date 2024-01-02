@@ -50,6 +50,7 @@ wire                        w_halt_fromCUToDU;
 wire [DATMEM_ADDR_LEN-1:0]    w_addr_fromDUToDatMem; // Address to read from Data Memory
 wire [DAT_LEN-1:0]            w_data_fromDatMemToDU; // Data read from Data memory
 wire                          w_muxSel_fromDUToDatMemMux; //  Mux Selector
+wire                          w_re_fromDUToDatMem; // Read Enable
 
 
 DebugUnit
@@ -87,7 +88,8 @@ DebugUnit
     // For Etapa 4 (Data Memory)
     .o_addr_fromDUToDatMem          (w_addr_fromDUToDatMem), // Address to read from Data Memory
     .i_data_fromDatMemToDU          (w_data_fromDatMemToDU), // Data read from Data memory
-    .o_muxSel_fromDUToDatMemMux     (w_muxSel_fromDUToDatMemMux) // Mux Selector
+    .o_muxSel_fromDUToDatMemMux     (w_muxSel_fromDUToDatMemMux), // Mux Selector
+    .o_re_fromDUToDatMem            (w_re_fromDUToDatMem)
 );
 
 Etapas
@@ -121,7 +123,8 @@ u_Etapas
     // For Etapa 4 (Data Memory)
     .i_addrForDatMem_fromDUToE4      (w_addr_fromDUToDatMem), // Address to read from Data Memory
     .o_dataForDatMem_fromE4ToDU      (w_data_fromDatMemToDU), // Data read from Data memory
-    .i_muxSelForDatMemMux_fromDUToE4 (w_muxSel_fromDUToDatMemMux) // Mux Selector
+    .i_muxSelForDatMemMux_fromDUToE4 (w_muxSel_fromDUToDatMemMux), // Mux Selector
+    .i_reForDatMem_fromDUToE4        (w_re_fromDUToDatMem)
 
 );
 
