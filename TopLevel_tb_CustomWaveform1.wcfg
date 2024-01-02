@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="TopLevel_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="TopLevel_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="157.644007882 ms"></ZoomStartTime>
+      <ZoomEndTime time="176.884007883 ms"></ZoomEndTime>
+      <Cursor1Time time="158.194006909 ms"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="302"></NameColumnWidth>
+      <ValueColumnWidth column_width="58"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="12" />
+   <wvobject fp_name="/TopLevel_tb/i_clock_fromPin" type="logic">
+      <obj_property name="ElementShortName">i_clock_fromPin</obj_property>
+      <obj_property name="ObjectShortName">i_clock_fromPin</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TopLevel_tb/i_reset_fromPin" type="logic">
+      <obj_property name="ElementShortName">i_reset_fromPin</obj_property>
+      <obj_property name="ObjectShortName">i_reset_fromPin</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TopLevel_tb/i_rx_fromPin" type="logic">
+      <obj_property name="ElementShortName">i_rx_fromPin</obj_property>
+      <obj_property name="ObjectShortName">i_rx_fromPin</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TopLevel_tb/i_halt_just4tb" type="logic">
+      <obj_property name="ElementShortName">i_halt_just4tb</obj_property>
+      <obj_property name="ObjectShortName">i_halt_just4tb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TopLevel_tb/o_tx_fromPin" type="logic">
+      <obj_property name="ElementShortName">o_tx_fromPin</obj_property>
+      <obj_property name="ObjectShortName">o_tx_fromPin</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TopLevel_tb/regProgram" type="array">
+      <obj_property name="ElementShortName">regProgram[0:3][31:0]</obj_property>
+      <obj_property name="ObjectShortName">regProgram[0:3][31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TopLevel_tb/regByteToSend" type="array">
+      <obj_property name="ElementShortName">regByteToSend[7:0]</obj_property>
+      <obj_property name="ObjectShortName">regByteToSend[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TopLevel_tb/regDataFrameToSend" type="array">
+      <obj_property name="ElementShortName">regDataFrameToSend[9:0]</obj_property>
+      <obj_property name="ObjectShortName">regDataFrameToSend[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TopLevel_tb/i" type="array">
+      <obj_property name="ElementShortName">i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">i[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TopLevel_tb/j" type="array">
+      <obj_property name="ElementShortName">j[31:0]</obj_property>
+      <obj_property name="ObjectShortName">j[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TopLevel_tb/k" type="array">
+      <obj_property name="ElementShortName">k[31:0]</obj_property>
+      <obj_property name="ObjectShortName">k[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="group1031" type="group">
+      <obj_property name="label">Debug Unit</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/regCurrentState" type="array">
+         <obj_property name="ElementShortName">regCurrentState[3:0]</obj_property>
+         <obj_property name="ObjectShortName">regCurrentState[3:0]</obj_property>
+         <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/i_globalClock" type="logic">
+         <obj_property name="ElementShortName">i_globalClock</obj_property>
+         <obj_property name="ObjectShortName">i_globalClock</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/i_globalReset" type="logic">
+         <obj_property name="ElementShortName">i_globalReset</obj_property>
+         <obj_property name="ObjectShortName">i_globalReset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/i_data_fromRxToDUFSM" type="array">
+         <obj_property name="ElementShortName">i_data_fromRxToDUFSM[7:0]</obj_property>
+         <obj_property name="ObjectShortName">i_data_fromRxToDUFSM[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/i_rxDone_fromRxToDUFSM" type="logic">
+         <obj_property name="ElementShortName">i_rxDone_fromRxToDUFSM</obj_property>
+         <obj_property name="ObjectShortName">i_rxDone_fromRxToDUFSM</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_data_fromDUFSMToTx" type="array">
+         <obj_property name="ElementShortName">o_data_fromDUFSMToTx[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_data_fromDUFSMToTx[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/i_txDone_fromTxToDUFSM" type="logic">
+         <obj_property name="ElementShortName">i_txDone_fromTxToDUFSM</obj_property>
+         <obj_property name="ObjectShortName">i_txDone_fromTxToDUFSM</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_txStart_fromDUFSMToTx" type="logic">
+         <obj_property name="ElementShortName">o_txStart_fromDUFSMToTx</obj_property>
+         <obj_property name="ObjectShortName">o_txStart_fromDUFSMToTx</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/i_pc_fromPcToDUFSM" type="array">
+         <obj_property name="ElementShortName">i_pc_fromPcToDUFSM[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_pc_fromPcToDUFSM[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_addr_fromDUFSMToInsMem" type="array">
+         <obj_property name="ElementShortName">o_addr_fromDUFSMToInsMem[31:0]</obj_property>
+         <obj_property name="ObjectShortName">o_addr_fromDUFSMToInsMem[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_data_fromDUFSMToInsMem" type="array">
+         <obj_property name="ElementShortName">o_data_fromDUFSMToInsMem[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_data_fromDUFSMToInsMem[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_we_fromDUFSMToInsMem" type="logic">
+         <obj_property name="ElementShortName">o_we_fromDUFSMToInsMem</obj_property>
+         <obj_property name="ObjectShortName">o_we_fromDUFSMToInsMem</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_muxSel_fromDUFSMToInsMemMux" type="logic">
+         <obj_property name="ElementShortName">o_muxSel_fromDUFSMToInsMemMux</obj_property>
+         <obj_property name="ObjectShortName">o_muxSel_fromDUFSMToInsMemMux</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_addr_fromDUFSMToRegFile" type="array">
+         <obj_property name="ElementShortName">o_addr_fromDUFSMToRegFile[4:0]</obj_property>
+         <obj_property name="ObjectShortName">o_addr_fromDUFSMToRegFile[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/i_data_fromRegFileToDUFSM" type="array">
+         <obj_property name="ElementShortName">i_data_fromRegFileToDUFSM[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_data_fromRegFileToDUFSM[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_muxSel_fromDUFSMToRegFileMux" type="logic">
+         <obj_property name="ElementShortName">o_muxSel_fromDUFSMToRegFileMux</obj_property>
+         <obj_property name="ObjectShortName">o_muxSel_fromDUFSMToRegFileMux</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_addr_fromDUFSMToDatMem" type="array">
+         <obj_property name="ElementShortName">o_addr_fromDUFSMToDatMem[31:0]</obj_property>
+         <obj_property name="ObjectShortName">o_addr_fromDUFSMToDatMem[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/i_data_fromDatMemToDUFSM" type="array">
+         <obj_property name="ElementShortName">i_data_fromDatMemToDUFSM[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_data_fromDatMemToDUFSM[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_muxSel_fromDUFSMToDatMemMux" type="logic">
+         <obj_property name="ElementShortName">o_muxSel_fromDUFSMToDatMemMux</obj_property>
+         <obj_property name="ObjectShortName">o_muxSel_fromDUFSMToDatMemMux</obj_property>
+         <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_re_fromDUFSMToDatMem" type="logic">
+         <obj_property name="ElementShortName">o_re_fromDUFSMToDatMem</obj_property>
+         <obj_property name="ObjectShortName">o_re_fromDUFSMToDatMem</obj_property>
+         <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/i_halt_fromCUToDUFSM" type="logic">
+         <obj_property name="ElementShortName">i_halt_fromCUToDUFSM</obj_property>
+         <obj_property name="ObjectShortName">i_halt_fromCUToDUFSM</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_clockIgnore_fromDUFSMToEtapas" type="logic">
+         <obj_property name="ElementShortName">o_clockIgnore_fromDUFSMToEtapas</obj_property>
+         <obj_property name="ObjectShortName">o_clockIgnore_fromDUFSMToEtapas</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/regClockIgnore" type="logic">
+         <obj_property name="ElementShortName">regClockIgnore</obj_property>
+         <obj_property name="ObjectShortName">regClockIgnore</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/regClockIgnore_next" type="logic">
+         <obj_property name="ElementShortName">regClockIgnore_next</obj_property>
+         <obj_property name="ObjectShortName">regClockIgnore_next</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_data_fromDUFSMToTx" type="array">
+         <obj_property name="ElementShortName">reg_data_fromDUFSMToTx[7:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_data_fromDUFSMToTx[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_data_fromDUFSMToTx_next" type="array">
+         <obj_property name="ElementShortName">reg_data_fromDUFSMToTx_next[7:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_data_fromDUFSMToTx_next[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/regIndexToSend1" type="array">
+         <obj_property name="ElementShortName">regIndexToSend1[6:0]</obj_property>
+         <obj_property name="ObjectShortName">regIndexToSend1[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/regIndexToSend1_next" type="array">
+         <obj_property name="ElementShortName">regIndexToSend1_next[6:0]</obj_property>
+         <obj_property name="ObjectShortName">regIndexToSend1_next[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/regIndexToSend2" type="array">
+         <obj_property name="ElementShortName">regIndexToSend2[6:0]</obj_property>
+         <obj_property name="ObjectShortName">regIndexToSend2[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/regIndexToSend2_next" type="array">
+         <obj_property name="ElementShortName">regIndexToSend2_next[6:0]</obj_property>
+         <obj_property name="ObjectShortName">regIndexToSend2_next[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_txStart_fromDUFSMToTx" type="logic">
+         <obj_property name="ElementShortName">reg_txStart_fromDUFSMToTx</obj_property>
+         <obj_property name="ObjectShortName">reg_txStart_fromDUFSMToTx</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_txStart_fromDUFSMToTx_next" type="logic">
+         <obj_property name="ElementShortName">reg_txStart_fromDUFSMToTx_next</obj_property>
+         <obj_property name="ObjectShortName">reg_txStart_fromDUFSMToTx_next</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_firstPackageFlag" type="logic">
+         <obj_property name="ElementShortName">reg_firstPackageFlag</obj_property>
+         <obj_property name="ObjectShortName">reg_firstPackageFlag</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_firstPackageFlag_next" type="logic">
+         <obj_property name="ElementShortName">reg_firstPackageFlag_next</obj_property>
+         <obj_property name="ObjectShortName">reg_firstPackageFlag_next</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_addr_fromDUFSMToInsMem" type="array">
+         <obj_property name="ElementShortName">reg_addr_fromDUFSMToInsMem[31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_addr_fromDUFSMToInsMem[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_addr_fromDUFSMToInsMem_next" type="array">
+         <obj_property name="ElementShortName">reg_addr_fromDUFSMToInsMem_next[31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_addr_fromDUFSMToInsMem_next[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_data_fromDUFSMToInsMem" type="array">
+         <obj_property name="ElementShortName">reg_data_fromDUFSMToInsMem[7:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_data_fromDUFSMToInsMem[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_data_fromDUFSMToInsMem_next" type="array">
+         <obj_property name="ElementShortName">reg_data_fromDUFSMToInsMem_next[7:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_data_fromDUFSMToInsMem_next[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_we_fromDUFSMToInsMem" type="logic">
+         <obj_property name="ElementShortName">reg_we_fromDUFSMToInsMem</obj_property>
+         <obj_property name="ObjectShortName">reg_we_fromDUFSMToInsMem</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_we_fromDUFSMToInsMem_next" type="logic">
+         <obj_property name="ElementShortName">reg_we_fromDUFSMToInsMem_next</obj_property>
+         <obj_property name="ObjectShortName">reg_we_fromDUFSMToInsMem_next</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_muxSel_fromDUFSMToInsMemMux" type="logic">
+         <obj_property name="ElementShortName">reg_muxSel_fromDUFSMToInsMemMux</obj_property>
+         <obj_property name="ObjectShortName">reg_muxSel_fromDUFSMToInsMemMux</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_muxSel_fromDUFSMToInsMemMux_next" type="logic">
+         <obj_property name="ElementShortName">reg_muxSel_fromDUFSMToInsMemMux_next</obj_property>
+         <obj_property name="ObjectShortName">reg_muxSel_fromDUFSMToInsMemMux_next</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/regIndexToProgram" type="array">
+         <obj_property name="ElementShortName">regIndexToProgram[31:0]</obj_property>
+         <obj_property name="ObjectShortName">regIndexToProgram[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/regIndexToProgram_next" type="array">
+         <obj_property name="ElementShortName">regIndexToProgram_next[31:0]</obj_property>
+         <obj_property name="ObjectShortName">regIndexToProgram_next[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_addr_fromDUFSMToRegFile" type="array">
+         <obj_property name="ElementShortName">reg_addr_fromDUFSMToRegFile[4:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_addr_fromDUFSMToRegFile[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_addr_fromDUFSMToRegFile_next" type="array">
+         <obj_property name="ElementShortName">reg_addr_fromDUFSMToRegFile_next[4:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_addr_fromDUFSMToRegFile_next[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_muxSel_fromDUFSMToRegFileMux" type="logic">
+         <obj_property name="ElementShortName">reg_muxSel_fromDUFSMToRegFileMux</obj_property>
+         <obj_property name="ObjectShortName">reg_muxSel_fromDUFSMToRegFileMux</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_muxSel_fromDUFSMToRegFileMux_next" type="logic">
+         <obj_property name="ElementShortName">reg_muxSel_fromDUFSMToRegFileMux_next</obj_property>
+         <obj_property name="ObjectShortName">reg_muxSel_fromDUFSMToRegFileMux_next</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_addr_fromDUFSMToDatMem" type="array">
+         <obj_property name="ElementShortName">reg_addr_fromDUFSMToDatMem[31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_addr_fromDUFSMToDatMem[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_addr_fromDUFSMToDatMem_next" type="array">
+         <obj_property name="ElementShortName">reg_addr_fromDUFSMToDatMem_next[31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_addr_fromDUFSMToDatMem_next[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_muxSel_fromDUFSMToDatMemMux" type="logic">
+         <obj_property name="ElementShortName">reg_muxSel_fromDUFSMToDatMemMux</obj_property>
+         <obj_property name="ObjectShortName">reg_muxSel_fromDUFSMToDatMemMux</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_muxSel_fromDUFSMToDatMemMux_next" type="logic">
+         <obj_property name="ElementShortName">reg_muxSel_fromDUFSMToDatMemMux_next</obj_property>
+         <obj_property name="ObjectShortName">reg_muxSel_fromDUFSMToDatMemMux_next</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_re_fromDUFSMToDatMem" type="logic">
+         <obj_property name="ElementShortName">reg_re_fromDUFSMToDatMem</obj_property>
+         <obj_property name="ObjectShortName">reg_re_fromDUFSMToDatMem</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/reg_re_fromDUFSMToDatMem_next" type="logic">
+         <obj_property name="ElementShortName">reg_re_fromDUFSMToDatMem_next</obj_property>
+         <obj_property name="ObjectShortName">reg_re_fromDUFSMToDatMem_next</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/regCurrentState" type="array">
+         <obj_property name="ElementShortName">regCurrentState[3:0]</obj_property>
+         <obj_property name="ObjectShortName">regCurrentState[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/regNextState" type="array">
+         <obj_property name="ElementShortName">regNextState[3:0]</obj_property>
+         <obj_property name="ObjectShortName">regNextState[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/UART_DATA_LEN" type="array">
+         <obj_property name="ElementShortName">UART_DATA_LEN[31:0]</obj_property>
+         <obj_property name="ObjectShortName">UART_DATA_LEN[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/PROG_KW" type="array">
+         <obj_property name="ElementShortName">PROG_KW[7:0]</obj_property>
+         <obj_property name="ObjectShortName">PROG_KW[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/TORUN_KW" type="array">
+         <obj_property name="ElementShortName">TORUN_KW[7:0]</obj_property>
+         <obj_property name="ObjectShortName">TORUN_KW[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/STEPMOD_KW" type="array">
+         <obj_property name="ElementShortName">STEPMOD_KW[7:0]</obj_property>
+         <obj_property name="ObjectShortName">STEPMOD_KW[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/CONTMOD_KW" type="array">
+         <obj_property name="ElementShortName">CONTMOD_KW[7:0]</obj_property>
+         <obj_property name="ObjectShortName">CONTMOD_KW[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/INSMEM_DEPTH" type="array">
+         <obj_property name="ElementShortName">INSMEM_DEPTH[31:0]</obj_property>
+         <obj_property name="ObjectShortName">INSMEM_DEPTH[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/INSMEM_ADDR_LEN" type="array">
+         <obj_property name="ElementShortName">INSMEM_ADDR_LEN[31:0]</obj_property>
+         <obj_property name="ObjectShortName">INSMEM_ADDR_LEN[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/INSMEM_DAT_LEN" type="array">
+         <obj_property name="ElementShortName">INSMEM_DAT_LEN[31:0]</obj_property>
+         <obj_property name="ObjectShortName">INSMEM_DAT_LEN[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/INS_LEN" type="array">
+         <obj_property name="ElementShortName">INS_LEN[31:0]</obj_property>
+         <obj_property name="ObjectShortName">INS_LEN[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/REGFILE_DEPTH" type="array">
+         <obj_property name="ElementShortName">REGFILE_DEPTH[31:0]</obj_property>
+         <obj_property name="ObjectShortName">REGFILE_DEPTH[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/REGFILE_ADDR_LEN" type="array">
+         <obj_property name="ElementShortName">REGFILE_ADDR_LEN[31:0]</obj_property>
+         <obj_property name="ObjectShortName">REGFILE_ADDR_LEN[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/REGFILE_LEN" type="array">
+         <obj_property name="ElementShortName">REGFILE_LEN[31:0]</obj_property>
+         <obj_property name="ObjectShortName">REGFILE_LEN[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/DATMEM_DEPTH" type="array">
+         <obj_property name="ElementShortName">DATMEM_DEPTH[31:0]</obj_property>
+         <obj_property name="ObjectShortName">DATMEM_DEPTH[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/DATMEM_ADDR_LEN" type="array">
+         <obj_property name="ElementShortName">DATMEM_ADDR_LEN[31:0]</obj_property>
+         <obj_property name="ObjectShortName">DATMEM_ADDR_LEN[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/DAT_LEN" type="array">
+         <obj_property name="ElementShortName">DAT_LEN[31:0]</obj_property>
+         <obj_property name="ObjectShortName">DAT_LEN[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/HIGH" type="logic">
+         <obj_property name="ElementShortName">HIGH</obj_property>
+         <obj_property name="ObjectShortName">HIGH</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/LOW" type="logic">
+         <obj_property name="ElementShortName">LOW</obj_property>
+         <obj_property name="ObjectShortName">LOW</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/ONE" type="logic">
+         <obj_property name="ElementShortName">ONE</obj_property>
+         <obj_property name="ObjectShortName">ONE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/ZERO" type="logic">
+         <obj_property name="ElementShortName">ZERO</obj_property>
+         <obj_property name="ObjectShortName">ZERO</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/TOTAL_BITS_TO_SEND" type="array">
+         <obj_property name="ElementShortName">TOTAL_BITS_TO_SEND[31:0]</obj_property>
+         <obj_property name="ObjectShortName">TOTAL_BITS_TO_SEND[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/INDEX_TO_SEND_LEN" type="array">
+         <obj_property name="ElementShortName">INDEX_TO_SEND_LEN[31:0]</obj_property>
+         <obj_property name="ObjectShortName">INDEX_TO_SEND_LEN[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/IDLE_STATE" type="array">
+         <obj_property name="ElementShortName">IDLE_STATE[3:0]</obj_property>
+         <obj_property name="ObjectShortName">IDLE_STATE[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/PROGRAMMING_STATE" type="array">
+         <obj_property name="ElementShortName">PROGRAMMING_STATE[3:0]</obj_property>
+         <obj_property name="ObjectShortName">PROGRAMMING_STATE[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/READY_STATE" type="array">
+         <obj_property name="ElementShortName">READY_STATE[3:0]</obj_property>
+         <obj_property name="ObjectShortName">READY_STATE[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/STEP_MODE_RUNNING_STATE" type="array">
+         <obj_property name="ElementShortName">STEP_MODE_RUNNING_STATE[3:0]</obj_property>
+         <obj_property name="ObjectShortName">STEP_MODE_RUNNING_STATE[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/CONT_MODE_RUNNING_STATE" type="array">
+         <obj_property name="ElementShortName">CONT_MODE_RUNNING_STATE[3:0]</obj_property>
+         <obj_property name="ObjectShortName">CONT_MODE_RUNNING_STATE[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SENDING_PC_STATE" type="array">
+         <obj_property name="ElementShortName">SENDING_PC_STATE[3:0]</obj_property>
+         <obj_property name="ObjectShortName">SENDING_PC_STATE[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/READING_REGFILE_STATE" type="array">
+         <obj_property name="ElementShortName">READING_REGFILE_STATE[3:0]</obj_property>
+         <obj_property name="ObjectShortName">READING_REGFILE_STATE[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SENDING_REGFILE_STATE" type="array">
+         <obj_property name="ElementShortName">SENDING_REGFILE_STATE[3:0]</obj_property>
+         <obj_property name="ObjectShortName">SENDING_REGFILE_STATE[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/READING_DATMEM_STATE" type="array">
+         <obj_property name="ElementShortName">READING_DATMEM_STATE[3:0]</obj_property>
+         <obj_property name="ObjectShortName">READING_DATMEM_STATE[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SENDING_DATMEM_STATE" type="array">
+         <obj_property name="ElementShortName">SENDING_DATMEM_STATE[3:0]</obj_property>
+         <obj_property name="ObjectShortName">SENDING_DATMEM_STATE[3:0]</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>
