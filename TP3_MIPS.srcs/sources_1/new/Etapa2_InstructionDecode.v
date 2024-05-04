@@ -111,10 +111,27 @@ module Etapa2_InstructionDecode
         .o_controlSignedLoad    (o_wire_controlSignedLoad),
         .o_controlALUSrc        (o_wire_controlALUSrc),
         .o_controlHalt          (o_wire_controlHalt),
-        .o_controlALUOp         (o_wire_controlALUOp),
+        //.o_controlALUOp         (o_wire_controlALUOp),
 
         .i_resetForHazard       (w_reset_fromHUToCU),
         .i_reset(i_reset)
+    );
+    
+    E2_ControlUnitAluOP
+    #(
+        
+    )
+    u_E2_ControlUnitAluOP
+    (
+        .i_reset        (i_reset),
+    
+        .i_operationCode    (i_instruction[31:26]),
+        .i_bits20_16        (i_instruction[20:15]),
+        .i_bits10_6         (i_instruction[11:6]), 
+        .i_bits20_6         (i_instruction[20:6]),
+        .i_functionCode     (i_instruction[5:0]),
+        
+        .o_controlALUOp(o_wire_controlALUOp)
     );
 
     wire [REGFILE_ADDR_LEN-1:0] w_addr_fromMuxForDUToRegFile;
