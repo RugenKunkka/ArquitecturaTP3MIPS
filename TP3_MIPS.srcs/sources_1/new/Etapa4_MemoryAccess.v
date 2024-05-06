@@ -204,9 +204,9 @@ module Etapa4_MemoryAccess
     )  
     u1_MuxWHB
     (
-        .i_bus001(w_dataWord_fromDatMemToMuxWHB),
+        .i_bus001(w_extended_fromMuxBSigMuxWHB),
         .i_bus010(w_extended_fromMuxHSigMuxWHB),
-        .i_bus100(w_extended_fromMuxBSigMuxWHB),
+        .i_bus100(w_dataWord_fromDatMemToMuxWHB),
         .i_muxSel(i_controlWHBLS),
         .o_bus(w_data_fromMuxWHBToMuxForMemtoReg)
 
