@@ -23,8 +23,8 @@ module E2_ControlUnit
         output reg          o_controlGpr31,//creo que es el jumpR ==> stf // o_controlIsJALBit31
         
         //memwidth de 4 bits reemplazado
-        output reg [3-1:0]  o_controlWHBLS,
-        output reg          o_controlSignedLoad,
+        output reg [3-1:0]  o_controlWHBLS,//
+        output reg          o_controlSignedLoad,//bit 4 MSB
         
         output reg          o_controlALUSrc,//selecciona la fuente del dato 2 para la ALU, tiene un multiplexor
         output reg          o_controlHalt,           
@@ -209,7 +209,7 @@ module E2_ControlUnit
                     o_controlPC4WB=0;
                     o_controlGpr31= 0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b100;
+                    o_controlWHBLS=3'b100;//1001
                     o_controlSignedLoad=1;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
@@ -227,8 +227,8 @@ module E2_ControlUnit
                     o_controlPC4WB=0;
                     o_controlGpr31= 0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b101;
-                    o_controlSignedLoad=0;
+                    o_controlWHBLS=3'b010;//1010
+                    o_controlSignedLoad=1;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
                     o_controlIsBranch=0;
@@ -245,8 +245,8 @@ module E2_ControlUnit
                     o_controlPC4WB=0;
                     o_controlGpr31= 0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b110;
-                    o_controlSignedLoad=0;
+                    o_controlWHBLS=3'b100;//1100
+                    o_controlSignedLoad=1;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
                     o_controlIsBranch=0;
@@ -265,8 +265,8 @@ module E2_ControlUnit
                     o_controlPC4WB=0;
                     o_controlGpr31= 0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b000;
-                    o_controlSignedLoad=1;
+                    o_controlWHBLS=3'b001;//0001
+                    o_controlSignedLoad=0;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
                     o_controlIsBranch=0;
@@ -283,7 +283,7 @@ module E2_ControlUnit
                     o_controlPC4WB=0;
                     o_controlGpr31= 0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b001;
+                    o_controlWHBLS=3'b010;//0010
                     o_controlSignedLoad=0;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
@@ -301,7 +301,7 @@ module E2_ControlUnit
                     o_controlPC4WB=0;
                     o_controlGpr31= 0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b100;
+                    o_controlWHBLS=3'b100;//1001
                     o_controlSignedLoad=1;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
@@ -319,8 +319,8 @@ module E2_ControlUnit
                     o_controlPC4WB=0;
                     o_controlGpr31= 0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b101;
-                    o_controlSignedLoad=0;
+                    o_controlWHBLS=3'b010;//1010
+                    o_controlSignedLoad=1;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
                     o_controlIsBranch=0;
@@ -337,8 +337,8 @@ module E2_ControlUnit
                     o_controlPC4WB=0;
                     o_controlGpr31= 0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b110;
-                    o_controlSignedLoad=0;
+                    o_controlWHBLS=3'b100;//1100
+                    o_controlSignedLoad=1;
                     o_controlIsJump=0;
                     o_controlIsJumpTipoR=0;
                     o_controlIsBranch=0;
@@ -403,6 +403,7 @@ module E2_ControlUnit
                 //-------------------------------------------
                 //a partir de aca van las isntrucciones que son tipo I y tienen el mismo output
                 //SUBI ver que ponemos para esto....
+                //no pidieron SUBI!!!!!!!!!!! OJOOO
                 6'b011110: begin//SUBI
                     o_controlRegDst=0;
                     o_controlRegWrite=1;
