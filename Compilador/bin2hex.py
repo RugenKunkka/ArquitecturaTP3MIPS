@@ -9,7 +9,7 @@ def binario_a_hexadecimal(binario):
 
 def main():
     archivo_entrada = "programa.mem"
-    archivo_salida = "programa.hex"
+    archivo_salida = "Program.hex"
 
     try:
         with open(archivo_entrada, 'r') as f_entrada, open(archivo_salida, 'w') as f_salida:
