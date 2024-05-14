@@ -11,15 +11,40 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="157.644007882 ms"></ZoomStartTime>
-      <ZoomEndTime time="176.884007883 ms"></ZoomEndTime>
-      <Cursor1Time time="158.194006909 ms"></Cursor1Time>
+      <ZoomStartTime time="0.000000000 ms"></ZoomStartTime>
+      <ZoomEndTime time="46.350000001 ms"></ZoomEndTime>
+      <Cursor1Time time="21.140055000 ms"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="302"></NameColumnWidth>
+      <NameColumnWidth column_width="298"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="12" />
+   <WVObjectSize size="17" />
+   <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/o_clockIgnore_fromDUToEtapas" type="logic">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">o_clockIgnore_fromDUToEtapas</obj_property>
+      <obj_property name="ObjectShortName">o_clockIgnore_fromDUToEtapas</obj_property>
+      <obj_property name="label">o_clockIgnore_fromDUToEtapas||DU</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/o_data_fromDUToInsMem" type="array">
+      <obj_property name="ElementShortName">o_data_fromDUToInsMem[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_data_fromDUToInsMem[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_ALU/o_ALUResult" type="array">
+      <obj_property name="ElementShortName">o_ALUResult[31:0]</obj_property>
+      <obj_property name="ObjectShortName">o_ALUResult[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/o_instruction" type="array">
+      <obj_property name="ElementShortName">o_instruction[31:0]</obj_property>
+      <obj_property name="ObjectShortName">o_instruction[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/i_address" type="array">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">i_address[31:0]</obj_property>
+      <obj_property name="ObjectShortName">i_address[31:0]</obj_property>
+      <obj_property name="label">i_address[31:0]IM</obj_property>
+   </wvobject>
    <wvobject fp_name="/TopLevel_tb/i_clock_fromPin" type="logic">
       <obj_property name="ElementShortName">i_clock_fromPin</obj_property>
       <obj_property name="ObjectShortName">i_clock_fromPin</obj_property>
