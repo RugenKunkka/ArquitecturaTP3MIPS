@@ -116,8 +116,10 @@ module Etapa2_InstructionDecode
         .i_resetForHazard       (w_reset_fromHUToCU),
         .i_reset(i_reset)
     );
-    
-    E2_ControlUnitAluOP
+
+    wire [REGFILE_ADDR_LEN-1:0] w_addr_fromMuxForDUToRegFile;
+
+        E2_ControlUnitAluOP
     #(
         
     )
@@ -133,8 +135,6 @@ module Etapa2_InstructionDecode
         
         .o_controlALUOp(o_wire_controlALUOp)
     );
-
-    wire [REGFILE_ADDR_LEN-1:0] w_addr_fromMuxForDUToRegFile;
 
     GenericMux2to1 
     #(
