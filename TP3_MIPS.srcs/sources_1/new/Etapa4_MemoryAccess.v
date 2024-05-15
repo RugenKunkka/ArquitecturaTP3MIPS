@@ -101,7 +101,7 @@ module Etapa4_MemoryAccess
         .i_data_forWordMode         (i_data_fromE3ToDatMem),   
         .o_data_forWordMode         (w_dataWord_fromDatMemToMuxWHB),
         .i_writeEnable_forWordMode  (i_controlMemWrite),  
-        .i_readEnable_forWordMode   (i_controlMemRead | i_re_fromDUToDatMem),       
+        .i_readEnable_forWordMode   (i_controlMemToReg | i_controlMemRead | i_re_fromDUToDatMem),       
 
         .i_addr_forHalfMode         (i_ALUResult_fromE3ToE4),     
         .i_data_forHalfMode         (i_data_fromE3ToDatMem[16-1:0]),   
@@ -204,9 +204,9 @@ module Etapa4_MemoryAccess
     )  
     u1_MuxWHB
     (
-        .i_bus001(w_dataWord_fromDatMemToMuxWHB),
+        .i_bus001(w_extended_fromMuxBSigMuxWHB),
         .i_bus010(w_extended_fromMuxHSigMuxWHB),
-        .i_bus100(w_extended_fromMuxBSigMuxWHB),
+        .i_bus100(w_dataWord_fromDatMemToMuxWHB),
         .i_muxSel(i_controlWHBLS),
         .o_bus(w_data_fromMuxWHBToMuxForMemtoReg)
 
