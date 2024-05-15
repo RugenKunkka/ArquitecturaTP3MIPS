@@ -121,7 +121,7 @@ module Etapas_tb
         init();
         reset_pulse();
         load_insmem();
-        #10000; // Extra delay to pretty waveform
+        #10003; // NO TIENE QUE SER MULTIPLO DE HALF_CLK_CYCLE
         i_clockIgnore_fromDU = LOW;
     end    
  /*
