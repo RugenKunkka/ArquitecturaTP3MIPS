@@ -11,12 +11,12 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="160,011.906 ns"></ZoomStartTime>
-      <ZoomEndTime time="160,103.645 ns"></ZoomEndTime>
-      <Cursor1Time time="160,050.263 ns"></Cursor1Time>
+      <ZoomStartTime time="160,000.792 ns"></ZoomStartTime>
+      <ZoomEndTime time="160,067.969 ns"></ZoomEndTime>
+      <Cursor1Time time="160,030.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="278"></NameColumnWidth>
+      <NameColumnWidth column_width="270"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="26" />
@@ -219,6 +219,13 @@
       <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa3_Execution/u1_ALU/o_ALUResult" type="array">
          <obj_property name="ElementShortName">o_ALUResult[31:0]</obj_property>
          <obj_property name="ObjectShortName">o_ALUResult[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa3_Execution/u1_ALU/i_controlOperationCode" type="array">
+         <obj_property name="ElementShortName">i_controlOperationCode[5:0]</obj_property>
+         <obj_property name="ObjectShortName">i_controlOperationCode[5:0]</obj_property>
+         <obj_property name="Radix">BINARYRADIX</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group150" type="group">
