@@ -85,7 +85,7 @@
 `define HALF_LEN 16
 `define BYTE_LEN 8
 
-`define DATMEM_DEPTH       12 // Data Memory Depth (IMPORTANT: Must be multiples of 4)
+`define DATMEM_DEPTH       128 // Data Memory Depth (IMPORTANT: Must be multiples of 4)
 `define DATMEM_ADDR_LEN    32   // Data Address Length
 `define DAT_LEN            32   
 `define DAT_ENTRY_LEN      8   

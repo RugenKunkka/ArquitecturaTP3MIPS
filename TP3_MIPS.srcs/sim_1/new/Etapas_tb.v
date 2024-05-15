@@ -168,7 +168,7 @@ module Etapas_tb
     endtask
 
     task load_insmem; begin 
-            $readmemh("C:\\Users\\UserTest1\\College\\CompArq\\Repositories\\ArquitecturaTP3MIPS\\StefProg.hex",u_Etapas.u_Etapa1_InstructionFetch.u1_InstructionMemory.reg_memory);
+            $readmemh("StefProg.hex",u_Etapas.u_Etapa1_InstructionFetch.u1_InstructionMemory.reg_memory);
         end 
     endtask
     
