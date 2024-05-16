@@ -121,7 +121,7 @@ module Etapas_tb
         init();
         reset_pulse();
         load_insmem();
-        load_datmem();
+        //load_datmem();
         #10003; // NO TIENE QUE SER MULTIPLO DE HALF_CLK_CYCLE
         i_clockIgnore_fromDU = LOW;
     end    
