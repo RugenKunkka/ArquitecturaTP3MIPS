@@ -121,6 +121,7 @@ module Etapas_tb
         init();
         reset_pulse();
         load_insmem();
+        load_datmem();
         #10003; // NO TIENE QUE SER MULTIPLO DE HALF_CLK_CYCLE
         i_clockIgnore_fromDU = LOW;
     end    
@@ -168,8 +169,12 @@ module Etapas_tb
     endtask
 
     task load_insmem; begin 
-            $readmemh("StefProg.hex",u_Etapas.u_Etapa1_InstructionFetch.u1_InstructionMemory.reg_memory);
+            $readmemh("StefProg2.hex",u_Etapas.u_Etapa1_InstructionFetch.u1_InstructionMemory.reg_memory);
         end 
     endtask
     
+    task load_datmem; begin  
+            $readmemh("datmem_init.hex",u_Etapas.u_Etapa4_MemoryAccess.u_DataMemory.reg_data_memory);         
+        end  
+    endtask 
 endmodule

@@ -11,13 +11,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="160,030.005 ns"></ZoomStartTime>
-      <ZoomEndTime time="160,048.986 ns"></ZoomEndTime>
-      <Cursor1Time time="160,039.305 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
+      <ZoomEndTime time="41.018044 us"></ZoomEndTime>
+      <Cursor1Time time="200.010000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="178"></NameColumnWidth>
-      <ValueColumnWidth column_width="85"></ValueColumnWidth>
+      <ValueColumnWidth column_width="81"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="29" />
    <wvobject fp_name="group1031" type="group">
@@ -434,6 +434,11 @@
       <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa3_Execution/u1_Mux3Frowarding2DataBToALU/LEN" type="array">
          <obj_property name="ElementShortName">LEN[31:0]</obj_property>
          <obj_property name="ObjectShortName">LEN[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/reg_data_memory" type="array">
+         <obj_property name="ElementShortName">reg_data_memory[127:0][7:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_data_memory[127:0][7:0]</obj_property>
+         <obj_property name="isExpanded"></obj_property>
       </wvobject>
    </wvobject>
 </wave_config>
