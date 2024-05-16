@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="160,000.792 ns"></ZoomStartTime>
-      <ZoomEndTime time="160,067.969 ns"></ZoomEndTime>
-      <Cursor1Time time="160,030.000 ns"></Cursor1Time>
+      <ZoomStartTime time="160,030.005 ns"></ZoomStartTime>
+      <ZoomEndTime time="160,048.986 ns"></ZoomEndTime>
+      <Cursor1Time time="160,039.305 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="270"></NameColumnWidth>
-      <ValueColumnWidth column_width="58"></ValueColumnWidth>
+      <NameColumnWidth column_width="178"></NameColumnWidth>
+      <ValueColumnWidth column_width="85"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="26" />
+   <WVObjectSize size="29" />
    <wvobject fp_name="group1031" type="group">
       <obj_property name="label">Debug Unit</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -111,6 +111,16 @@
    <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa1_InstructionFetch/u_SumadorMas4/LEN" type="array">
       <obj_property name="ElementShortName">LEN[31:0]</obj_property>
       <obj_property name="ObjectShortName">LEN[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="group197" type="group">
+      <obj_property name="label">Entrada etapa 2</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa2_InstructionDecode/i_instruction" type="array">
+         <obj_property name="ElementShortName">i_instruction[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_instruction[31:0]</obj_property>
+         <obj_property name="Radix">BINARYRADIX</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject fp_name="group145" type="group">
       <obj_property name="label">Control unit</obj_property>
@@ -204,6 +214,16 @@
          <obj_property name="ObjectShortName">i_reset</obj_property>
       </wvobject>
    </wvobject>
+   <wvobject fp_name="group195" type="group">
+      <obj_property name="label">AluCtrolOp</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa2_InstructionDecode/u_E2_ControlUnitAluOP/o_controlALUOp" type="array">
+         <obj_property name="ElementShortName">o_controlALUOp[5:0]</obj_property>
+         <obj_property name="ObjectShortName">o_controlALUOp[5:0]</obj_property>
+         <obj_property name="Radix">BINARYRADIX</obj_property>
+      </wvobject>
+   </wvobject>
    <wvobject fp_name="group146" type="group">
       <obj_property name="label">ALU</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -228,6 +248,15 @@
          <obj_property name="Radix">BINARYRADIX</obj_property>
       </wvobject>
    </wvobject>
+   <wvobject fp_name="group193" type="group">
+      <obj_property name="label">Latch etapa 2 a 3</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa3_Execution/i_instruction" type="array">
+         <obj_property name="ElementShortName">i_instruction[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_instruction[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
    <wvobject fp_name="group150" type="group">
       <obj_property name="label">Latch Etapa 3 a 4</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -241,9 +270,31 @@
       <obj_property name="label">Latch etapa 4 a 5</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa4_MemoryAccess/u_Reg_MEM_WB/i_controlRegWrite" type="logic">
+         <obj_property name="ElementShortName">i_controlRegWrite</obj_property>
+         <obj_property name="ObjectShortName">i_controlRegWrite</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa4_MemoryAccess/u_Reg_MEM_WB/i_data_fromDatMemToE5" type="array">
+         <obj_property name="ElementShortName">i_data_fromDatMemToE5[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_data_fromDatMemToE5[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa4_MemoryAccess/u_Reg_MEM_WB/i_rdToWrite_fromE3ToE4" type="array">
+         <obj_property name="ElementShortName">i_rdToWrite_fromE3ToE4[4:0]</obj_property>
+         <obj_property name="ObjectShortName">i_rdToWrite_fromE3ToE4[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa4_MemoryAccess/u_Reg_MEM_WB/o_controlRegWrite" type="logic">
+         <obj_property name="ElementShortName">o_controlRegWrite</obj_property>
+         <obj_property name="ObjectShortName">o_controlRegWrite</obj_property>
+      </wvobject>
       <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa4_MemoryAccess/u_Reg_MEM_WB/o_data_fromDatMemToE5" type="array">
          <obj_property name="ElementShortName">o_data_fromDatMemToE5[31:0]</obj_property>
          <obj_property name="ObjectShortName">o_data_fromDatMemToE5[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#FFA500</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa4_MemoryAccess/u_Reg_MEM_WB/o_rdToWrite_fromE4ToE5" type="array">
+         <obj_property name="ElementShortName">o_rdToWrite_fromE4ToE5[4:0]</obj_property>
+         <obj_property name="ObjectShortName">o_rdToWrite_fromE4ToE5[4:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group154" type="group">
@@ -258,7 +309,6 @@
    <wvobject fp_name="group156" type="group">
       <obj_property name="label">ForwardingUnit</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa3_Execution/u1_E3_ForwardingUnit/i_rs_fromE3ToFU" type="array">
          <obj_property name="ElementShortName">i_rs_fromE3ToFU[4:0]</obj_property>
          <obj_property name="ObjectShortName">i_rs_fromE3ToFU[4:0]</obj_property>
@@ -343,6 +393,8 @@
       <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa3_Execution/u1_Mux3Frowarding1DataAToALU/i_muxSel" type="array">
          <obj_property name="ElementShortName">i_muxSel[1:0]</obj_property>
          <obj_property name="ObjectShortName">i_muxSel[1:0]</obj_property>
+         <obj_property name="CustomSignalColor">#0000A0</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa3_Execution/u1_Mux3Frowarding1DataAToALU/o_bus" type="array">
          <obj_property name="ElementShortName">o_bus[31:0]</obj_property>
@@ -372,6 +424,8 @@
       <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa3_Execution/u1_Mux3Frowarding2DataBToALU/i_muxSel" type="array">
          <obj_property name="ElementShortName">i_muxSel[1:0]</obj_property>
          <obj_property name="ObjectShortName">i_muxSel[1:0]</obj_property>
+         <obj_property name="CustomSignalColor">#0000A0</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/Etapas_tb/u_Etapas/u_Etapa3_Execution/u1_Mux3Frowarding2DataBToALU/o_bus" type="array">
          <obj_property name="ElementShortName">o_bus[31:0]</obj_property>

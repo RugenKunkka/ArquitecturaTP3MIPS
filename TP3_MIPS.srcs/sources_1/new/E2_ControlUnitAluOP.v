@@ -73,7 +73,7 @@ module E2_ControlUnitAluOP(
         
         else if(i_operationCode==6'b000000) begin //TIPO - R y a partir de ahora me queda verificar el func code
         //VER SLL Y SRL a que grupo pertenecen xq se me armo quilombo ahi
-            case (i_operationCode)
+            case (i_functionCode)
                 6'b000100: begin//SLLV
                     o_controlALUOp<=6'b100000;
                 end
