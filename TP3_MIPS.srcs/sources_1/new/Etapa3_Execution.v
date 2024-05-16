@@ -284,7 +284,7 @@ module Etapa3_Execution
     u1_E3_ForwardingUnit
     (
         // Inputs from Etapa 3
-        .i_rs_fromE3ToFU        (i_instruction[15:11]),
+        .i_rs_fromE3ToFU        (i_instruction[25:21]),
         .i_rt_fromE3ToFU        (i_instruction[20:16]),
         .i_MemWrite_fromE3ToFU  (i_controlMemWrite),
         .i_RegDst_fromE3ToFU    (i_controlRegDst),

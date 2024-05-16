@@ -220,7 +220,7 @@ module Etapa4_MemoryAccess
     )
     MuxForMemtoReg
     (
-        .i_bus0     (i_data_fromE3ToDatMem),
+        .i_bus0     (i_ALUResult_fromE3ToE4),
         .i_bus1     (w_data_fromMuxWHBToMuxForMemtoReg),
         .i_muxSel   (i_controlMemToReg),
         .o_bus      (w_data_fromMuxWHBToMuxPC4)
