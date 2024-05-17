@@ -52,6 +52,26 @@ module E2_ControlUnit
             o_controlHalt       = 0;
         end
         
+        
+        else if(i_operationCode==6'b111111) begin//HALT
+            o_controlRegDst=0;
+            o_controlRegWrite=0;
+            o_controlALUSrc=0;
+            o_controlMemWrite=0;
+            o_controlMemtoReg=0;
+            o_controlPC4WB=0;
+            o_controlGpr31= 0;
+            //el memwidth xxxx
+            o_controlWHBLS=3'b000;
+            o_controlSignedLoad=0;
+            o_controlIsJump=0;
+            o_controlIsJumpTipoR=0;//stefanooo fraannn hazard unit ==> estaba en 1
+            o_controlIsBranch=0;
+            o_controlIsBNEQ=0;
+            
+            o_controlHalt=1;
+        end
+        
         //JALR ok
         else if (i_operationCode==6'b000000 && i_bits20_16==5'b00000 && i_bits10_6==5'b00000 && i_functionCode==6'b001001) begin
             o_controlRegDst=1;//
