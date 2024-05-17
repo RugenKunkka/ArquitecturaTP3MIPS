@@ -35,14 +35,12 @@ module E3_ForwardingUnit
         /*
             For Mux A
         */
-        if( i_rs_fromE3ToFU == i_rd_fromE4ToFU &&
-            i_RegWrite_fromE4ToFU == HIGH &&
-            i_rd_fromE4ToFU != 5'b00000 )begin
+        if( i_rs_fromE3ToFU == i_rd_fromE4ToFU && i_RegWrite_fromE4ToFU == HIGH && i_rd_fromE4ToFU != 5'b00000 )
+        begin
             o_forwardA_muxSel = FORWARD_FROM_E4;
         end
-        else if (i_rs_fromE3ToFU == i_rd_fromE5ToFU &&
-                i_RegWrite_fromE5ToFU == HIGH && 
-                i_rd_fromE5ToFU != 5'b00000 ) begin
+        else if (i_rs_fromE3ToFU == i_rd_fromE5ToFU && i_RegWrite_fromE5ToFU == HIGH && i_rd_fromE5ToFU != 5'b00000 ) 
+        begin
             o_forwardA_muxSel = FORWARD_FROM_E5;
         end
         else begin
@@ -53,13 +51,11 @@ module E3_ForwardingUnit
             For Mux B
         */
         if(i_RegDst_fromE3ToFU) begin
-            if( i_rt_fromE3ToFU == i_rd_fromE4ToFU &&
-                i_RegWrite_fromE4ToFU == HIGH &&
-                i_rd_fromE4ToFU != 5'b00000 )begin
+            if( i_rt_fromE3ToFU == i_rd_fromE4ToFU && i_RegWrite_fromE4ToFU == HIGH && i_rd_fromE4ToFU != 5'b00000 )
+            begin
                     o_forwardB_muxSel  = FORWARD_FROM_E4;
-            end else if (i_rt_fromE3ToFU == i_rd_fromE5ToFU &&   
-                        i_RegWrite_fromE5ToFU == HIGH && 
-                        i_rd_fromE5ToFU != 5'b00000) begin
+            end else if (i_rt_fromE3ToFU == i_rd_fromE5ToFU && i_RegWrite_fromE5ToFU == HIGH && i_rd_fromE5ToFU != 5'b00000) 
+            begin
                             o_forwardB_muxSel = FORWARD_FROM_E5;
             end else begin
                 o_forwardB_muxSel  = NO_FORWARD;
@@ -73,12 +69,12 @@ module E3_ForwardingUnit
         /*
             For Mux C
         */
-        if( i_rt_fromE3ToFU == i_rd_fromE4ToFU &&
-            i_MemWrite_fromE3ToFU == HIGH) begin
+        if( i_rt_fromE3ToFU == i_rd_fromE4ToFU && i_MemWrite_fromE3ToFU == HIGH) 
+        begin
                 o_forwardC_muxSel = FORWARD_FROM_E4;
         end
-        else if (i_rt_fromE3ToFU == i_rd_fromE5ToFU &&
-                i_MemWrite_fromE3ToFU == HIGH) begin
+        else if (i_rt_fromE3ToFU == i_rd_fromE5ToFU && i_MemWrite_fromE3ToFU == HIGH) 
+        begin
                     o_forwardC_muxSel = FORWARD_FROM_E5;
         end
         else begin

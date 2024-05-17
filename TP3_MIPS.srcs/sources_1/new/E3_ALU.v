@@ -68,7 +68,7 @@ module E3_ALU
 			6'b000100: o_ALUResult = i_dataA | i_dataB; //OR //ORI
 			6'b000101: o_ALUResult = i_dataA ^ i_dataB; // XOR //XORI
 			6'b000110: o_ALUResult = ~(i_dataA | i_dataB); //NOR		
-			6'b000010: o_ALUResult = reg_signedDataA < reg_signedDataB; //SLT SLTI //lo tengo en resta.. no se xq.. XD
+			//6'b000010: o_ALUResult = reg_signedDataA < reg_signedDataB; //SLT SLTI //lo tengo en resta.. no se xq.. XD
 			default: o_ALUResult = 0;
 		endcase	
 	end

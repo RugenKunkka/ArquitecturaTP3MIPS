@@ -65,7 +65,8 @@ module E2_ControlUnit
             o_controlWHBLS=3'b000;
             o_controlSignedLoad=0;
             o_controlIsJump=0;
-            o_controlIsJumpTipoR=0;//stefanooo fraannn hazard unit ==> estaba en 1
+            o_controlIsJumpTipoR=1;//stefanooo fraannn hazard unit ==> estaba en 1
+            //stefanooo Si se clava el programa es por esto pasarlo a 0 temporalmente
             o_controlIsBranch=0;
             o_controlIsBNEQ=0;
             
