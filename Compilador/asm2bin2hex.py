@@ -72,6 +72,8 @@ def hex32tohex8(file):
 
 if __name__ == "__main__":
 
+    # Ejemplo uso: \Compilador$ python3 asm2bin2hex.py .\orioriaddu.asm
+
     if len(sys.argv) > 1:
         file = sys.argv[1]
     else:
@@ -83,5 +85,3 @@ if __name__ == "__main__":
     bin2hex_func(file)
     print("-------------------------HEX32 to HEX8----------------------")
     hex32tohex8(file)
-
-
