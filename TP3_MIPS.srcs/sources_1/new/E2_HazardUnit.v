@@ -56,7 +56,7 @@ module E2_HazardUnit
             reset_CU <= LOW;
 
         end else begin
-
+        
             if( (i_MemToReg_fromE4ToHU == HIGH && 
                 i_rd_fromE4ToHU == i_rs_fromE3ToHU) || 
                 (i_RegDst_fromE3ToHU == HIGH && 

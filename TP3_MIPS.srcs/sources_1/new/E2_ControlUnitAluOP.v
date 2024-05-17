@@ -154,6 +154,7 @@ module E2_ControlUnitAluOP(
                     o_controlALUOp<=6'b000001;
                 end
                 6'b001010: begin//SLTI
+                    o_controlALUOp<=6'b000010;
                 end
                 6'b000100: begin//BEQ
                     o_controlALUOp<=6'b000010;

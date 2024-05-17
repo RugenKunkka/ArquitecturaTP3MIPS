@@ -12,7 +12,7 @@
 `define ONE_CLK_CYCLE  `STEPS_PER_CYCLE  
 
 // For the Program.hex
-`define PROG_FILE   "Program.hex"
+`define PROG_FILE   "StefProg2.hex"
 `define PROG_LEN    32
 `define PROG_DEPTH  4 // Number of lines of Program.hex
 

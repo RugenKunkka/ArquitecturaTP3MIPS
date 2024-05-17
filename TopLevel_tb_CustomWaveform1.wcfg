@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000000000 ms"></ZoomStartTime>
-      <ZoomEndTime time="46.350000001 ms"></ZoomEndTime>
-      <Cursor1Time time="21.140055000 ms"></Cursor1Time>
+      <ZoomStartTime time="39,896.953333 us"></ZoomStartTime>
+      <ZoomEndTime time="40,697.103334 us"></ZoomEndTime>
+      <Cursor1Time time="40,563.745000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="298"></NameColumnWidth>
+      <NameColumnWidth column_width="294"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="17" />
+   <WVObjectSize size="21" />
    <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/o_clockIgnore_fromDUToEtapas" type="logic">
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">o_clockIgnore_fromDUToEtapas</obj_property>
@@ -92,7 +92,6 @@
    <wvobject fp_name="group1031" type="group">
       <obj_property name="label">Debug Unit</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/regCurrentState" type="array">
          <obj_property name="ElementShortName">regCurrentState[3:0]</obj_property>
          <obj_property name="ObjectShortName">regCurrentState[3:0]</obj_property>
@@ -451,6 +450,44 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SENDING_DATMEM_STATE" type="array">
          <obj_property name="ElementShortName">SENDING_DATMEM_STATE[3:0]</obj_property>
          <obj_property name="ObjectShortName">SENDING_DATMEM_STATE[3:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group206" type="group">
+      <obj_property name="label">Entrada etapa 2</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/i_instruction" type="array">
+         <obj_property name="ElementShortName">i_instruction[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_instruction[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/o_instruction" type="array">
+         <obj_property name="ElementShortName">o_instruction[31:0]</obj_property>
+         <obj_property name="ObjectShortName">o_instruction[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group204" type="group">
+      <obj_property name="label">Entrada etapa 3</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/i_instruction" type="array">
+         <obj_property name="ElementShortName">i_instruction[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_instruction[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group202" type="group">
+      <obj_property name="label">ALU</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_ALU/o_ALUResult" type="array">
+         <obj_property name="ElementShortName">o_ALUResult[31:0]</obj_property>
+         <obj_property name="ObjectShortName">o_ALUResult[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group209" type="group">
+      <obj_property name="label">Instruction Memory</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/reg_memory" type="array">
+         <obj_property name="ElementShortName">reg_memory[15:0][7:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_memory[15:0][7:0]</obj_property>
       </wvobject>
    </wvobject>
 </wave_config>
