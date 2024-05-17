@@ -52,6 +52,18 @@ wire [DAT_LEN-1:0]            w_data_fromDatMemToDU; // Data read from Data memo
 wire                          w_muxSel_fromDUToDatMemMux; //  Mux Selector
 wire                          w_re_fromDUToDatMem; // Read Enable
 
+wire clk_out;
+wire o_locked;
+clk_wiz_0 u_ClockWizard
+   (
+    // Clock out ports
+    .clk_out1(clk_out),     // output clk_out
+    // Status and control signals
+    .reset(i_reset_fromPin), // input reset
+    .locked(o_locked),       // output locked
+   // Clock in ports
+    .clk_in1(i_clock_fromPin)
+); 
 
 DebugUnit
 #(
@@ -60,8 +72,8 @@ DebugUnit
  u_DebugUnit
 (
     // Multiple Etapas
-    .i_globalClock          (i_clock_fromPin),
-    .i_globalReset          (i_reset_fromPin),
+    .i_globalClock          (clk_out),
+    .i_globalReset          (i_reset_fromPin|!o_locked),
     .o_clockIgnore_fromDUToEtapas(w_clockIgnore_fromDUToEtapas),
 
     // For Uart
@@ -99,8 +111,8 @@ Etapas
 u_Etapas
 (
     // Multiple Etapas
-    .i_globalClock          (i_clock_fromPin),
-    .i_globalReset          (i_reset_fromPin),
+    .i_globalClock          (clk_out),
+    .i_globalReset          (i_reset_fromPin|!o_locked),
     .i_clockIgnore_fromDU   (w_clockIgnore_fromDUToEtapas),
 
     // For Etapa 1 (Program Counter)
