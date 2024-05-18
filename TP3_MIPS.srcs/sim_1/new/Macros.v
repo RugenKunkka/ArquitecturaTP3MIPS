@@ -12,9 +12,9 @@
 `define ONE_CLK_CYCLE  `STEPS_PER_CYCLE  
 
 // For the Program.hex
-`define PROG_FILE   "StefProg2.hex"
+`define PROG_FILE   "Program.hex"
 `define PROG_LEN    32
-`define PROG_DEPTH  4 // Number of lines of Program.hex
+`define PROG_DEPTH  5 // Number of lines of Program.hex
 
 `define BAUDRATE            9600
 `define UART_BIT_TIME       ((`CLK_FREQ * `STEPS_PER_CYCLE) / `BAUDRATE)
@@ -52,7 +52,7 @@
 ******************/
 
 // For Instruction Memory
-`define INSMEM_DEPTH    16  // Instruction Memory Depth <----
+`define INSMEM_DEPTH    20  // Instruction Memory Depth <----
 `define INSMEM_ADDR_LEN 32  // Instruction Address Length
 `define INSMEM_DAT_LEN  8   // Entry Length
 `define INS_LEN         32  // Instruction Length
