@@ -1,7 +1,21 @@
 `include "Macros.v"
 
 /*
-    IMPORTANTE: Con un clock de 100Mhz, toma 5ms cada instruccion en enviarse 
+    IMPORTANTE: Con un clock de 100Mhz, toma 5ms cada instruccion en enviarse
+    IMPORTANTE: Setear  PROG_LEN en macros con la cantidad de lineas del programa
+    IMPORTANTE: La cantidad de lineas de programa debe ser del mismo tamaño que la memoria de instruccion (complatar el resto con zeros)
+    IMPORTANTE: Poner varios send_stepmod_kw() si usas modo step
+    IMPORTANTE: PROG_LEN == INSMEM_DEPTH / 4. SIEMPRE!!
+
+    EJ  Programa.hex 
+        34080007
+        3409000F
+        01285021
+        00000000
+        00000000
+        00000000
+        00000000
+    En este caso PROG_LEN = 7 e INSMEM_DEPTH = 28 (7x4)
 */
 module TopLevel_tb
     (
@@ -86,7 +100,8 @@ module TopLevel_tb
         send_program_keyword();
         send_program();
         #(UART_BIT_TIME*10);
-        send_stepmod_kw();
+        //send_stepmod_kw();
+        send_contmod_kw()
         //#(HALF_CLK_CYCLE * 2 * PROG_DEPTH);
         #(UART_BIT_TIME*10*10*10);
         //send_stepmod_kw();
@@ -169,5 +184,18 @@ module TopLevel_tb
         end
     endtask
     
+    task send_contmod_kw; begin
+            regByteToSend = CONTMOD_KW;
+            regDataFrameToSend = {BSTOP ,regByteToSend, BSTART};
+            for (k = 0; k < UART_DATAFRAME_LEN; k = k + 1) begin
+                i_rx_fromPin = regDataFrameToSend[k];
+                #UART_BIT_TIME;
+            end
+            #UART_PKT_DELAY;
+            k=0;
+            regByteToSend ={UART_DATA_LEN{LOW}};
+            regDataFrameToSend ={UART_DATAFRAME_LEN{LOW}};
+        end
+    endtask
 
 endmodule
