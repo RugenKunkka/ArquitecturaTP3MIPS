@@ -101,7 +101,7 @@ module TopLevel_tb
         send_program();
         #(UART_BIT_TIME*10);
         //send_stepmod_kw();
-        send_contmod_kw()
+        send_contmod_kw();
         //#(HALF_CLK_CYCLE * 2 * PROG_DEPTH);
         #(UART_BIT_TIME*10*10*10);
         //send_stepmod_kw();
