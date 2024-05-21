@@ -35,9 +35,10 @@ module DU_FSM
         IO Ports
     */  
 
-        // Global
+        // For Multiple Etapas
         input wire i_globalClock,
         input wire i_globalReset,
+        output wire o_clockIgnore_fromDUFSMToPcAndLatches,
 
         // For Uart
         input wire [UART_DATA_LEN-1:0]      i_data_fromRxToDUFSM,
@@ -47,28 +48,30 @@ module DU_FSM
         output wire                         o_txStart_fromDUFSMToTx,
     
         // For Program Counter
-        input wire [INS_LEN-1:0] i_pc_fromPcToDUFSM, 
+        input wire [INS_LEN-1:0]    i_pc_fromPcToDUFSM, 
 
         // For Instructions Memory 
         output wire [INSMEM_ADDR_LEN-1:0]   o_addr_fromDUFSMToInsMem, // Address to write
         output wire [INSMEM_DAT_LEN-1:0]    o_data_fromDUFSMToInsMem, // Data to write
         output wire                         o_we_fromDUFSMToInsMem, // Write Enable
         output wire                         o_muxSel_fromDUFSMToInsMemMux, // Mux Selector to handle extra mux for Instruction Memory
+        output wire                         o_clockIgnore_fromDUFSMToInsMem,
 
         // For Register File
         output wire [REGFILE_ADDR_LEN-1:0]  o_addr_fromDUFSMToRegFile, // Address to read from Register File
         input wire [REGFILE_LEN-1:0]        i_data_fromRegFileToDUFSM, // Data read from Register File
         output wire                         o_muxSel_fromDUFSMToRegFileMux, // Mux Selector to handle extra mux for Register File
+        output wire                         o_clockIgnore_fromDUFSMToRegFile,
         
         // For Data Memory
-        output wire [DATMEM_ADDR_LEN-1:0]    o_addr_fromDUFSMToDatMem, // Address to read from Data Memory
+        output wire [DATMEM_ADDR_LEN-1:0]   o_addr_fromDUFSMToDatMem, // Address to read from Data Memory
         input wire [DAT_LEN-1:0]            i_data_fromDatMemToDUFSM, // Data read from Data memory
-        output wire                          o_muxSel_fromDUFSMToDatMemMux, //Mux Selector to handle extra mux for Data memory
+        output wire                         o_muxSel_fromDUFSMToDatMemMux, //Mux Selector to handle extra mux for Data memory
         output wire                         o_re_fromDUFSMToDatMem, // Read Enable for Data Memory
+        output wire                         o_clockIgnore_fromDUFSMToDatMem,
 
         // Other IO Ports
-        input wire i_halt_fromCUToDUFSM,            // Halt coming from Control Unit
-        output wire  o_clockIgnore_fromDUFSMToEtapas    // Clock Enable to do Stepping
+        input wire i_halt_fromCUToDUFSM            // Halt coming from Control Unit
     );
 
     /*
@@ -106,8 +109,8 @@ module DU_FSM
         Internal Registers
     */
 
-    // For Clock
-    reg regClockIgnore, regClockIgnore_next;
+    // For Multiple Etapas
+    reg regClockIgnoreForPcAndLatches,  regClockIgnoreForPcAndLatches_next;
 
     // For UART
     reg [UART_DATA_LEN-1:0]     reg_data_fromDUFSMToTx,     reg_data_fromDUFSMToTx_next;
@@ -122,15 +125,18 @@ module DU_FSM
     reg                         reg_we_fromDUFSMToInsMem,   reg_we_fromDUFSMToInsMem_next;
     reg                         reg_muxSel_fromDUFSMToInsMemMux, reg_muxSel_fromDUFSMToInsMemMux_next;
     reg [INSMEM_ADDR_LEN-1:0]   regIndexToProgram,          regIndexToProgram_next;
+    reg                         regClockIgnoreForInsMem,        regClockIgnoreForInsMem_next;
     
     // For Register File
     reg [REGFILE_ADDR_LEN-1:0]  reg_addr_fromDUFSMToRegFile, reg_addr_fromDUFSMToRegFile_next;
     reg                         reg_muxSel_fromDUFSMToRegFileMux,reg_muxSel_fromDUFSMToRegFileMux_next;
+    reg                         regClockIgnoreForRegFile, regClockIgnoreForRegFile_next;    
   
     // For Data Memory
     reg [DATMEM_ADDR_LEN-1:0]   reg_addr_fromDUFSMToDatMem, reg_addr_fromDUFSMToDatMem_next;
     reg                         reg_muxSel_fromDUFSMToDatMemMux, reg_muxSel_fromDUFSMToDatMemMux_next;
     reg                         reg_re_fromDUFSMToDatMem, reg_re_fromDUFSMToDatMem_next;
+    reg                         regClockIgnoreForDatMem, regClockIgnoreForDatMem_next;    
 
     // For FSM
     reg [4-1:0] regCurrentState, regNextState;
@@ -139,8 +145,8 @@ module DU_FSM
         Continuous Assignments
     */
 
-    // For Clock
-    assign o_clockIgnore_fromDUFSMToEtapas = regClockIgnore;
+    // For Multiple Etapas
+    assign o_clockIgnore_fromDUFSMToPcAndLatches = regClockIgnoreForPcAndLatches;
     
     // For UART
     assign o_data_fromDUFSMToTx     = reg_data_fromDUFSMToTx;
@@ -151,26 +157,29 @@ module DU_FSM
     assign o_data_fromDUFSMToInsMem = reg_data_fromDUFSMToInsMem; 
     assign o_we_fromDUFSMToInsMem = reg_we_fromDUFSMToInsMem;
     assign o_muxSel_fromDUFSMToInsMemMux = reg_muxSel_fromDUFSMToInsMemMux;
+    assign o_clockIgnore_fromDUFSMToInsMem = regClockIgnoreForInsMem;
 
     // For Register File
     assign  o_addr_fromDUFSMToRegFile  = reg_addr_fromDUFSMToRegFile;
     assign o_muxSel_fromDUFSMToRegFileMux = reg_muxSel_fromDUFSMToRegFileMux;
+    assign o_clockIgnore_fromDUFSMToRegFile = regClockIgnoreForRegFile;
 
     // For Data Memory
     assign  o_addr_fromDUFSMToDatMem  = reg_addr_fromDUFSMToDatMem ;
     assign o_muxSel_fromDUFSMToDatMemMux = reg_muxSel_fromDUFSMToDatMemMux;
     assign o_re_fromDUFSMToDatMem = reg_re_fromDUFSMToDatMem;
+    assign o_clockIgnore_fromDUFSMToDatMem = regClockIgnoreForDatMem;
     
     /*
         Procedural Blocks
     */
 
-   always@( posedge i_globalClock, posedge i_globalReset) begin
+   always@( negedge i_globalClock) begin
 
         if(i_globalReset)begin
 
-            // For Clocks
-            regClockIgnore          <= HIGH;
+            // For Multiple Etapas
+            regClockIgnoreForPcAndLatches <= HIGH;
 
             // For UART
             reg_data_fromDUFSMToTx <= {UART_DATA_LEN{ZERO}};
@@ -185,15 +194,18 @@ module DU_FSM
             reg_muxSel_fromDUFSMToInsMemMux <= LOW;
             reg_we_fromDUFSMToInsMem  <= LOW;
             regIndexToProgram       <= {INSMEM_ADDR_LEN{ZERO}};
+            regClockIgnoreForInsMem <= HIGH;
 
             // For Register File
             reg_addr_fromDUFSMToRegFile <= {REGFILE_ADDR_LEN{ZERO}};
             reg_muxSel_fromDUFSMToRegFileMux <= LOW;// Should be low
+            regClockIgnoreForRegFile <= HIGH;
 
             // For Data Memory
             reg_addr_fromDUFSMToDatMem <= {DATMEM_ADDR_LEN{ZERO}};
             reg_muxSel_fromDUFSMToDatMemMux <= LOW;
             reg_re_fromDUFSMToDatMem <= LOW;
+            regClockIgnoreForDatMem <= HIGH;
 
             // For FSM
             regCurrentState         <= IDLE_STATE;  
@@ -201,8 +213,8 @@ module DU_FSM
         end
         else begin
 
-            // For Clock
-            regClockIgnore = regClockIgnore_next;
+            // For Multiple Etapas
+            regClockIgnoreForPcAndLatches<= regClockIgnoreForPcAndLatches_next;
 
             // For UART
             reg_data_fromDUFSMToTx      <= reg_data_fromDUFSMToTx_next;  
@@ -217,15 +229,18 @@ module DU_FSM
             regIndexToProgram        <= regIndexToProgram_next;
             reg_we_fromDUFSMToInsMem <= reg_we_fromDUFSMToInsMem_next;
             reg_muxSel_fromDUFSMToInsMemMux <= reg_muxSel_fromDUFSMToInsMemMux_next;
+            regClockIgnoreForInsMem      <= regClockIgnoreForInsMem_next;
 
             // For Register File
             reg_addr_fromDUFSMToRegFile <= reg_addr_fromDUFSMToRegFile_next;
             reg_muxSel_fromDUFSMToRegFileMux <= reg_muxSel_fromDUFSMToRegFileMux_next;
+            regClockIgnoreForRegFile     <= regClockIgnoreForRegFile_next;
 
             // For Data Memory
             reg_addr_fromDUFSMToDatMem <= reg_addr_fromDUFSMToDatMem_next;
             reg_muxSel_fromDUFSMToDatMemMux <= reg_muxSel_fromDUFSMToDatMemMux_next;
             reg_re_fromDUFSMToDatMem <= reg_re_fromDUFSMToDatMem_next;
+            regClockIgnoreForDatMem      <= regClockIgnoreForDatMem_next;
 
             // For FSM
             regCurrentState          <= regNextState;
@@ -234,8 +249,8 @@ module DU_FSM
     
     always@(*) begin
 
-        // For Clock
-        regClockIgnore_next = regClockIgnore;
+        // For Multiple Etapas
+        regClockIgnoreForPcAndLatches_next  = regClockIgnoreForPcAndLatches ;
 
         // For UART
         reg_data_fromDUFSMToTx_next = reg_data_fromDUFSMToTx;
@@ -250,15 +265,18 @@ module DU_FSM
         reg_we_fromDUFSMToInsMem_next   = LOW;//reg_we_fromDUFSMToInsMem;     
         regIndexToProgram_next      =  regIndexToProgram;
         reg_muxSel_fromDUFSMToInsMemMux_next = reg_muxSel_fromDUFSMToInsMemMux;
+        regClockIgnoreForInsMem_next        = regClockIgnoreForInsMem ;
 
         // For Register File
         reg_addr_fromDUFSMToRegFile_next = reg_addr_fromDUFSMToRegFile;
         reg_muxSel_fromDUFSMToRegFileMux_next = reg_muxSel_fromDUFSMToRegFileMux;
+        regClockIgnoreForRegFile_next       = regClockIgnoreForRegFile ;
 
         // For Data Memory
         reg_addr_fromDUFSMToDatMem_next = reg_addr_fromDUFSMToDatMem;
         reg_muxSel_fromDUFSMToDatMemMux_next = reg_muxSel_fromDUFSMToDatMemMux;
         reg_re_fromDUFSMToDatMem_next = reg_re_fromDUFSMToDatMem;
+        regClockIgnoreForDatMem_next        = regClockIgnoreForDatMem ;
 
         // For FSM
         regNextState = regCurrentState;
@@ -272,8 +290,11 @@ module DU_FSM
                 end
             end           
             PROGRAMMING_STATE: begin
-                if (i_rxDone_fromRxToDUFSM) begin 
-                    regClockIgnore_next = LOW;                    
+                if (i_rxDone_fromRxToDUFSM) begin    
+                    regClockIgnoreForPcAndLatches_next = HIGH;
+                    regClockIgnoreForInsMem_next = LOW;
+                    regClockIgnoreForRegFile_next = HIGH;
+                    regClockIgnoreForDatMem_next =  HIGH;
                     reg_muxSel_fromDUFSMToInsMemMux_next = HIGH;
                     reg_data_fromDUFSMToInsMem_next = i_data_fromRxToDUFSM;
                     reg_addr_fromDUFSMToInsMem_next = regIndexToProgram; 
@@ -288,7 +309,10 @@ module DU_FSM
             end
             READY_STATE: begin
                 reg_muxSel_fromDUFSMToInsMemMux_next = LOW;
-                regClockIgnore_next = HIGH; 
+                regClockIgnoreForPcAndLatches_next = HIGH;
+                regClockIgnoreForInsMem_next = HIGH;
+                regClockIgnoreForRegFile_next = HIGH;
+                regClockIgnoreForDatMem_next =  HIGH;
                 if (i_rxDone_fromRxToDUFSM) begin
                     if (i_data_fromRxToDUFSM == STEPMOD_KW) begin
                         regNextState = STEP_MODE_RUNNING_STATE;
@@ -300,22 +324,38 @@ module DU_FSM
             end
             STEP_MODE_RUNNING_STATE: begin
                 if (~i_halt_fromCUToDUFSM) begin
-                    regClockIgnore_next = LOW;
+                    regClockIgnoreForPcAndLatches_next = LOW;
+                    regClockIgnoreForInsMem_next = LOW;
+                    regClockIgnoreForRegFile_next = LOW;
+                    regClockIgnoreForDatMem_next =  LOW;
                 end else begin   
-                    regClockIgnore_next = HIGH;
+                    regClockIgnoreForPcAndLatches_next = HIGH;
+                    regClockIgnoreForInsMem_next = HIGH;
+                    regClockIgnoreForRegFile_next = HIGH;
+                    regClockIgnoreForDatMem_next =  HIGH;                    
                 end
                 regNextState = SENDING_PC_STATE;
             end 
             CONT_MODE_RUNNING_STATE: begin
                 if (~i_halt_fromCUToDUFSM )begin
-                    regClockIgnore_next = LOW;
+                    regClockIgnoreForPcAndLatches_next = LOW;
+                    regClockIgnoreForInsMem_next = LOW;
+                    regClockIgnoreForRegFile_next = LOW;
+                    regClockIgnoreForDatMem_next =  LOW;       
                 end else begin
+                    regClockIgnoreForPcAndLatches_next = HIGH;
+                    regClockIgnoreForInsMem_next = HIGH;
+                    regClockIgnoreForRegFile_next = HIGH;
+                    regClockIgnoreForDatMem_next =  HIGH;  
                     regNextState = SENDING_PC_STATE; 
                 end
             end
             SENDING_PC_STATE: begin
                 if (reg_firstPackageFlag) begin  
-                    regClockIgnore_next = HIGH;
+                    regClockIgnoreForPcAndLatches_next = HIGH;
+                    regClockIgnoreForInsMem_next = HIGH;
+                    regClockIgnoreForRegFile_next = HIGH;
+                    regClockIgnoreForDatMem_next =  HIGH;  
                     reg_data_fromDUFSMToTx_next = i_pc_fromPcToDUFSM[UART_DATA_LEN-1:0];
                     reg_txStart_fromDUFSMToTx_next = HIGH;                    
                     reg_firstPackageFlag_next = LOW;
@@ -336,7 +376,10 @@ module DU_FSM
             end
             READING_REGFILE_STATE: begin
                 if (regIndexToSend1 < REGFILE_DEPTH) begin 
-                    regClockIgnore_next = LOW;
+                    regClockIgnoreForPcAndLatches_next = HIGH;
+                    regClockIgnoreForInsMem_next = HIGH;
+                    regClockIgnoreForRegFile_next = LOW;
+                    regClockIgnoreForDatMem_next =  HIGH;                      
                     reg_muxSel_fromDUFSMToRegFileMux_next = HIGH;
                     reg_addr_fromDUFSMToRegFile_next = regIndexToSend1;
                     regIndexToSend1_next = regIndexToSend1 + 1 ;
@@ -369,7 +412,10 @@ module DU_FSM
             end
             READING_DATMEM_STATE: begin
                 if (regIndexToSend1 < DATMEM_DEPTH) begin 
-                    regClockIgnore_next = LOW;
+                    regClockIgnoreForPcAndLatches_next = HIGH;
+                    regClockIgnoreForInsMem_next = HIGH;
+                    regClockIgnoreForRegFile_next = HIGH;
+                    regClockIgnoreForDatMem_next =  LOW;  
                     reg_muxSel_fromDUFSMToDatMemMux_next = HIGH;
                     reg_re_fromDUFSMToDatMem_next = HIGH; // Read Enable
                     reg_addr_fromDUFSMToDatMem_next = regIndexToSend1;

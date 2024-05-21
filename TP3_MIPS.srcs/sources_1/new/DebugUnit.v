@@ -29,28 +29,31 @@ module DebugUnit
         output wire o_tx_fromDUToTop,
     
         // For Program Counter
-        input wire [INS_LEN-1:0] i_pc_fromPcToDU, 
+        input wire [INS_LEN-1:0]    i_pc_fromPcToDU, 
+        output wire                 o_clockIgnore_fromDUToPcAndLatches,
 
         // For Instructions Memory
         output wire                         o_we_fromDUToInsMem,
         output wire [INSMEM_ADDR_LEN-1:0]   o_addr_fromDUToInsMem,
         output wire [INSMEM_DAT_LEN-1:0]    o_data_fromDUToInsMem, 
         output wire                         o_muxSel_fromDUToInsMemMux,
+        output wire                         o_clockIgnore_fromDUToInsMem,
 
         // For Register File
         output wire [REGFILE_ADDR_LEN-1:0]  o_addr_fromDUToRegFile, // Address to read from Register File
         input wire [REGFILE_LEN-1:0]        i_data_fromRegFileToDU, // Data read from Register File
         output wire                         o_muxSel_fromDUToRegFileMux,
+        output wire                         o_clockIgnore_fromDUToRegFile,
 
         // For Data Memory
         output wire [DATMEM_ADDR_LEN-1:0]   o_addr_fromDUToDatMem, // Address to read from Data Memory
         input wire [DAT_LEN-1:0]            i_data_fromDatMemToDU, // Data read from Data memory
         output wire                         o_muxSel_fromDUToDatMemMux,
         output wire                         o_re_fromDUToDatMem,
+        output wire                         o_clockIgnore_fromDUToDatMem,
 
         // Other IO Ports
-        input wire i_halt_fromCUToDU,
-        output wire o_clockIgnore_fromDUToEtapas
+        input wire i_halt_fromCUToDU
     );
 
 
@@ -120,27 +123,30 @@ module DebugUnit
 
         // For Program Counter
         .i_pc_fromPcToDUFSM(i_pc_fromPcToDU), 
+        .o_clockIgnore_fromDUFSMToPcAndLatches   (o_clockIgnore_fromDUToPcAndLatches),        
 
         // For Instructions Memory
-        .o_we_fromDUFSMToInsMem     (o_we_fromDUToInsMem), // Write Enable
-        .o_muxSel_fromDUFSMToInsMemMux (o_muxSel_fromDUToInsMemMux), // Mux Selector
-        .o_addr_fromDUFSMToInsMem   (o_addr_fromDUToInsMem), // Adress where to write
-        .o_data_fromDUFSMToInsMem   (o_data_fromDUToInsMem), // Data to write
+        .o_we_fromDUFSMToInsMem             (o_we_fromDUToInsMem), // Write Enable
+        .o_muxSel_fromDUFSMToInsMemMux      (o_muxSel_fromDUToInsMemMux), // Mux Selector
+        .o_addr_fromDUFSMToInsMem           (o_addr_fromDUToInsMem), // Adress where to write
+        .o_data_fromDUFSMToInsMem           (o_data_fromDUToInsMem), // Data to write
+        .o_clockIgnore_fromDUFSMToInsMem    (o_clockIgnore_fromDUToInsMem),
 
         // For Register File
-        .o_addr_fromDUFSMToRegFile      (o_addr_fromDUToRegFile), // Address to read from Register File
-        .i_data_fromRegFileToDUFSM      (i_data_fromRegFileToDU), // Data read from Register File
-        .o_muxSel_fromDUFSMToRegFileMux (o_muxSel_fromDUToRegFileMux), // Mux Selector
+        .o_addr_fromDUFSMToRegFile          (o_addr_fromDUToRegFile), // Address to read from Register File
+        .i_data_fromRegFileToDUFSM          (i_data_fromRegFileToDU), // Data read from Register File
+        .o_muxSel_fromDUFSMToRegFileMux     (o_muxSel_fromDUToRegFileMux), // Mux Selector
+        .o_clockIgnore_fromDUFSMToRegFile   (o_clockIgnore_fromDUToRegFile),        
 
         // For Data Memory
-        .o_addr_fromDUFSMToDatMem   (o_addr_fromDUToDatMem), // Address to read from Data Memory
-        .i_data_fromDatMemToDUFSM       (i_data_fromDatMemToDU), // Data read from Data memory
-        .o_muxSel_fromDUFSMToDatMemMux (o_muxSel_fromDUToDatMemMux), // Mux Selector
-        .o_re_fromDUFSMToDatMem         (o_re_fromDUToDatMem),
+        .o_addr_fromDUFSMToDatMem           (o_addr_fromDUToDatMem), // Address to read from Data Memory
+        .i_data_fromDatMemToDUFSM           (i_data_fromDatMemToDU), // Data read from Data memory
+        .o_muxSel_fromDUFSMToDatMemMux      (o_muxSel_fromDUToDatMemMux), // Mux Selector
+        .o_re_fromDUFSMToDatMem             (o_re_fromDUToDatMem),
+        .o_clockIgnore_fromDUFSMToDatMem    (o_clockIgnore_fromDUToDatMem),        
 
         // Other IO Ports
-        .i_halt_fromCUToDUFSM           (i_halt_fromCUToDU),
-        .o_clockIgnore_fromDUFSMToEtapas    (o_clockIgnore_fromDUToEtapas)
+        .i_halt_fromCUToDUFSM           (i_halt_fromCUToDU)
     );
 
 endmodule

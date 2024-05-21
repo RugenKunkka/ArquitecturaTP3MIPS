@@ -30,7 +30,8 @@ module Etapa1_InstructionFetch
         input wire [INSMEM_DAT_LEN-1:0] i_data_fromDUToInsMem,     
         input wire                      i_muxSel_fromDUToInsMemMux,
         output wire [INS_LEN-1:0]       o_pc_fromPcToDU,           
-        input wire                      i_clockIgnore_fromDU,      
+        input wire                      i_clockIgnore_fromDUToPcAndLatch,
+        input wire                      i_clockIgnore_fromDUToInsMem, 
 
         input wire i_clock,
         input wire i_reset
@@ -93,7 +94,7 @@ module Etapa1_InstructionFetch
         .i_pcAddressIn(wire_o_dataFromMux3ToPC),
         .o_pcAddressOut(wire_pcAddressFromPCToInstructionMemoryAndSumadorMas4),
         .i_stallPC_fromHU(i_stallPC_fromHU),
-        .i_clockIgnore_fromDU(i_clockIgnore_fromDU)
+        .i_clockIgnore_fromDU(i_clockIgnore_fromDUToPcAndLatch)
     );
     
     GenericAdder
@@ -143,7 +144,7 @@ module Etapa1_InstructionFetch
         // For Debug Unit (Programming)
         .i_writeEnable_fromDU   (i_we_fromDUToInsMem),
         .i_data_fromDU          (i_data_fromDUToInsMem), 
-        .i_clockIgnore_fromDU   (i_clockIgnore_fromDU)
+        .i_clockIgnore_fromDU   (i_clockIgnore_fromDUToInsMem)
 
     );
     
@@ -161,7 +162,7 @@ module Etapa1_InstructionFetch
 
         .i_stallIFID_fromHU(i_stallIFID_fromHU),
         
-        .i_clockIgnore_fromDU (i_clockIgnore_fromDU),
+        .i_clockIgnore_fromDU (i_clockIgnore_fromDUToPcAndLatch),
         
         .o_instruction(o_instruction),
         .o_pcMas4(o_pcMas4)

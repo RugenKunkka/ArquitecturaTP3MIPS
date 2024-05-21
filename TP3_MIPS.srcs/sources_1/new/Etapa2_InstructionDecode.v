@@ -63,7 +63,8 @@ module Etapa2_InstructionDecode
         input wire [REGFILE_ADDR_LEN-1:0]   i_addr_fromDUToRegFile,
         output wire [REGFILE_LEN-1:0]       o_data_fromRegFileToDU, 
         input wire                          i_muxSel_fromDUToRegFileMux,
-        input wire                          i_clockIgnore_fromDU,
+        input wire                          i_clockIgnore_fromDUToLatch,
+        input wire                          i_clockIgnore_fromDUToRegFile,
 
         input wire i_clock,
         input wire i_reset        
@@ -161,7 +162,7 @@ module Etapa2_InstructionDecode
     (
         .i_clock(i_clock),
         .i_reset(i_reset),
-        .i_clockIgnore_fromDU (i_clockIgnore_fromDU),  
+        .i_clockIgnore_fromDU (i_clockIgnore_fromDUToRegFile),  
 
         .i_RegWrite_fromControl(i_controlRegWriteToRegisterMemory),
         
@@ -281,7 +282,7 @@ module Etapa2_InstructionDecode
         .i_stall_fromHU (w_stallIDEX_fromHUToE2),
 
         // Form Debug Unit
-        .i_clockIgnore_fromDU (i_clockIgnore_fromDU),
+        .i_clockIgnore_fromDU (i_clockIgnore_fromDUToLatch),
 
         .i_clock(i_clock),
         .i_reset(i_reset)

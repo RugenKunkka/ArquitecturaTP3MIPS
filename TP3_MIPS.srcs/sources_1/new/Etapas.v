@@ -20,7 +20,7 @@ module Etapas
         // For Multiple Etapas
         input wire i_globalClock,
         input wire i_globalReset,
-        input wire i_clockIgnore_fromDU,
+        input wire i_clockIgnore_fromDUToPcAndLatches,
 
         // For Etapa 1 (Program Counter)
         output wire [INS_LEN-1:0]           o_pc_fromE1ToDU, 
@@ -30,11 +30,13 @@ module Etapas
         input wire [INSMEM_ADDR_LEN-1:0]    i_addrForInsMem_fromDUToE1,
         input wire [INSMEM_DAT_LEN-1:0]     i_dataForInsMem_fromDUToE1, 
         input wire                          i_muxSelForInsMemMux_fromDUToE1,
+        input wire                          i_clockIgnore_fromDUToInsMem,
 
         // For Etapa 2 (Register File)
         input wire [REGFILE_ADDR_LEN-1:0]   i_addrForRegFile_fromDUToE2, // Address to read from Register File
         output wire [REGFILE_LEN-1:0]       o_dataForRegFile_fromE2ToDU, // Data read from Register File
         input wire                          i_muxSelForRegFileMux_fromDUToE2,
+        input wire                          i_clockIgnore_fromDUToRegFile,
 
         // For Etapa 4 (From Control Unit  to Debug Unit)
         output wire o_halt_fromE4ToDU,
@@ -43,8 +45,8 @@ module Etapas
         input wire [DATMEM_ADDR_LEN-1:0]    i_addrForDatMem_fromDUToE4, // Address to read from Data Memory
         output wire [DAT_LEN-1:0]           o_dataForDatMem_fromE4ToDU, // Data read from Data memory
         input wire                          i_muxSelForDatMemMux_fromDUToE4,
-        input wire                          i_reForDatMem_fromDUToE4
-
+        input wire                          i_reForDatMem_fromDUToE4,
+        input wire                          i_clockIgnore_fromDUToDatMem
     );
 
     wire w_muxSelForJumpMux_fromE2ToE1; // For J, JAL
@@ -89,7 +91,8 @@ module Etapas
         .i_data_fromDUToInsMem      (i_dataForInsMem_fromDUToE1),
         .i_muxSel_fromDUToInsMemMux (i_muxSelForInsMemMux_fromDUToE1),
         .o_pc_fromPcToDU            (o_pc_fromE1ToDU),
-        .i_clockIgnore_fromDU       (i_clockIgnore_fromDU),
+        .i_clockIgnore_fromDUToPcAndLatch   (i_clockIgnore_fromDUToPcAndLatches),
+        .i_clockIgnore_fromDUToInsMem       (i_clockIgnore_fromDUToInsMem),
 
         // Global
         .i_clock(i_globalClock),
@@ -189,7 +192,8 @@ module Etapas
         .i_addr_fromDUToRegFile     (i_addrForRegFile_fromDUToE2),
         .o_data_fromRegFileToDU     (o_dataForRegFile_fromE2ToDU),
         .i_muxSel_fromDUToRegFileMux (i_muxSelForRegFileMux_fromDUToE2),
-        .i_clockIgnore_fromDU       (i_clockIgnore_fromDU),
+        .i_clockIgnore_fromDUToLatch    (i_clockIgnore_fromDUToPcAndLatches),
+        .i_clockIgnore_fromDUToRegFile  (i_clockIgnore_fromDUToRegFile),
 
         // Global
         .i_clock(i_globalClock),
@@ -283,7 +287,7 @@ module Etapas
         .i_flushEXMEM_fromHU            (w_flushEXMEM_fromE2ToE3),
 
         // From Debug Unit
-        .i_clockIgnore_fromDU (i_clockIgnore_fromDU),
+        .i_clockIgnore_fromDUToLatch  (i_clockIgnore_fromDUToPcAndLatches),
     
         // Global
         .i_clock(i_globalClock),
@@ -336,7 +340,8 @@ module Etapas
         .o_data_fromDatMemToDU      (o_dataForDatMem_fromE4ToDU), 
         .i_muxSel_fromDUToDatMemMux (i_muxSelForDatMemMux_fromDUToE4),
         .i_re_fromDUToDatMem        (i_reForDatMem_fromDUToE4),
-        .i_clockIgnore_fromDU       (i_clockIgnore_fromDU),
+        .i_clockIgnore_fromDUToLatch    (i_clockIgnore_fromDUToPcAndLatches),
+        .i_clockIgnore_fromDUToDatMem   (i_clockIgnore_fromDUToDatMem),
         
         .i_clock(i_globalClock),
         .i_reset(i_globalReset)

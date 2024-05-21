@@ -57,7 +57,8 @@ module Etapa4_MemoryAccess
         output wire [DAT_LEN-1:0]           o_data_fromDatMemToDU, 
         input wire                          i_muxSel_fromDUToDatMemMux,
         input wire                          i_re_fromDUToDatMem,
-        input wire                          i_clockIgnore_fromDU,
+        input wire                          i_clockIgnore_fromDUToLatch,
+        input wire                          i_clockIgnore_fromDUToDatMem,
         output wire                         o_halt_fromE4ToDU,      
 
         input wire i_clock,
@@ -95,7 +96,7 @@ module Etapa4_MemoryAccess
     (
         .i_clock(i_clock),
         .i_reset(i_reset),
-        .i_clockIgnore_fromDU(i_clockIgnore_fromDU),
+        .i_clockIgnore_fromDU(i_clockIgnore_fromDUToDatMem),
 
         .i_addr_forWordMode         (w_addr_fromDUMuxToDatMem),     
         .i_data_forWordMode         (i_data_fromE3ToDatMem),   
@@ -256,7 +257,7 @@ module Etapa4_MemoryAccess
         .o_rdToWrite_fromE4ToE5 (o_rdForWB_fromE4ToE5),   
 
         // For Debug Unit
-        .i_clockIgnore_fromDU(i_clockIgnore_fromDU),
+        .i_clockIgnore_fromDU(i_clockIgnore_fromDUToLatch),
 
         .i_clock(i_clock),
         .i_reset(i_reset)

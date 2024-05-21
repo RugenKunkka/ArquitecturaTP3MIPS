@@ -74,7 +74,7 @@ module Etapa3_Execution
         input wire                          i_flushEXMEM_fromHU,          
 
         // From Debug Unit
-        input wire i_clockIgnore_fromDU,
+        input wire i_clockIgnore_fromDUToLatch,
 
         input wire i_clock,
         input wire i_reset
@@ -268,7 +268,7 @@ module Etapa3_Execution
         .i_flushEXMEM_fromHU    (i_flushEXMEM_fromHU),
 
         // For Debug Unit
-        .i_clockIgnore_fromDU (i_clockIgnore_fromDU),  
+        .i_clockIgnore_fromDU (i_clockIgnore_fromDUToLatch),  
         
         .i_clock(i_clock),
         .i_reset(i_reset)
