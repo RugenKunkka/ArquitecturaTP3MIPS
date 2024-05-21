@@ -61,10 +61,10 @@ module E2_HazardUnit
                 i_rd_fromE4ToHU == i_rs_fromE3ToHU) || 
                 (i_RegDst_fromE3ToHU == HIGH && 
                 i_rd_fromE4ToHU == i_rt_fromE3ToHU )) begin
-                    stall_PC_a      <= HIGH;
-                    stall_IFID_a    <= HIGH;
-                    stall_IDEX_a    <= HIGH;
-                    flush_EXMEM_a   <= HIGH;               
+                    stall_PC_a      <= LOW;
+                    stall_IFID_a    <= LOW;
+                    stall_IDEX_a    <= LOW;
+                    flush_EXMEM_a   <= LOW;               
             end else begin
                 stall_PC_a      <= LOW;
                 stall_IFID_a    <= LOW;
@@ -73,9 +73,9 @@ module E2_HazardUnit
             end
 
             if(i_takeJumpR_fromE2ToHU | i_controlBranch_fromE2ToHU )begin
-                stall_PC_b  <= HIGH;
-                stall_IFID_b <= HIGH;
-                foo_IDEX_b <= HIGH;
+                stall_PC_b  <= LOW;
+                stall_IFID_b <= LOW;
+                foo_IDEX_b <= LOW;
             end
         end
     end
