@@ -315,6 +315,6 @@ module Etapa2_InstructionDecode
 
         .i_reset(i_reset)
     );
-    assign o_data_fromRegFileToDU = o_dataA;
+    assign o_data_fromRegFileToDU = w_dataA;
     
 endmodule
