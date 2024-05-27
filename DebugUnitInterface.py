@@ -10,9 +10,9 @@ def setup_argparse():
 
     # Add command-line arguments with default values
     parser.add_argument('--mode', type=str, default='STEP', help='Modo de Operacion del MIPS. (CONT or STEP)')
-    parser.add_argument('--port', type=str, default='COM13', help='Puerto de comunicacion serial.')
+    parser.add_argument('--port', type=str, default='COM4', help='Puerto de comunicacion serial.')
     parser.add_argument('--baudrate', type=int, default=9600, help='Baud Rate de la comunicacion serial.')
-    parser.add_argument('--path', type=str, default=r"C:\Users\UserTest1\College\CompArq\DebugUnit\DebugUnit.srcs\sim_1\new\Program.hex"  , help='Path hacia el programa a cargar.')
+    parser.add_argument('--path', type=str, default=r"D:\Facultad\Arquitectura de computadoras\MIS_TPS\ArquitecturaTP3MIPS\Program.hex"  , help='Path hacia el programa a cargar.')
     parser.add_argument('--log', action='store_true', help='Para loggear la terminal')
     args = parser.parse_args()
     print(args)
@@ -82,6 +82,8 @@ if __name__ == "__main__"   :
     PROG_KW = "50"
     STEPMOD_KW = "53"
 
+    contModKeyword = "68"
+
     bytes_from_program = [];
 
     print("\n1. Configuracion: ")
@@ -96,7 +98,9 @@ if __name__ == "__main__"   :
     print("\n3. Programando...")
     send_keyword(ser,PROG_KW);
     send_program(ser,bytes_from_program);
-    send_keyword(ser,STEPMOD_KW);
+    #send_keyword(ser,STEPMOD_KW);
+    send_keyword(ser,contModKeyword);
+
 
     thread_recepcion = threading.Thread(target=recibir_numero)
     thread_recepcion.daemon = True
