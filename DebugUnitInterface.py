@@ -133,10 +133,10 @@ def reformatear_archivo(archivo_entrada='datos.txt', archivo_salida='datos_forma
     """
     # Array de nombres predefinidos
     nombres = [
-        "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10",
-        "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20",
-        "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30",
-        "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37"
+        "PC", "Reg0", "Reg1", "Reg2", "Reg3", "Reg4", "Reg5", "Reg6", "Reg7", "Reg8", "Reg9",
+        "Reg10", "Reg11", "Reg12", "Reg13", "Reg14", "Reg15", "Reg16", "Reg17", "Reg18", "Reg19",
+        "Reg20", "Reg21", "Reg22", "Reg23", "Reg24", "Reg25", "Reg26", "Reg27", "Reg28", "Reg29",
+        "Reg30", "Reg31", "Reg32", "Reg33", "Reg34", "Reg35", 
     ]
 
     try:
