@@ -4,6 +4,8 @@ import sys
 import argparse
 import time
 
+primeraEjecucion=True
+
 def setup_argparse():
     # Create an ArgumentParser object
     parser = argparse.ArgumentParser(description='A script to receive and print command-line parameters.')
@@ -71,11 +73,85 @@ def recibir_numero():
                 # Imprime el número recibido
                 #print(f"{hex(numero_recibido)[2:].zfill(2).upper()}",end='',flush=True)
                 print(f"{hex(numero_recibido)[2:].zfill(2).upper()}")
+                
+                guardar_datos(f"{hex(numero_recibido)[2:].zfill(2).upper()}")
 
 
     except Exception as e:
         print(f"Error al recibir: {str(e)}")
+        
+def guardar_datos(digitos, archivo='datos.txt'):
+    """
+    Guarda un string de dos dígitos en un archivo sin sobrescribir el contenido existente.
 
+    Parámetros:
+    digitos (str): El string que contiene los dos dígitos a guardar.
+    archivo (str): El nombre del archivo donde se guardarán los datos.
+    """
+    # Verificar que el string tenga exactamente 2 caracteres
+    if len(digitos) != 2:
+        raise ValueError("El string debe contener exactamente 2 dígitos.")
+    
+    # Abrir el archivo en modo de agregar ('a')
+    with open(archivo, 'a') as f:
+        # Escribir los dos dígitos seguidos de una nueva línea
+        f.write(f"{digitos}\n")
+        
+def borrar_contenido_archivo(archivo='datos.txt'):
+    """
+    Abre un archivo y borra su contenido. Si el archivo no existe, lo crea vacío.
+
+    Parámetros:
+    archivo (str): El nombre del archivo cuyo contenido se va a borrar.
+    """
+    # Abrir el archivo en modo de escritura ('w') borra su contenido
+    with open(archivo, 'w') as f:
+        pass  # No es necesario escribir nada, solo abrir en 'w' ya borra el contenido
+
+def contar_lineas_archivo(archivo='datos.txt'):
+    """
+    Cuenta el número de líneas en un archivo.
+
+    Parámetros:
+    archivo (str): El nombre del archivo del cual se contarán las líneas.
+
+    Retorna:
+    int: El número de líneas en el archivo.
+    """
+    with open(archivo, 'r') as f:
+        lineas = f.readlines()
+        return len(lineas)
+        
+def reformatear_archivo(archivo_entrada='datos.txt', archivo_salida='datos_formateados.txt'):
+    """
+    Lee los datos de 'archivo_entrada', los reformatea y los guarda en 'archivo_salida'.
+    Si el archivo de salida existe, su contenido será sobrescrito.
+
+    Parámetros:
+    archivo_entrada (str): El nombre del archivo de entrada con los datos originales.
+    archivo_salida (str): El nombre del archivo de salida donde se guardarán los datos reformateados.
+    """
+    try:
+        with open(archivo_entrada, 'r') as f_entrada:
+            lineas = f_entrada.readlines()
+        
+        # Limpiar las líneas y agruparlas en grupos de 4 líneas
+        lineas = [linea.strip() for linea in lineas]
+        datos_reformateados = []
+        for i in range(0, len(lineas), 4):
+            # Extrae un grupo de hasta 4 líneas
+            grupo = lineas[i:i+4]
+            # Invierte el orden del grupo
+            grupo_invertido = grupo[::-1]
+            # Une las líneas del grupo invertido en una sola cadena y agrega a la lista de datos reformateados
+            datos_reformateados.append(''.join(grupo_invertido))
+        
+        with open(archivo_salida, 'w') as f_salida:
+            for linea in datos_reformateados:
+                f_salida.write(linea + '\n')
+
+    except FileNotFoundError:
+        print(f"El archivo {archivo_entrada} no existe.")
 
 if __name__ == "__main__"   :
 
@@ -110,7 +186,20 @@ if __name__ == "__main__"   :
     try:
         while True:
             time.sleep(5)
+            numero_de_lineas = contar_lineas_archivo()
+            if primeraEjecucion:
+                borrar_contenido_archivo()
+            elif primeraEjecucion==False and numero_de_lineas!=0:
+                print(f"----------------------------Contenido del archivo formateado----------------------------")
+                reformatear_archivo()
+                
+            
+            
+            print(f"El archivo tiene {numero_de_lineas} líneas.")
+            print(f"Variable bool es primera ejecucion {primeraEjecucion}")
+            
             input("\n<Presiona ENTER para hacer otro step>\n")
+            primeraEjecucion=False
             send_keyword(ser,STEPMOD_KW);
         
     except KeyboardInterrupt:
