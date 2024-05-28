@@ -131,28 +131,74 @@ def reformatear_archivo(archivo_entrada='datos.txt', archivo_salida='datos_forma
     archivo_entrada (str): El nombre del archivo de entrada con los datos originales.
     archivo_salida (str): El nombre del archivo de salida donde se guardarán los datos reformateados.
     """
+    # Array de nombres predefinidos
+    nombres = [
+        "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10",
+        "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20",
+        "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30",
+        "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37"
+    ]
+
     try:
+        contador=0
+        # Abre el archivo de entrada en modo de lectura
         with open(archivo_entrada, 'r') as f_entrada:
+            # Lee todas las líneas del archivo de entrada
             lineas = f_entrada.readlines()
         
-        # Limpiar las líneas y agruparlas en grupos de 4 líneas
+        # Limpiar las líneas eliminando espacios en blanco alrededor y saltos de línea
         lineas = [linea.strip() for linea in lineas]
+        
+        # Lista para almacenar los datos reformateados
         datos_reformateados = []
+        
+        # Itera sobre las líneas en grupos de 4
         for i in range(0, len(lineas), 4):
             # Extrae un grupo de hasta 4 líneas
             grupo = lineas[i:i+4]
             # Invierte el orden del grupo
             grupo_invertido = grupo[::-1]
-            # Une las líneas del grupo invertido en una sola cadena y agrega a la lista de datos reformateados
-            datos_reformateados.append(''.join(grupo_invertido))
+            # Une las líneas del grupo invertido en una sola cadena
+            cadena_reformateada = ''.join(grupo_invertido)
+            # Añade el nombre correspondiente del array y concatena con la cadena reformateada
+            nombre = nombres[i // 4] if i // 4 < len(nombres) else f"PC{i // 4 + 1}"
+            datos_reformateados.append(nombre+": " + cadena_reformateada+"  ")
         
+        # Abre el archivo de salida en modo de escritura ('w') para sobrescribir su contenido
         with open(archivo_salida, 'w') as f_salida:
+            # Escribe cada línea reformateada en el archivo de salida
             for linea in datos_reformateados:
-                f_salida.write(linea + '\n')
+                f_salida.write(linea)
+                contador=contador+1
+                if contador==4:
+                    f_salida.write('\n')
+                    contador=0
 
     except FileNotFoundError:
+        # Maneja el caso en que el archivo de entrada no existe
         print(f"El archivo {archivo_entrada} no existe.")
 
+
+def leer_y_imprimir_archivo(nombre_archivo):
+    """
+    Lee el contenido de 'nombre_archivo' y lo imprime en pantalla.
+
+    Parámetros:
+    nombre_archivo (str): El nombre del archivo que se desea leer e imprimir.
+    """
+    try:
+        # Abre el archivo en modo de lectura
+        with open(nombre_archivo, 'r') as archivo:
+            # Lee todas las líneas del archivo
+            lineas = archivo.readlines()
+            # Imprime cada línea en pantalla
+            for linea in lineas:
+                print(linea.strip())
+    except FileNotFoundError:
+        # Maneja el caso en que el archivo no existe
+        print(f"El archivo {nombre_archivo} no existe.")
+        
+        
 if __name__ == "__main__"   :
 
     PROG_KW = "50"
@@ -192,6 +238,7 @@ if __name__ == "__main__"   :
             elif primeraEjecucion==False and numero_de_lineas!=0:
                 print(f"----------------------------Contenido del archivo formateado----------------------------")
                 reformatear_archivo()
+                leer_y_imprimir_archivo("datos_formateados.txt")
                 
             
             
