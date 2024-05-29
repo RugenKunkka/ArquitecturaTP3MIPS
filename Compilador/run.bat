@@ -1,4 +1,4 @@
 #!/bin/bash
 
-python3 single_converter.py programa.asm
-python3 bin2hex.py
+python single_converter.py programa.asm
+python bin2hex.py

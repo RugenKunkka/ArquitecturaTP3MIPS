@@ -1,5 +1,5 @@
-ORI 7 ,0 ,3
-ORI 8 ,0 ,2
-ADDU 9 ,8 ,7
-HALT
-
+addi 1, 2, 1
+addi 3, 4, 1
+addi 5, 6, 1
+addi 7, 8, 1
+halt 
