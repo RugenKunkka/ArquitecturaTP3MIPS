@@ -40,6 +40,7 @@ module E3_ALU
     localparam op_sra = 6'b001000;
     localparam op_srl = 6'b010000;
     localparam op_sll = 6'b100000;
+    localparam op_slti = 6'b111111;
 
     reg signed [DATA_LENGTH-1:0] reg_signedDataA;
     reg signed [DATA_LENGTH-1:0] reg_signedDataB;
@@ -68,7 +69,7 @@ module E3_ALU
 			6'b000100: o_ALUResult = i_dataA | i_dataB; //OR //ORI
 			6'b000101: o_ALUResult = i_dataA ^ i_dataB; // XOR //XORI
 			6'b000110: o_ALUResult = ~(i_dataA | i_dataB); //NOR		
-			//6'b000010: o_ALUResult = reg_signedDataA < reg_signedDataB; //SLT SLTI //lo tengo en resta.. no se xq.. XD
+			6'b111111: o_ALUResult = reg_signedDataA < reg_signedDataB; //SLT SLTI //lo tengo en resta.. no se xq.. XD
 			default: o_ALUResult = 0;
 		endcase	
 	end

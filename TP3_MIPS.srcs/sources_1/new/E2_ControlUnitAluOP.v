@@ -102,7 +102,7 @@ module E2_ControlUnitAluOP(
                     o_controlALUOp<=6'b000110;
                 end
                 6'b101010: begin//SLT
-                    o_controlALUOp<=6'b000010;
+                    o_controlALUOp<=6'b111111;
                 end
                 6'b000000: begin//SLL
                     o_controlALUOp<=6'b011100;
@@ -154,7 +154,7 @@ module E2_ControlUnitAluOP(
                     o_controlALUOp<=6'b000001;
                 end
                 6'b001010: begin//SLTI
-                    o_controlALUOp<=6'b000010;
+                    o_controlALUOp<=6'b111111;
                 end
                 6'b000100: begin//BEQ
                     o_controlALUOp<=6'b000010;
