@@ -11,10 +11,10 @@ def setup_argparse():
     parser = argparse.ArgumentParser(description='A script to receive and print command-line parameters.')
 
     # Add command-line arguments with default values
-    parser.add_argument('--mode', type=str, default='STEP', help='Modo de Operacion del MIPS. (CONT or STEP)')
+    parser.add_argument('--mode', type=str, default='CONT', help='Modo de Operacion del MIPS. (CONT or STEP)')
     parser.add_argument('--port', type=str, default='COM4', help='Puerto de comunicacion serial.')
     parser.add_argument('--baudrate', type=int, default=9600, help='Baud Rate de la comunicacion serial.')
-    parser.add_argument('--path', type=str, default=r"D:\Facultad\Arquitectura de computadoras\MIS_TPS\ArquitecturaTP3MIPS\prueba1.hex"  , help='Path hacia el programa a cargar.')
+    parser.add_argument('--path', type=str, default=r"D:\Facultad\Arquitectura de computadoras\MIS_TPS\ArquitecturaTP3MIPS\prueba2.hex"  , help='Path hacia el programa a cargar.')
     parser.add_argument('--log', action='store_true', help='Para loggear la terminal')
     args = parser.parse_args()
     print(args)
@@ -64,7 +64,7 @@ def recibir_numero():
             counter = 0 
             # Espera y lee un byte desde UART
             byte_recibido = ser.read(1)
-            
+            #print(byte_recibido)
             if byte_recibido:
                 # Convierte el byte recibido a un número decimal
 
@@ -73,7 +73,7 @@ def recibir_numero():
                 # Imprime el número recibido
                 #print(f"{hex(numero_recibido)[2:].zfill(2).upper()}",end='',flush=True)
                 
-                print(f"{hex(numero_recibido)[2:].zfill(2).upper()}")
+                #print(f"{hex(numero_recibido)[2:].zfill(2).upper()}")
                 
                 guardar_datos(f"{hex(numero_recibido)[2:].zfill(2).upper()}")
 
@@ -205,7 +205,7 @@ if __name__ == "__main__"   :
     PROG_KW = "50"
     STEPMOD_KW = "53"
 
-    contModKeyword = "68"
+    contModKeyword = "44"
 
     bytes_from_program = [];
 
@@ -221,10 +221,14 @@ if __name__ == "__main__"   :
     print("\n3. Programando...")
     send_keyword(ser,PROG_KW);
     send_program(ser,bytes_from_program);
-    #send_keyword(ser,STEPMOD_KW);
-    send_keyword(ser,contModKeyword);
+    if args.mode=='STEP' :
+        print("Ejecutamos en modo STEP")
+        send_keyword(ser,STEPMOD_KW);
+    elif args.mode=='CONT' :
+        print("Ejecutamos en modo CONT")
+        send_keyword(ser,contModKeyword);
 
-
+    print("asdasdads")
     thread_recepcion = threading.Thread(target=recibir_numero)
     thread_recepcion.daemon = True
     thread_recepcion.start()
@@ -234,22 +238,28 @@ if __name__ == "__main__"   :
         while True:
             time.sleep(5)
             numero_de_lineas = contar_lineas_archivo()
-            if primeraEjecucion:
+            if primeraEjecucion and args.mode=='STEP':
                 borrar_contenido_archivo()
-            elif primeraEjecucion==False and numero_de_lineas!=0:
+            elif args.mode=='STEP' and primeraEjecucion==False and numero_de_lineas!=0:
+                print(f"----------------------------Contenido del archivo formateado----------------------------")
+                reformatear_archivo()
+                leer_y_imprimir_archivo("datos_formateados.txt")
+                borrar_contenido_archivo()
+            elif args.mode=='CONT' and numero_de_lineas!=0:
                 print(f"----------------------------Contenido del archivo formateado----------------------------")
                 reformatear_archivo()
                 leer_y_imprimir_archivo("datos_formateados.txt")
                 borrar_contenido_archivo()
                 
             
-            
+            print(f"El modo ejecutado es: {args.mode}")
             print(f"El archivo tiene {numero_de_lineas} líneas.")
             print(f"Variable bool es primera ejecucion {primeraEjecucion}")
             
             input("\n<Presiona ENTER para hacer otro step>\n")
             primeraEjecucion=False
-            send_keyword(ser,STEPMOD_KW);
+            if args.mode=='STEP' :
+                send_keyword(ser,STEPMOD_KW);
         
     except KeyboardInterrupt:
         print("\nCtrl+C pressed. Exiting the program.")
