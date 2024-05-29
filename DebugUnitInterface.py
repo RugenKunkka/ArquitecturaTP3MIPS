@@ -72,6 +72,7 @@ def recibir_numero():
                 
                 # Imprime el número recibido
                 #print(f"{hex(numero_recibido)[2:].zfill(2).upper()}",end='',flush=True)
+                
                 print(f"{hex(numero_recibido)[2:].zfill(2).upper()}")
                 
                 guardar_datos(f"{hex(numero_recibido)[2:].zfill(2).upper()}")
@@ -239,6 +240,7 @@ if __name__ == "__main__"   :
                 print(f"----------------------------Contenido del archivo formateado----------------------------")
                 reformatear_archivo()
                 leer_y_imprimir_archivo("datos_formateados.txt")
+                borrar_contenido_archivo()
                 
             
             
