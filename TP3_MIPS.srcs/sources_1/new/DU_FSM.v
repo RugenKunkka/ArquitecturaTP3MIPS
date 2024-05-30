@@ -85,21 +85,25 @@ module DU_FSM
     localparam ZERO = 1'b0;
 
     //For UART
-    localparam TOTAL_BITS_TO_SEND = INS_LEN + (REGFILE_DEPTH * REGFILE_LEN) + (DATMEM_DEPTH * DAT_LEN); // PC  , Register File , Data Memory                                
+    //localparam TOTAL_BITS_TO_SEND = INS_LEN + (REGFILE_DEPTH * REGFILE_LEN) + (DATMEM_DEPTH * DAT_LEN); // PC  , Register File , Data Memory                                
     localparam INDEX_TO_SEND_LEN  = $clog2((REGFILE_DEPTH * REGFILE_LEN)/8); // The largest element
 
     // For FSM
-    localparam [4-1:0] IDLE_STATE               = 4'b0000;
-    localparam [4-1:0] PROGRAMMING_STATE        = 4'b0001; 
-    localparam [4-1:0] READY_STATE              = 4'b0010; 
-    localparam [4-1:0] STEP_MODE_RUNNING_STATE  = 4'b0011; 
-    localparam [4-1:0] CONT_MODE_RUNNING_STATE  = 4'b0100; 
-    localparam [4-1:0] SENDING_PC_STATE         = 4'b0101; 
-    localparam [4-1:0] READING_REGFILE_STATE    = 4'b0110; 
-    localparam [4-1:0] SENDING_REGFILE_STATE    = 4'b0111; 
-    localparam [4-1:0] READING_DATMEM_STATE     = 4'b1000; 
-    localparam [4-1:0] SENDING_DATMEM_STATE     = 4'b1001; 
-
+    localparam [4-1:0] IDLE_STATE               = 4'b0000; //0
+    localparam [4-1:0] PROGRAMMING_STATE        = 4'b0001; //1
+    localparam [4-1:0] READY_STATE              = 4'b0010; //2
+    localparam [4-1:0] STEP_MODE_RUNNING_STATE  = 4'b0011; //3
+    localparam [4-1:0] CONT_MODE_RUNNING_STATE  = 4'b0100; //4
+    localparam [4-1:0] SEND_PC_STATE_A          = 4'b0101; //5
+    localparam [4-1:0] SEND_PC_STATE_B          = 4'b0110; //6
+    localparam [4-1:0] SEND_REGFILE_STATE_A     = 4'b0111; //7
+    localparam [4-1:0] SEND_REGFILE_STATE_B     = 4'b1000; //8
+    localparam [4-1:0] SEND_REGFILE_STATE_C     = 4'b1001; //9
+    localparam [4-1:0] SEND_REGFILE_STATE_D     = 4'b1010; //10
+    localparam [4-1:0] SEND_DATMEM_STATE_A      = 4'b1011; //11
+    localparam [4-1:0] SEND_DATMEM_STATE_B      = 4'b1100; //12
+    localparam [4-1:0] SEND_DATMEM_STATE_C      = 4'b1101; //13
+    localparam [4-1:0] SEND_DATMEM_STATE_D      = 4'b1110; //14
 
   /*
         Internal Wires
@@ -279,7 +283,7 @@ module DU_FSM
         // For Data Memory
         reg_addr_fromDUFSMToDatMem_next = reg_addr_fromDUFSMToDatMem;
         reg_muxSel_fromDUFSMToDatMemMux_next = reg_muxSel_fromDUFSMToDatMemMux;
-        reg_re_fromDUFSMToDatMem_next = reg_re_fromDUFSMToDatMem;
+        reg_re_fromDUFSMToDatMem_next = LOW;
         regClockIgnoreForDatMem_next        = regClockIgnoreForDatMem ;
 
         // For FSM
@@ -338,7 +342,7 @@ module DU_FSM
                     regClockIgnoreForRegFile_next = HIGH;
                     regClockIgnoreForDatMem_next =  HIGH;                    
                 end
-                regNextState = SENDING_PC_STATE;
+                regNextState = SEND_PC_STATE_A;
             end 
             CONT_MODE_RUNNING_STATE: begin
                 if (~i_halt_fromCUToDUFSM )begin
@@ -351,120 +355,89 @@ module DU_FSM
                     regClockIgnoreForInsMem_next = HIGH;
                     regClockIgnoreForRegFile_next = HIGH;
                     regClockIgnoreForDatMem_next =  HIGH;  
-                    regNextState = SENDING_PC_STATE; 
+                    regNextState = SEND_PC_STATE_A; 
                 end
             end
-            SENDING_PC_STATE: begin
-                if (reg_firstPackageFlag) begin  
-                    regClockIgnoreForPcAndLatches_next = HIGH;
-                    regClockIgnoreForInsMem_next = HIGH;
-                    regClockIgnoreForRegFile_next = HIGH;
-                    regClockIgnoreForDatMem_next =  HIGH;  
-                    reg_data_fromDUFSMToTx_next = i_pc_fromPcToDUFSM[UART_DATA_LEN-1:0];
+            SEND_PC_STATE_A: begin
+                if (regIndexToSend1 < (INS_LEN/8)) begin 
+                    reg_data_fromDUFSMToTx_next = i_pc_fromPcToDUFSM[ regIndexToSend1 * UART_DATA_LEN  +: UART_DATA_LEN ]; 
                     reg_txStart_fromDUFSMToTx_next = HIGH;                    
-                    reg_firstPackageFlag_next = LOW;
                     regIndexToSend1_next = regIndexToSend1 + 1 ;
-                end else begin
-                    if (i_txDone_fromTxToDUFSM) begin
-                        reg_gotTxDone_next = HIGH;
-                    end else begin                             
-                        if (reg_gotTxDone) begin                             
-                            if (regIndexToSend1 < (INS_LEN/8)) begin 
-                                reg_data_fromDUFSMToTx_next = i_pc_fromPcToDUFSM[ regIndexToSend1 * UART_DATA_LEN  +: UART_DATA_LEN ];                            
-                                reg_txStart_fromDUFSMToTx_next = HIGH;
-                                regIndexToSend1_next = regIndexToSend1 + 1 ;
-                            end else begin                             
-                                regIndexToSend1_next = {INDEX_TO_SEND_LEN{ZERO}};
-                                reg_firstPackageFlag_next = HIGH;
-                                regNextState = READING_REGFILE_STATE;                                
-                            end
-                            reg_gotTxDone_next = LOW;
-                        end
-                    end
+                    regNextState = SEND_PC_STATE_B;
+                end else begin 
+                    regIndexToSend1_next = {INDEX_TO_SEND_LEN{ZERO}};
+                    regNextState = SEND_REGFILE_STATE_A;
                 end
             end
-            READING_REGFILE_STATE: begin
+            SEND_PC_STATE_B: begin
+                if (i_txDone_fromTxToDUFSM)begin 
+                    regNextState = SEND_PC_STATE_A;
+                end
+            end
+            SEND_REGFILE_STATE_A: begin 
                 if (regIndexToSend1 < REGFILE_DEPTH) begin 
-                    regClockIgnoreForPcAndLatches_next = HIGH;
-                    regClockIgnoreForInsMem_next = HIGH;
                     regClockIgnoreForRegFile_next = LOW;
-                    regClockIgnoreForDatMem_next =  HIGH;                      
                     reg_muxSel_fromDUFSMToRegFileMux_next = HIGH;
                     reg_addr_fromDUFSMToRegFile_next = regIndexToSend1;
                     regIndexToSend1_next = regIndexToSend1 + 1 ;
-                    regNextState = SENDING_REGFILE_STATE;
-                end else begin  
-                    reg_muxSel_fromDUFSMToRegFileMux_next = LOW;
-                    regIndexToSend1_next = {INDEX_TO_SEND_LEN{ZERO}};
-                    regNextState = READING_DATMEM_STATE;
-                end                    
-            end
-            SENDING_REGFILE_STATE: begin
-                if (reg_firstPackageFlag) begin
-                    reg_data_fromDUFSMToTx_next = i_data_fromRegFileToDUFSM[UART_DATA_LEN-1:0];
-                    reg_txStart_fromDUFSMToTx_next = HIGH;    
-                    reg_firstPackageFlag_next = LOW; 
-                    regIndexToSend2_next = regIndexToSend2 + 1 ;
+                    regNextState = SEND_REGFILE_STATE_B;
                 end else begin
-                    if (i_txDone_fromTxToDUFSM) begin
-                        reg_gotTxDone_next = HIGH;
-                    end else begin                             
-                        if (reg_gotTxDone) begin   
-                            if (regIndexToSend2 < (INS_LEN/8)) begin 
-                                reg_data_fromDUFSMToTx_next = i_data_fromRegFileToDUFSM[regIndexToSend2 * UART_DATA_LEN  +: UART_DATA_LEN]; 
-                                reg_txStart_fromDUFSMToTx_next = HIGH;  
-                                regIndexToSend2_next = regIndexToSend2 + 1 ;
-                            end else begin 
-                                regIndexToSend2_next = {INDEX_TO_SEND_LEN{ZERO}};
-                                reg_firstPackageFlag_next = HIGH; 
-                                regNextState = READING_REGFILE_STATE;
-                            end
-                            reg_gotTxDone_next = LOW;                            
-                        end
-                    end
+                    reg_muxSel_fromDUFSMToRegFileMux_next = LOW;
+                    regClockIgnoreForRegFile_next = HIGH;
+                    regIndexToSend1_next = {INDEX_TO_SEND_LEN{ZERO}};
+                    regNextState = SEND_DATMEM_STATE_A;
+                end    
+            end
+            SEND_REGFILE_STATE_B: begin
+                regNextState = SEND_REGFILE_STATE_C;
+            end
+            SEND_REGFILE_STATE_C: begin
+                if (regIndexToSend2 < (INS_LEN/8)) begin 
+                    reg_data_fromDUFSMToTx_next = i_data_fromRegFileToDUFSM[regIndexToSend2 * UART_DATA_LEN  +: UART_DATA_LEN]; 
+                    reg_txStart_fromDUFSMToTx_next = HIGH;  
+                    regIndexToSend2_next = regIndexToSend2 + 1 ;
+                    regNextState = SEND_REGFILE_STATE_D;
+                end else begin 
+                    regIndexToSend2_next = {INDEX_TO_SEND_LEN{ZERO}};
+                    regNextState = SEND_REGFILE_STATE_A;
+                end
+            end 
+            SEND_REGFILE_STATE_D: begin
+                if (i_txDone_fromTxToDUFSM)begin 
+                    regNextState = SEND_REGFILE_STATE_C;
                 end
             end
-            READING_DATMEM_STATE: begin
+            SEND_DATMEM_STATE_A: begin
                 if (regIndexToSend1 < DATMEM_DEPTH) begin 
-                    regClockIgnoreForPcAndLatches_next = HIGH;
-                    regClockIgnoreForInsMem_next = HIGH;
-                    regClockIgnoreForRegFile_next = HIGH;
                     regClockIgnoreForDatMem_next =  LOW;  
                     reg_muxSel_fromDUFSMToDatMemMux_next = HIGH;
-                    reg_re_fromDUFSMToDatMem_next = HIGH; // Read Enable
+                    reg_re_fromDUFSMToDatMem_next = HIGH; 
                     reg_addr_fromDUFSMToDatMem_next = regIndexToSend1;
                     regIndexToSend1_next = regIndexToSend1 + 4 ;
-                    regNextState = SENDING_DATMEM_STATE;
-                end else begin  
+                    regNextState = SEND_DATMEM_STATE_B;
+                end else begin 
                     reg_muxSel_fromDUFSMToDatMemMux_next = LOW;
-                    reg_re_fromDUFSMToDatMem_next = LOW;
                     regIndexToSend1_next = {INDEX_TO_SEND_LEN{ZERO}};
                     regNextState = READY_STATE;
-                end 
+                end
             end
-            SENDING_DATMEM_STATE: begin
-                if (reg_firstPackageFlag) begin
-                    reg_data_fromDUFSMToTx_next = i_data_fromDatMemToDUFSM[UART_DATA_LEN-1:0];
-                    reg_txStart_fromDUFSMToTx_next = HIGH;    
-                    reg_firstPackageFlag_next = LOW; 
+            SEND_DATMEM_STATE_B: begin
+                regNextState = SEND_DATMEM_STATE_C;
+            end
+            SEND_DATMEM_STATE_C: begin
+                if (regIndexToSend2 < (INS_LEN/8)) begin 
+                    reg_data_fromDUFSMToTx_next = i_data_fromDatMemToDUFSM[regIndexToSend2 * UART_DATA_LEN  +: UART_DATA_LEN]; 
+                    reg_txStart_fromDUFSMToTx_next = HIGH;  
                     regIndexToSend2_next = regIndexToSend2 + 1 ;
-                end else begin
-                    if (i_txDone_fromTxToDUFSM) begin
-                        reg_gotTxDone_next = HIGH;
-                    end else begin                             
-                        if (reg_gotTxDone) begin   
-                            if (regIndexToSend2 < (INS_LEN/8)) begin 
-                                reg_data_fromDUFSMToTx_next = i_data_fromDatMemToDUFSM[regIndexToSend2 * UART_DATA_LEN  +: UART_DATA_LEN]; 
-                                reg_txStart_fromDUFSMToTx_next = HIGH;  
-                                regIndexToSend2_next = regIndexToSend2 + 1 ;
-                            end else begin 
-                                regIndexToSend2_next = {INDEX_TO_SEND_LEN{ZERO}};
-                                reg_firstPackageFlag_next = HIGH; 
-                                regNextState = READING_DATMEM_STATE;
-                            end
-                            reg_gotTxDone_next = LOW;                            
-                        end
-                    end
+                    regNextState = SEND_DATMEM_STATE_D;
+                end else begin 
+                    regIndexToSend2_next = {INDEX_TO_SEND_LEN{ZERO}};
+                    regNextState = SEND_DATMEM_STATE_A;
+                end
+            end
+            SEND_DATMEM_STATE_D: begin
+                if (i_txDone_fromTxToDUFSM)begin 
+                    regNextState = SEND_DATMEM_STATE_C;
                 end
             end
         endcase  
