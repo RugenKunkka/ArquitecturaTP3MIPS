@@ -5,7 +5,7 @@ module TopLevel
     // For Etapa 1 (Instruction Memory)
     parameter INSMEM_ADDR_LEN   = `INSMEM_ADDR_LEN,   // Instruction Address Length
     parameter INSMEM_DAT_LEN    = `INSMEM_DAT_LEN,   // Instruction Legth
-    parameter INS_LEN           = `INS_LEN,
+    parameter INS_LEN           = `INS_LEN, 
 
     // For Etapa 2 (Register File)
     parameter REGFILE_ADDR_LEN  = `REGFILE_ADDR_LEN, // Register File Address Lenght
