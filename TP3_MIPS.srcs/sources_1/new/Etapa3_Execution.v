@@ -302,7 +302,7 @@ module Etapa3_Execution
         .o_forwardC_muxSel  (o_controlForwarding3)
     );
 
-    assign o_rsForHazard_fromE3ToE2 = i_instruction[15:11];
+    assign o_rsForHazard_fromE3ToE2 = i_instruction[25:21];
     assign o_rtForHazard_fromE3ToE2 = i_instruction[20:16];
     assign o_RegDstForHazard_fromE3ToE2 = i_controlRegDst;
 
