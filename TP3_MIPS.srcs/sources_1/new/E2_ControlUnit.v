@@ -35,81 +35,81 @@ module E2_ControlUnit
  
     always@(*) begin
         if(i_reset | i_resetForHazard) begin
-            o_controlIsBNEQ     = 0;
-            o_controlIsBranch   = 0;
-            o_controlIsJumpTipoR= 0;
-            o_controlIsJump     = 0;
-            o_controlRegWrite   = 0;
-            o_controlMemWrite   = 0;
-            o_controlMemRead    = 0;
-            o_controlMemtoReg   = 0;
-            o_controlRegDst     = 0;
-            o_controlPC4WB      = 0;
-            o_controlGpr31      = 0;
-            o_controlWHBLS      = 0;
-            o_controlSignedLoad = 0;
-            o_controlALUSrc     = 0;
-            o_controlHalt       = 0;
+            o_controlIsBNEQ     <= 0;
+            o_controlIsBranch   <= 0;
+            o_controlIsJumpTipoR<= 0;
+            o_controlIsJump     <= 0;
+            o_controlRegWrite   <= 0;
+            o_controlMemWrite   <= 0;
+            o_controlMemRead    <= 0;
+            o_controlMemtoReg   <= 0;
+            o_controlRegDst     <= 0;
+            o_controlPC4WB      <= 0;
+            o_controlGpr31      <= 0;
+            o_controlWHBLS      <= 0;
+            o_controlSignedLoad <= 0;
+            o_controlALUSrc     <= 0;
+            o_controlHalt       <= 0;
         end
         
         
         else if(i_operationCode==6'b111111) begin//HALT
-            o_controlRegDst=0;
-            o_controlRegWrite=0;
-            o_controlALUSrc=0;
-            o_controlMemWrite=0;
-            o_controlMemtoReg=0;
-            o_controlPC4WB=0;
-            o_controlGpr31= 0;
+            o_controlRegDst<=0;
+            o_controlRegWrite<=0;
+            o_controlALUSrc<=0;
+            o_controlMemWrite<=0;
+            o_controlMemtoReg<=0;
+            o_controlPC4WB<=0;
+            o_controlGpr31<=0;
             //el memwidth xxxx
-            o_controlWHBLS=3'b000;
-            o_controlSignedLoad=0;
-            o_controlIsJump=0;
-            o_controlIsJumpTipoR=0;//stefanooo fraannn hazard unit ==> estaba en 1
-            o_controlIsBranch=0;
-            o_controlIsBNEQ=0;
+            o_controlWHBLS<=3'b000;
+            o_controlSignedLoad<=0;
+            o_controlIsJump<=0;
+            o_controlIsJumpTipoR<=0;//stefanooo fraannn hazard unit ==> estaba en 1
+            o_controlIsBranch<=0;
+            o_controlIsBNEQ<=0;
             
-            o_controlHalt=1;
+            o_controlHalt<=1;
         end
         
         //JALR ok
         else if (i_operationCode==6'b000000 && i_bits20_16==5'b00000 && i_bits10_6==5'b00000 && i_functionCode==6'b001001) begin
-            o_controlRegDst=1;//
-            o_controlRegWrite=1;
-            o_controlALUSrc=0;//x
-            o_controlMemWrite=0;
-            o_controlMemtoReg=0;
-            o_controlPC4WB=1;
-            o_controlGpr31= 0;
+            o_controlRegDst<=1;//
+            o_controlRegWrite<=1;
+            o_controlALUSrc<=0;//x
+            o_controlMemWrite<=0;
+            o_controlMemtoReg<=0;
+            o_controlPC4WB<=1;
+            o_controlGpr31<= 0;
             //el memwidth xxxx
-            o_controlWHBLS=3'b000;
-            o_controlSignedLoad=0;
-            o_controlIsJump=0;
-            o_controlIsJumpTipoR=1;//stefanooo fraannn hazard unit ==> estaba en 1
+            o_controlWHBLS<=3'b000;
+            o_controlSignedLoad<=0;
+            o_controlIsJump<=0;
+            o_controlIsJumpTipoR<=1;//stefanooo fraannn hazard unit ==> estaba en 1
             //stefanooo Si se clava el programa es por esto pasarlo a 0 temporalmente
-            o_controlIsBranch=0;
-            o_controlIsBNEQ=0;
+            o_controlIsBranch<=0;
+            o_controlIsBNEQ<=0;
             
-            o_controlHalt=0;
+            o_controlHalt<=0;
         end
         //JR ok
         else if (i_operationCode==6'b000000 && i_bits20_6==15'b000000000000000) begin
-            o_controlRegDst=0;
-            o_controlRegWrite=0;
-            o_controlALUSrc=0;
-            o_controlMemWrite=0;
-            o_controlMemtoReg=0;
-            o_controlPC4WB=0;
-            o_controlGpr31= 0;
+            o_controlRegDst<=0;
+            o_controlRegWrite<=0;
+            o_controlALUSrc<=0;
+            o_controlMemWrite<=0;
+            o_controlMemtoReg<=0;
+            o_controlPC4WB<=0;
+            o_controlGpr31<= 0;
             //el memwidth xxxx
-            o_controlWHBLS=3'b000;
-            o_controlSignedLoad=0;
-            o_controlIsJump=0;
-            o_controlIsJumpTipoR=0;//stefanooo fraannn hazard unit ==> estaba en 1
-            o_controlIsBranch=0;
-            o_controlIsBNEQ=0;
+            o_controlWHBLS<=3'b000;
+            o_controlSignedLoad<=0;
+            o_controlIsJump<=0;
+            o_controlIsJumpTipoR<=0;//stefanooo fraannn hazard unit ==> estaba en 1
+            o_controlIsBranch<=0;
+            o_controlIsBNEQ<=0;
             
-            o_controlHalt=0;
+            o_controlHalt<=0;
         end
         
         else if(i_operationCode==6'b000000) begin //TIPO - R y a partir de ahora me queda verificar el func code
@@ -126,430 +126,430 @@ module E2_ControlUnit
             i_functionCode==6'b100111 ||//NOR
             i_functionCode==6'b101010 //SLT
             ) begin
-                o_controlRegDst=1;
-                o_controlRegWrite=1;
-                o_controlALUSrc=0;
-                o_controlMemWrite=0;
-                o_controlMemtoReg=0;
-                o_controlPC4WB=0;
-                o_controlGpr31= 0;
+                o_controlRegDst<=1;
+                o_controlRegWrite<=1;
+                o_controlALUSrc<=0;
+                o_controlMemWrite<=0;
+                o_controlMemtoReg<=0;
+                o_controlPC4WB<=0;
+                o_controlGpr31<= 0;
                 //el memwidth xxxx
-                o_controlWHBLS=3'b000;
-                o_controlSignedLoad=0;
-                o_controlIsJump=0;
-                o_controlIsJumpTipoR=0;
-                o_controlIsBranch=0;
-                o_controlIsBNEQ=0;
+                o_controlWHBLS<=3'b000;
+                o_controlSignedLoad<=0;
+                o_controlIsJump<=0;
+                o_controlIsJumpTipoR<=0;
+                o_controlIsBranch<=0;
+                o_controlIsBNEQ<=0;
                 
-                o_controlHalt=0;
+                o_controlHalt<=0;
             end 
             else if(i_functionCode==6'b000000 || //SLL
             i_functionCode==6'b000010 ||//SRL
             i_functionCode==6'b000011 //SRA
             ) begin 
-                o_controlRegDst=0;
-                o_controlRegWrite=1;
-                o_controlALUSrc=1;
-                o_controlMemWrite=0;
-                o_controlMemtoReg=0;
-                o_controlPC4WB=0;
-                o_controlGpr31= 0;
+                o_controlRegDst<=0;
+                o_controlRegWrite<=1;
+                o_controlALUSrc<=1;
+                o_controlMemWrite<=0;
+                o_controlMemtoReg<=0;
+                o_controlPC4WB<=0;
+                o_controlGpr31<= 0;
                 //el memwidth xxxx
-                o_controlWHBLS=3'b000;
-                o_controlSignedLoad=0;
-                o_controlIsJump=0;
-                o_controlIsJumpTipoR=0;
-                o_controlIsBranch=0;
-                o_controlIsBNEQ=0;
+                o_controlWHBLS<=3'b000;
+                o_controlSignedLoad<=0;
+                o_controlIsJump<=0;
+                o_controlIsJumpTipoR<=0;
+                o_controlIsBranch<=0;
+                o_controlIsBNEQ<=0;
                 
-                o_controlHalt=0;
+                o_controlHalt<=0;
             end
             else begin
-                o_controlRegDst=0;
-                o_controlRegWrite=0;
-                o_controlALUSrc=0;
-                o_controlMemWrite=0;
-                o_controlMemtoReg=0;
-                o_controlPC4WB=0;
-                o_controlGpr31= 0;
+                o_controlRegDst<=0;
+                o_controlRegWrite<=0;
+                o_controlALUSrc<=0;
+                o_controlMemWrite<=0;
+                o_controlMemtoReg<=0;
+                o_controlPC4WB<=0;
+                o_controlGpr31<=0;
                 //el memwidth xxxx
-                o_controlWHBLS=3'b000;
-                o_controlSignedLoad=0;
-                o_controlIsJump=0;
-                o_controlIsJumpTipoR=0;
-                o_controlIsBranch=0;
-                o_controlIsBNEQ=0;
+                o_controlWHBLS<=3'b000;
+                o_controlSignedLoad<=0;
+                o_controlIsJump<=0;
+                o_controlIsJumpTipoR<=0;
+                o_controlIsBranch<=0;
+                o_controlIsBNEQ<=0;
                 
-                o_controlHalt=0;
+                o_controlHalt<=0;
             end
         end
         else begin
             case (i_operationCode)
                 6'b000010: begin//J OK
-                    o_controlRegDst=0;
-                    o_controlRegWrite=0;
-                    o_controlALUSrc=0;
-                    o_controlMemWrite=0;
-                    o_controlMemtoReg=0;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=0;
+                    o_controlALUSrc<=0;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=0;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b000;
-                    o_controlSignedLoad=0;
-                    o_controlIsJump=1;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b000;
+                    o_controlSignedLoad<=0;
+                    o_controlIsJump<=1;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 6'b000011: begin//JAL OK
-                    o_controlRegDst=0;
-                    o_controlRegWrite=1;
-                    o_controlALUSrc=0;
-                    o_controlMemWrite=0;
-                    o_controlMemtoReg=0;
-                    o_controlPC4WB=1;
-                    o_controlGpr31= 1;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=1;
+                    o_controlALUSrc<=0;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=0;
+                    o_controlPC4WB<=1;
+                    o_controlGpr31<=1;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b000;
-                    o_controlSignedLoad=0;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;//stefanooo fraannn hazard unit ==> estaba en 1
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b000;
+                    o_controlSignedLoad<=0;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=1;//stefanooo fraannn hazard unit ==> estaba en 1
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 6'b100000: begin//LB
-                    o_controlRegDst=0;
-                    o_controlRegWrite=1;
-                    o_controlALUSrc=1;
-                    o_controlMemWrite=0;
-                    o_controlMemtoReg=1;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=1;
+                    o_controlALUSrc<=1;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=1;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<= 0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b100;//1001
-                    o_controlSignedLoad=1;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b100;//1001
+                    o_controlSignedLoad<=1;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 6'b100001: begin//LH
-                    o_controlRegDst=0;
-                    o_controlRegWrite=1;
-                    o_controlALUSrc=1;
-                    o_controlMemWrite=0;
-                    o_controlMemtoReg=1;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=1;
+                    o_controlALUSrc<=1;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=1;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b010;//1010
-                    o_controlSignedLoad=1;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b010;//1010
+                    o_controlSignedLoad<=1;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 6'b100011: begin//LW
-                    o_controlRegDst=0;
-                    o_controlRegWrite=1;
-                    o_controlALUSrc=1;
-                    o_controlMemWrite=0;
-                    o_controlMemtoReg=1;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=1;
+                    o_controlALUSrc<=1;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=1;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b100;//1100
-                    o_controlSignedLoad=1;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b100;//1100
+                    o_controlSignedLoad<=1;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 //6'b100111: begin//LWU
                 //end
                 6'b100100: begin//LBU
-                    o_controlRegDst=0;
-                    o_controlRegWrite=1;
-                    o_controlALUSrc=1;
-                    o_controlMemWrite=0;
-                    o_controlMemtoReg=1;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=1;
+                    o_controlALUSrc<=1;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=1;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b001;//0001
-                    o_controlSignedLoad=0;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b001;//0001
+                    o_controlSignedLoad<=0;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 6'b100101: begin//LHU
-                    o_controlRegDst=0;
-                    o_controlRegWrite=1;
-                    o_controlALUSrc=1;
-                    o_controlMemWrite=0;
-                    o_controlMemtoReg=1;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=1;
+                    o_controlALUSrc<=1;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=1;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b010;//0010
-                    o_controlSignedLoad=0;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b010;//0010
+                    o_controlSignedLoad<=0;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 6'b101000: begin//SB
-                    o_controlRegDst=0;
-                    o_controlRegWrite=0;
-                    o_controlALUSrc=1;
-                    o_controlMemWrite=1;
-                    o_controlMemtoReg=0;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=0;
+                    o_controlALUSrc<=1;
+                    o_controlMemWrite<=1;
+                    o_controlMemtoReg<=0;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b100;//1001
-                    o_controlSignedLoad=1;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b100;//1001
+                    o_controlSignedLoad<=1;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 6'b101001: begin//SH
-                    o_controlRegDst=0;
-                    o_controlRegWrite=0;
-                    o_controlALUSrc=1;
-                    o_controlMemWrite=1;
-                    o_controlMemtoReg=0;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=0;
+                    o_controlALUSrc<=1;
+                    o_controlMemWrite<=1;
+                    o_controlMemtoReg<=0;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b010;//1010
-                    o_controlSignedLoad=1;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b010;//1010
+                    o_controlSignedLoad<=1;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 6'b101011: begin//SW
-                    o_controlRegDst=0;
-                    o_controlRegWrite=0;
-                    o_controlALUSrc=1;
-                    o_controlMemWrite=1;
-                    o_controlMemtoReg=0;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=0;
+                    o_controlALUSrc<=1;
+                    o_controlMemWrite<=1;
+                    o_controlMemtoReg<=0;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b100;//1100
-                    o_controlSignedLoad=1;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b100;//1100
+                    o_controlSignedLoad<=1;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 6'b001010: begin//SLTI
-                    o_controlRegDst=0;
-                    o_controlRegWrite=1;
-                    o_controlALUSrc=1;
-                    o_controlMemWrite=0;
-                    o_controlMemtoReg=0;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=1;
+                    o_controlALUSrc<=1;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=0;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b000;
-                    o_controlSignedLoad=0;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b000;
+                    o_controlSignedLoad<=0;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 6'b000100: begin//BEQ
-                    o_controlRegDst=1;
-                    o_controlRegWrite=0;
-                    o_controlALUSrc=0;
-                    o_controlMemWrite=0;
-                    o_controlMemtoReg=0;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=1;
+                    o_controlRegWrite<=0;
+                    o_controlALUSrc<=0;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=0;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b000;
-                    o_controlSignedLoad=0;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=1;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b000;
+                    o_controlSignedLoad<=0;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=1;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 6'b000101: begin//BNE
-                    o_controlRegDst=1;
-                    o_controlRegWrite=0;
-                    o_controlALUSrc=0;
-                    o_controlMemWrite=0;
-                    o_controlMemtoReg=0;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=1;
+                    o_controlRegWrite<=0;
+                    o_controlALUSrc<=0;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=0;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b000;
-                    o_controlSignedLoad=0;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=1;
-                    o_controlIsBNEQ=1;
+                    o_controlWHBLS<=3'b000;
+                    o_controlSignedLoad<=0;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=1;
+                    o_controlIsBNEQ<=1;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 //-------------------------------------------
                 //a partir de aca van las isntrucciones que son tipo I y tienen el mismo output
                 //SUBI ver que ponemos para esto....
                 //no pidieron SUBI!!!!!!!!!!! OJOOO
                 6'b011110: begin//SUBI
-                    o_controlRegDst=0;
-                    o_controlRegWrite=1;
-                    o_controlALUSrc=1;
-                    o_controlMemWrite=0;
-                    o_controlMemtoReg=0;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=1;
+                    o_controlALUSrc<=1;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=0;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b000;
-                    o_controlSignedLoad=0;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b000;
+                    o_controlSignedLoad<=0;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 6'b001000: begin//ADDI
-                    o_controlRegDst=0;
-                    o_controlRegWrite=1;
-                    o_controlALUSrc=1;
-                    o_controlMemWrite=0;
-                    o_controlMemtoReg=0;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=1;
+                    o_controlALUSrc<=1;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=0;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b000;
-                    o_controlSignedLoad=0;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b000;
+                    o_controlSignedLoad<=0;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 6'b001100: begin//ANDI
-                    o_controlRegDst=0;
-                    o_controlRegWrite=1;
-                    o_controlALUSrc=1;
-                    o_controlMemWrite=0;
-                    o_controlMemtoReg=0;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=1;
+                    o_controlALUSrc<=1;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=0;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b000;
-                    o_controlSignedLoad=0;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b000;
+                    o_controlSignedLoad<=0;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 6'b001101: begin//ORI
-                    o_controlRegDst=0;
-                    o_controlRegWrite=1;
-                    o_controlALUSrc=1;
-                    o_controlMemWrite=0;
-                    o_controlMemtoReg=0;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=1;
+                    o_controlALUSrc<=1;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=0;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b000;
-                    o_controlSignedLoad=0;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b000;
+                    o_controlSignedLoad<=0;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 6'b001110: begin//XORI
-                    o_controlRegDst=0;
-                    o_controlRegWrite=1;
-                    o_controlALUSrc=1;
-                    o_controlMemWrite=0;
-                    o_controlMemtoReg=0;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=1;
+                    o_controlALUSrc<=1;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=0;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b000;
-                    o_controlSignedLoad=0;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b000;
+                    o_controlSignedLoad<=0;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 6'b001111: begin//LUI
-                    o_controlRegDst=0;
-                    o_controlRegWrite=1;
-                    o_controlALUSrc=1;
-                    o_controlMemWrite=0;
-                    o_controlMemtoReg=0;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=1;
+                    o_controlALUSrc<=1;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=0;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b000;
-                    o_controlSignedLoad=0;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b000;
+                    o_controlSignedLoad<=0;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
                 default: begin
-                    o_controlRegDst=0;
-                    o_controlRegWrite=0;
-                    o_controlALUSrc=0;
-                    o_controlMemWrite=0;
-                    o_controlMemtoReg=0;
-                    o_controlPC4WB=0;
-                    o_controlGpr31= 0;
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=0;
+                    o_controlALUSrc<=0;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=0;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS=3'b000;
-                    o_controlSignedLoad=0;
-                    o_controlIsJump=0;
-                    o_controlIsJumpTipoR=0;
-                    o_controlIsBranch=0;
-                    o_controlIsBNEQ=0;
+                    o_controlWHBLS<=3'b000;
+                    o_controlSignedLoad<=0;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
                     
-                    o_controlHalt=0;
+                    o_controlHalt<=0;
                 end
             endcase
         end

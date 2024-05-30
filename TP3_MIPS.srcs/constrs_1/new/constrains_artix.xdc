@@ -21,9 +21,9 @@ set_property CFGBVS VCCO [current_design];
 
 ## Clock signal
 
-set_property -dict { PACKAGE_PIN E3    IOSTANDARD LVCMOS33 } [get_ports { i_clock_fromPin }]; #IO_L12P_T1_MRCC_35 Sch=gclk[100]
-#set_property -dict {PACKAGE_PIN E3 IOSTANDARD LVCMOS33} [get_ports i_clock]
-#create_clock -period 10.000 -name sys_clk_pin -waveform {0.000 5.000} -add [get_ports i_clock]
+#set_property -dict { PACKAGE_PIN E3    IOSTANDARD LVCMOS33 } [get_ports { i_clock_fromPin }]; #IO_L12P_T1_MRCC_35 Sch=gclk[100]
+set_property -dict {PACKAGE_PIN E3 IOSTANDARD LVCMOS33} [get_ports i_clock_fromPin]
+create_clock -period 10.000 -name sys_clk_pin -waveform {0.000 5.000} -add [get_ports i_clock_fromPin]
 
 ##Switches
 

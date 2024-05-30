@@ -4,17 +4,22 @@
 // Aritmetico:	duplica valores
 // Logico:		rellena con ceros
 // 13 instrucciones + 4 ciclos llenado del pipe => PC: 11(HEX) 17(DEC)
-
-addu 1 , 13, 14		// 1B(r1 ) = D   +  E
-subu 2 , 16, 15		//  1(r2 ) = 10  -  F 
-and  3 , 17, 18		// 10(r3 ) = 11 AND 12
-or   4 , 19, 20		// 17(r4 ) = 13 OR  14
-xor  5 , 21, 22		//  3(r5 ) = 15 XOR 16
-slt  6 , 23, 24		//  1(r6 ) = 17  <  18
-sll  7 , 25, 2		// 64(r7 ) = 19 <<  2
-srl  8 , 26, 1		//  D(r8 ) = 1A >>  1 
-sra  9 , 27, 2		//  6(r9 ) = 1B >>  3		(con signo)
-sllv 10, 28, 2 		// 38(r10) = 1C << 1(r2)
-srlv 11, 29, 2 		//  E(r11) = 1D >> 1(r2)
-srav 12, 30, 2 		//  F(r12) = 1E >> 1(r2)	(con signo)
+ori 13 , 5, 1
+ori 14 , 6, 2
+ori 15 , 7, 3
+ori 16 , 8, 4
+ori 17 , 8, 5
+ori 18 , 8, 6
+ori 19 , 8, 7
+ori 20 , 8, 8
+ori 21 , 8, 9
+ori 22 , 8, 10
+ori 23 , 8, 11
+ori 24 , 8, 12
+addu 1 , 13, 14		// 1+2=3
+subu 2 , 16, 15		// 4-3=1
+and  3 , 17, 18		// 5 & 6= 100 = 4 en hexa
+or   4 , 19, 20		// 7 | 8 = 1111 = F
+xor  5 , 21, 22		//  9 xor 10 = 0011 = 3
+slt  6 , 23, 24		//  slt 11 12 = 1 
 halt		

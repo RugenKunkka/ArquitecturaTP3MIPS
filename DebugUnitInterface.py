@@ -14,7 +14,7 @@ def setup_argparse():
     parser.add_argument('--mode', type=str, default='CONT', help='Modo de Operacion del MIPS. (CONT or STEP)')
     parser.add_argument('--port', type=str, default='COM4', help='Puerto de comunicacion serial.')
     parser.add_argument('--baudrate', type=int, default=9600, help='Baud Rate de la comunicacion serial.')
-    parser.add_argument('--path', type=str, default=r"D:\Facultad\Arquitectura de computadoras\MIS_TPS\ArquitecturaTP3MIPS\prueba2.hex"  , help='Path hacia el programa a cargar.')
+    parser.add_argument('--path', type=str, default=r"D:\Facultad\Arquitectura de computadoras\MIS_TPS\ArquitecturaTP3MIPS\prueba7.hex"  , help='Path hacia el programa a cargar.')
     parser.add_argument('--log', action='store_true', help='Para loggear la terminal')
     args = parser.parse_args()
     print(args)
@@ -64,7 +64,7 @@ def recibir_numero():
             counter = 0 
             # Espera y lee un byte desde UART
             byte_recibido = ser.read(1)
-            #print(byte_recibido)
+            print(byte_recibido)
             if byte_recibido:
                 # Convierte el byte recibido a un número decimal
 
@@ -73,7 +73,7 @@ def recibir_numero():
                 # Imprime el número recibido
                 #print(f"{hex(numero_recibido)[2:].zfill(2).upper()}",end='',flush=True)
                 
-                #print(f"{hex(numero_recibido)[2:].zfill(2).upper()}")
+                print(f"{hex(numero_recibido)[2:].zfill(2).upper()}")
                 
                 guardar_datos(f"{hex(numero_recibido)[2:].zfill(2).upper()}")
 
@@ -236,7 +236,7 @@ if __name__ == "__main__"   :
 
     try:
         while True:
-            time.sleep(5)
+            time.sleep(4)
             numero_de_lineas = contar_lineas_archivo()
             if primeraEjecucion and args.mode=='STEP':
                 borrar_contenido_archivo()

@@ -105,7 +105,7 @@ module E2_ControlUnitAluOP(
                     o_controlALUOp<=6'b111111;
                 end
                 6'b000000: begin//SLL
-                    o_controlALUOp<=6'b011100;
+                    o_controlALUOp<=6'b100000;
                 end
                 6'b000010: begin//SRL
                     o_controlALUOp<=6'b010000;
