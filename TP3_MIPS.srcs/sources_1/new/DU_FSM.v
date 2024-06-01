@@ -299,15 +299,14 @@ module DU_FSM
             end           
             PROGRAMMING_STATE: begin
                 if (i_rxDone_fromRxToDUFSM) begin    
-                    regClockIgnoreForPcAndLatches_next = HIGH;
                     regClockIgnoreForInsMem_next = LOW;
-                    regClockIgnoreForRegFile_next = HIGH;
-                    regClockIgnoreForDatMem_next =  HIGH;
                     reg_muxSel_fromDUFSMToInsMemMux_next = HIGH;
                     reg_data_fromDUFSMToInsMem_next = i_data_fromRxToDUFSM;
                     reg_addr_fromDUFSMToInsMem_next = regIndexToProgram; 
                     reg_we_fromDUFSMToInsMem_next = HIGH; //Write Enable
                     if (regIndexToProgram == (INSMEM_DEPTH-1) ) begin
+                        regClockIgnoreForInsMem_next = HIGH;
+                        reg_muxSel_fromDUFSMToInsMemMux_next = LOW;
                         regIndexToProgram_next = {INSMEM_ADDR_LEN{ZERO}};                        
                         regNextState = READY_STATE;            
                     end else begin
@@ -316,49 +315,56 @@ module DU_FSM
                 end                      
             end
             READY_STATE: begin
-                reg_muxSel_fromDUFSMToInsMemMux_next = LOW;
-                regClockIgnoreForPcAndLatches_next = HIGH;
-                regClockIgnoreForInsMem_next = HIGH;
-                regClockIgnoreForRegFile_next = HIGH;
-                regClockIgnoreForDatMem_next =  HIGH;
                 if (i_rxDone_fromRxToDUFSM) begin
                     if (i_data_fromRxToDUFSM == STEPMOD_KW) begin
+                        regClockIgnoreForPcAndLatches_next = LOW;
+                        regClockIgnoreForInsMem_next = LOW;
+                        regClockIgnoreForRegFile_next = LOW;
+                        regClockIgnoreForDatMem_next =  LOW;
                         regNextState = STEP_MODE_RUNNING_STATE;
                     end
                     if (i_data_fromRxToDUFSM == CONTMOD_KW) begin
+                        regClockIgnoreForPcAndLatches_next = LOW;
+                        regClockIgnoreForInsMem_next = LOW;
+                        regClockIgnoreForRegFile_next = LOW;
+                        regClockIgnoreForDatMem_next =  LOW;
                         regNextState = CONT_MODE_RUNNING_STATE;
                     end
                 end
             end
             STEP_MODE_RUNNING_STATE: begin
-                if (~i_halt_fromCUToDUFSM) begin
-                    regClockIgnoreForPcAndLatches_next = LOW;
-                    regClockIgnoreForInsMem_next = LOW;
-                    regClockIgnoreForRegFile_next = LOW;
-                    regClockIgnoreForDatMem_next =  LOW;
-                end else begin   
+                if (i_halt_fromCUToDUFSM == HIGH) begin
                     regClockIgnoreForPcAndLatches_next = HIGH;
                     regClockIgnoreForInsMem_next = HIGH;
                     regClockIgnoreForRegFile_next = HIGH;
-                    regClockIgnoreForDatMem_next =  HIGH;                    
+                    regClockIgnoreForDatMem_next =  HIGH;   
+                end else begin 
+                    regClockIgnoreForPcAndLatches_next = HIGH;
+                    regClockIgnoreForInsMem_next = HIGH;
+                    regClockIgnoreForRegFile_next = HIGH;
+                    regClockIgnoreForDatMem_next =  HIGH;             
                 end
                 regNextState = SEND_PC_STATE_A;
             end 
             CONT_MODE_RUNNING_STATE: begin
-                if (~i_halt_fromCUToDUFSM )begin
+                if (i_halt_fromCUToDUFSM == HIGH )begin
+                    //regClockIgnoreForPcAndLatches_next = HIGH;
+                    //regClockIgnoreForInsMem_next = HIGH;
+                    //regClockIgnoreForRegFile_next = HIGH;
+                    //regClockIgnoreForDatMem_next =  HIGH;  
+                    regNextState = SEND_PC_STATE_A;   
+                end else begin
                     regClockIgnoreForPcAndLatches_next = LOW;
                     regClockIgnoreForInsMem_next = LOW;
                     regClockIgnoreForRegFile_next = LOW;
-                    regClockIgnoreForDatMem_next =  LOW;       
-                end else begin
-                    regClockIgnoreForPcAndLatches_next = HIGH;
-                    regClockIgnoreForInsMem_next = HIGH;
-                    regClockIgnoreForRegFile_next = HIGH;
-                    regClockIgnoreForDatMem_next =  HIGH;  
-                    regNextState = SEND_PC_STATE_A; 
+                    regClockIgnoreForDatMem_next =  LOW;    
                 end
             end
             SEND_PC_STATE_A: begin
+                regClockIgnoreForPcAndLatches_next = HIGH;
+                regClockIgnoreForInsMem_next = HIGH;
+                regClockIgnoreForRegFile_next = HIGH;
+                regClockIgnoreForDatMem_next =  HIGH; 
                 if (regIndexToSend1 < (INS_LEN/8)) begin 
                     reg_data_fromDUFSMToTx_next = i_pc_fromPcToDUFSM[ regIndexToSend1 * UART_DATA_LEN  +: UART_DATA_LEN ]; 
                     reg_txStart_fromDUFSMToTx_next = HIGH;                    
@@ -416,12 +422,13 @@ module DU_FSM
                     regIndexToSend1_next = regIndexToSend1 + 4 ;
                     regNextState = SEND_DATMEM_STATE_B;
                 end else begin 
+                    regClockIgnoreForDatMem_next =  HIGH;
                     reg_muxSel_fromDUFSMToDatMemMux_next = LOW;
                     regIndexToSend1_next = {INDEX_TO_SEND_LEN{ZERO}};
                     regNextState = READY_STATE;
                 end
             end
-            SEND_DATMEM_STATE_B: begin
+            SEND_DATMEM_STATE_B: begin // Dummy state to wait one clock cycle
                 regNextState = SEND_DATMEM_STATE_C;
             end
             SEND_DATMEM_STATE_C: begin
