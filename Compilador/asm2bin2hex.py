@@ -27,7 +27,7 @@ def binario_a_hexadecimal(binario):
 
 
 def bin2hex_func(file):
-    archivo_entrada = file.replace('asm', 'mem')
+    archivo_entrada = file.replace('asm', 'bin')
     archivo_salida = file.replace('asm', 'hex32')
 
     try:
@@ -72,7 +72,7 @@ def hex32tohex8(file):
 
 if __name__ == "__main__":
 
-    # Ejemplo uso: \Compilador$ python3 asm2bin2hex.py .\orioriaddu.asm
+    # Ejemplo uso: \Compilador$  python asm2bin2hex.py orioriaddu.asm
 
     if len(sys.argv) > 1:
         file = sys.argv[1]
