@@ -25,7 +25,7 @@ module E1_Reg_IF_ID
         // pase lo que pase la instruccion no la puedo resetear en cero xq ya con resetear el pc a cero,
         //obtengo la instruccion cero del banco de memoria y 99,9999% que no son 32 ceros consecutivos.. ya el bloque de instrucciones
         //me va a devolver la instruccion que se encuentra en la posicion cero 
-        o_instruction<=i_instruction;
+        
         if(i_reset) begin
             o_pcMas4<={32{1'b0}};
         end
@@ -33,6 +33,7 @@ module E1_Reg_IF_ID
             if (~i_clockIgnore_fromDU) begin
                 if (~i_stallIFID_fromHU) begin
                     o_pcMas4 <= i_pcMas4;
+                    o_instruction<=i_instruction;
                 end 
             end
         end
