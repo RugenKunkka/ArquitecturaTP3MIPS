@@ -86,7 +86,7 @@ module Etapas_tb
         // For Multiple Etapas
         .i_globalClock(i_globalClock),
         .i_globalReset(i_globalReset),
-        .i_clockIgnore_fromDU(i_clockIgnore_fromDU),
+        .i_clockIgnore_fromDUToPcAndLatches(i_clockIgnore_fromDU),
         
         // For Etapa 1 (Program Counter)
         .o_pc_fromE1ToDU(o_pc_fromE1ToDU),
@@ -169,7 +169,7 @@ module Etapas_tb
     endtask
 
     task load_insmem; begin 
-            $readmemh("StefProg2.hex",u_Etapas.u_Etapa1_InstructionFetch.u1_InstructionMemory.reg_memory);
+            $readmemh("StefProg.hex",u_Etapas.u_Etapa1_InstructionFetch.u1_InstructionMemory.reg_memory);
         end 
     endtask
     

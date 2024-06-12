@@ -4,7 +4,7 @@
 ******************************************************************************/
 
 //For the Clock
-`define CLK_FREQ        65_000_000
+`define CLK_FREQ        100_000_000
 `define STEPS_PER_CYCLE 10
 `define NS_PER_STEP     1
 `timescale 1 ns / 1ps 

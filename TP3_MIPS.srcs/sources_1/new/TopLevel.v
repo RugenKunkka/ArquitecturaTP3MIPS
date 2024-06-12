@@ -78,7 +78,9 @@ DebugUnit
 (
     // Multiple Etapas
     .i_globalClock          (clk_out),
+    //.i_globalClock          (i_clock_fromPin),
     .i_globalReset          (i_reset_fromPin|!o_locked),
+    //.i_globalReset          (i_reset_fromPin),
     .o_clockIgnore_fromDUToPcAndLatches (w_clockIgnore_fromDUToPcAndLatches),   
 
     // For Uart
@@ -120,7 +122,9 @@ u_Etapas
 (
     // Multiple Etapas
     .i_globalClock          (clk_out),
+    //.i_globalClock          (i_clock_fromPin),
     .i_globalReset          (i_reset_fromPin|!o_locked),
+    //.i_globalReset          (i_reset_fromPin),
     .i_clockIgnore_fromDUToPcAndLatches (w_clockIgnore_fromDUToPcAndLatches),
 
     // For Etapa 1 (Program Counter)
