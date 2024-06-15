@@ -21,8 +21,10 @@ module E1_PC
         if (i_reset) begin 
             o_pcAddressOut <= {INS_LEN{ZERO}};            
         end else begin
-            if ((~i_clockIgnore_fromDU) | (~i_stallPC_fromHU)) begin
-                o_pcAddressOut <= i_pcAddressIn; 
+            if (~i_clockIgnore_fromDU) begin
+                if (~i_stallPC_fromHU) begin
+                    o_pcAddressOut <= i_pcAddressIn;
+                end
             end
         end
     end
