@@ -3,7 +3,7 @@
 module DU_BaudRateGenerator
     #(
         parameter BAUD_RATE    = `BAUDRATE,
-        parameter CLOCK_FREQUENCY_MHZ  = 60.0,
+        parameter CLOCK_FREQUENCY_MHZ  = 100.0,
         parameter MHZ_TO_HZ_CONVERSION_FACTOR  = 1000000
     )
     (

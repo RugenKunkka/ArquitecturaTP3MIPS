@@ -23,7 +23,7 @@ module TopLevel
     output wire o_tx_fromPin
 );
 
-
+/*
 wire clk_out;
 wire o_locked;
 clk_wiz_0 u_ClockWizard
@@ -36,7 +36,7 @@ clk_wiz_0 u_ClockWizard
    // Clock in ports
     .clk_in1(i_clock_fromPin)
 );
-
+*/
 /*
      Internals Wires:
 */
@@ -77,10 +77,10 @@ DebugUnit
  u_DebugUnit
 (
     // Multiple Etapas
-    .i_globalClock          (clk_out),
-    //.i_globalClock          (i_clock_fromPin),
-    .i_globalReset          (i_reset_fromPin|!o_locked),
-    //.i_globalReset          (i_reset_fromPin),
+    //.i_globalClock          (clk_out),
+    .i_globalClock          (i_clock_fromPin),
+    //.i_globalReset          (i_reset_fromPin|!o_locked),
+    .i_globalReset          (i_reset_fromPin),
     .o_clockIgnore_fromDUToPcAndLatches (w_clockIgnore_fromDUToPcAndLatches),   
 
     // For Uart
@@ -121,10 +121,10 @@ Etapas
 u_Etapas
 (
     // Multiple Etapas
-    .i_globalClock          (clk_out),
-    //.i_globalClock          (i_clock_fromPin),
-    .i_globalReset          (i_reset_fromPin|!o_locked),
-    //.i_globalReset          (i_reset_fromPin),
+    //.i_globalClock          (clk_out),
+    .i_globalClock          (i_clock_fromPin),
+    //.i_globalReset          (i_reset_fromPin|!o_locked),
+    .i_globalReset          (i_reset_fromPin),
     .i_clockIgnore_fromDUToPcAndLatches (w_clockIgnore_fromDUToPcAndLatches),
 
     // For Etapa 1 (Program Counter)
