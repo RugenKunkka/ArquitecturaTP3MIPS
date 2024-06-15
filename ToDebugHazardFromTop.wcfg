@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000000000 ms"></ZoomStartTime>
-      <ZoomEndTime time="295.266041809 ms"></ZoomEndTime>
-      <Cursor1Time time="35.000010000 ms"></Cursor1Time>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="22.959 ns"></ZoomEndTime>
+      <Cursor1Time time="10.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="355"></NameColumnWidth>
-      <ValueColumnWidth column_width="174"></ValueColumnWidth>
+      <NameColumnWidth column_width="290"></NameColumnWidth>
+      <ValueColumnWidth column_width="120"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="15" />
+   <WVObjectSize size="20" />
    <wvobject fp_name="/TopLevel_tb/i_clock_fromPin" type="logic">
       <obj_property name="ElementShortName">i_clock_fromPin</obj_property>
       <obj_property name="ObjectShortName">i_clock_fromPin</obj_property>
@@ -36,6 +36,30 @@
       <obj_property name="ElementShortName">o_tx_fromPin</obj_property>
       <obj_property name="ObjectShortName">o_tx_fromPin</obj_property>
    </wvobject>
+   <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/o_instruction" type="array">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">o_instruction[31:0]</obj_property>
+      <obj_property name="ObjectShortName">o_instruction[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="label">o_instruction[31:0] InsMem</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Reg_IF_ID/o_instruction" type="array">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">o_instruction[31:0]</obj_property>
+      <obj_property name="ObjectShortName">o_instruction[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="label">o_instruction[31:0] LATCH IFID</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/o_instruction" type="array">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">o_instruction[31:0]</obj_property>
+      <obj_property name="ObjectShortName">o_instruction[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="label">o_instruction[31:0] LATCH IDEX</obj_property>
+   </wvobject>
    <wvobject fp_name="group1572" type="group">
       <obj_property name="label">DUFSM I</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -43,22 +67,102 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/regCurrentState" type="array">
          <obj_property name="ElementShortName">regCurrentState[3:0]</obj_property>
          <obj_property name="ObjectShortName">regCurrentState[3:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_clockIgnore_fromDUFSMToInsMem" type="logic">
-         <obj_property name="ElementShortName">o_clockIgnore_fromDUFSMToInsMem</obj_property>
-         <obj_property name="ObjectShortName">o_clockIgnore_fromDUFSMToInsMem</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_clockIgnore_fromDUFSMToPcAndLatches" type="logic">
          <obj_property name="ElementShortName">o_clockIgnore_fromDUFSMToPcAndLatches</obj_property>
          <obj_property name="ObjectShortName">o_clockIgnore_fromDUFSMToPcAndLatches</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_clockIgnore_fromDUFSMToDatMem" type="logic">
-         <obj_property name="ElementShortName">o_clockIgnore_fromDUFSMToDatMem</obj_property>
-         <obj_property name="ObjectShortName">o_clockIgnore_fromDUFSMToDatMem</obj_property>
+         <obj_property name="CustomSignalColor">#0000FF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_clockIgnore_fromDUFSMToRegFile" type="logic">
          <obj_property name="ElementShortName">o_clockIgnore_fromDUFSMToRegFile</obj_property>
          <obj_property name="ObjectShortName">o_clockIgnore_fromDUFSMToRegFile</obj_property>
+         <obj_property name="CustomSignalColor">#0000FF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_clockIgnore_fromDUFSMToInsMem" type="logic">
+         <obj_property name="ElementShortName">o_clockIgnore_fromDUFSMToInsMem</obj_property>
+         <obj_property name="ObjectShortName">o_clockIgnore_fromDUFSMToInsMem</obj_property>
+         <obj_property name="CustomSignalColor">#0000FF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_clockIgnore_fromDUFSMToDatMem" type="logic">
+         <obj_property name="ElementShortName">o_clockIgnore_fromDUFSMToDatMem</obj_property>
+         <obj_property name="ObjectShortName">o_clockIgnore_fromDUFSMToDatMem</obj_property>
+         <obj_property name="CustomSignalColor">#0000FF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/i_halt_fromCUToDUFSM" type="logic">
+         <obj_property name="ElementShortName">i_halt_fromCUToDUFSM</obj_property>
+         <obj_property name="ObjectShortName">i_halt_fromCUToDUFSM</obj_property>
+         <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="group1907" type="group">
+         <obj_property name="label">States</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/IDLE_STATE" type="array">
+            <obj_property name="ElementShortName">IDLE_STATE[3:0]</obj_property>
+            <obj_property name="ObjectShortName">IDLE_STATE[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/PROGRAMMING_STATE" type="array">
+            <obj_property name="ElementShortName">PROGRAMMING_STATE[3:0]</obj_property>
+            <obj_property name="ObjectShortName">PROGRAMMING_STATE[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/READY_STATE" type="array">
+            <obj_property name="ElementShortName">READY_STATE[3:0]</obj_property>
+            <obj_property name="ObjectShortName">READY_STATE[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/STEP_MODE_RUNNING_STATE" type="array">
+            <obj_property name="ElementShortName">STEP_MODE_RUNNING_STATE[3:0]</obj_property>
+            <obj_property name="ObjectShortName">STEP_MODE_RUNNING_STATE[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/CONT_MODE_RUNNING_STATE" type="array">
+            <obj_property name="ElementShortName">CONT_MODE_RUNNING_STATE[3:0]</obj_property>
+            <obj_property name="ObjectShortName">CONT_MODE_RUNNING_STATE[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_PC_STATE_A" type="array">
+            <obj_property name="ElementShortName">SEND_PC_STATE_A[3:0]</obj_property>
+            <obj_property name="ObjectShortName">SEND_PC_STATE_A[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_PC_STATE_B" type="array">
+            <obj_property name="ElementShortName">SEND_PC_STATE_B[3:0]</obj_property>
+            <obj_property name="ObjectShortName">SEND_PC_STATE_B[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_REGFILE_STATE_A" type="array">
+            <obj_property name="ElementShortName">SEND_REGFILE_STATE_A[3:0]</obj_property>
+            <obj_property name="ObjectShortName">SEND_REGFILE_STATE_A[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_REGFILE_STATE_B" type="array">
+            <obj_property name="ElementShortName">SEND_REGFILE_STATE_B[3:0]</obj_property>
+            <obj_property name="ObjectShortName">SEND_REGFILE_STATE_B[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_REGFILE_STATE_C" type="array">
+            <obj_property name="ElementShortName">SEND_REGFILE_STATE_C[3:0]</obj_property>
+            <obj_property name="ObjectShortName">SEND_REGFILE_STATE_C[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_REGFILE_STATE_D" type="array">
+            <obj_property name="ElementShortName">SEND_REGFILE_STATE_D[3:0]</obj_property>
+            <obj_property name="ObjectShortName">SEND_REGFILE_STATE_D[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_DATMEM_STATE_A" type="array">
+            <obj_property name="ElementShortName">SEND_DATMEM_STATE_A[3:0]</obj_property>
+            <obj_property name="ObjectShortName">SEND_DATMEM_STATE_A[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_DATMEM_STATE_B" type="array">
+            <obj_property name="ElementShortName">SEND_DATMEM_STATE_B[3:0]</obj_property>
+            <obj_property name="ObjectShortName">SEND_DATMEM_STATE_B[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_DATMEM_STATE_C" type="array">
+            <obj_property name="ElementShortName">SEND_DATMEM_STATE_C[3:0]</obj_property>
+            <obj_property name="ObjectShortName">SEND_DATMEM_STATE_C[3:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_DATMEM_STATE_D" type="array">
+            <obj_property name="ElementShortName">SEND_DATMEM_STATE_D[3:0]</obj_property>
+            <obj_property name="ObjectShortName">SEND_DATMEM_STATE_D[3:0]</obj_property>
+         </wvobject>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group1272" type="group">
@@ -139,10 +243,6 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/o_re_fromDUFSMToDatMem" type="logic">
          <obj_property name="ElementShortName">o_re_fromDUFSMToDatMem</obj_property>
          <obj_property name="ObjectShortName">o_re_fromDUFSMToDatMem</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/i_halt_fromCUToDUFSM" type="logic">
-         <obj_property name="ElementShortName">i_halt_fromCUToDUFSM</obj_property>
-         <obj_property name="ObjectShortName">i_halt_fromCUToDUFSM</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/regClockIgnoreForPcAndLatches" type="logic">
          <obj_property name="ElementShortName">regClockIgnoreForPcAndLatches</obj_property>
@@ -388,66 +488,6 @@
          <obj_property name="ElementShortName">INDEX_TO_SEND_LEN[31:0]</obj_property>
          <obj_property name="ObjectShortName">INDEX_TO_SEND_LEN[31:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/IDLE_STATE" type="array">
-         <obj_property name="ElementShortName">IDLE_STATE[3:0]</obj_property>
-         <obj_property name="ObjectShortName">IDLE_STATE[3:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/PROGRAMMING_STATE" type="array">
-         <obj_property name="ElementShortName">PROGRAMMING_STATE[3:0]</obj_property>
-         <obj_property name="ObjectShortName">PROGRAMMING_STATE[3:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/READY_STATE" type="array">
-         <obj_property name="ElementShortName">READY_STATE[3:0]</obj_property>
-         <obj_property name="ObjectShortName">READY_STATE[3:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/STEP_MODE_RUNNING_STATE" type="array">
-         <obj_property name="ElementShortName">STEP_MODE_RUNNING_STATE[3:0]</obj_property>
-         <obj_property name="ObjectShortName">STEP_MODE_RUNNING_STATE[3:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/CONT_MODE_RUNNING_STATE" type="array">
-         <obj_property name="ElementShortName">CONT_MODE_RUNNING_STATE[3:0]</obj_property>
-         <obj_property name="ObjectShortName">CONT_MODE_RUNNING_STATE[3:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_PC_STATE_A" type="array">
-         <obj_property name="ElementShortName">SEND_PC_STATE_A[3:0]</obj_property>
-         <obj_property name="ObjectShortName">SEND_PC_STATE_A[3:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_PC_STATE_B" type="array">
-         <obj_property name="ElementShortName">SEND_PC_STATE_B[3:0]</obj_property>
-         <obj_property name="ObjectShortName">SEND_PC_STATE_B[3:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_REGFILE_STATE_A" type="array">
-         <obj_property name="ElementShortName">SEND_REGFILE_STATE_A[3:0]</obj_property>
-         <obj_property name="ObjectShortName">SEND_REGFILE_STATE_A[3:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_REGFILE_STATE_B" type="array">
-         <obj_property name="ElementShortName">SEND_REGFILE_STATE_B[3:0]</obj_property>
-         <obj_property name="ObjectShortName">SEND_REGFILE_STATE_B[3:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_REGFILE_STATE_C" type="array">
-         <obj_property name="ElementShortName">SEND_REGFILE_STATE_C[3:0]</obj_property>
-         <obj_property name="ObjectShortName">SEND_REGFILE_STATE_C[3:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_REGFILE_STATE_D" type="array">
-         <obj_property name="ElementShortName">SEND_REGFILE_STATE_D[3:0]</obj_property>
-         <obj_property name="ObjectShortName">SEND_REGFILE_STATE_D[3:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_DATMEM_STATE_A" type="array">
-         <obj_property name="ElementShortName">SEND_DATMEM_STATE_A[3:0]</obj_property>
-         <obj_property name="ObjectShortName">SEND_DATMEM_STATE_A[3:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_DATMEM_STATE_B" type="array">
-         <obj_property name="ElementShortName">SEND_DATMEM_STATE_B[3:0]</obj_property>
-         <obj_property name="ObjectShortName">SEND_DATMEM_STATE_B[3:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_DATMEM_STATE_C" type="array">
-         <obj_property name="ElementShortName">SEND_DATMEM_STATE_C[3:0]</obj_property>
-         <obj_property name="ObjectShortName">SEND_DATMEM_STATE_C[3:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_DATMEM_STATE_D" type="array">
-         <obj_property name="ElementShortName">SEND_DATMEM_STATE_D[3:0]</obj_property>
-         <obj_property name="ObjectShortName">SEND_DATMEM_STATE_D[3:0]</obj_property>
-      </wvobject>
    </wvobject>
    <wvobject fp_name="group1374" type="group">
       <obj_property name="label">E1 PC</obj_property>
@@ -467,14 +507,20 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_PC/o_pcAddressOut" type="array">
          <obj_property name="ElementShortName">o_pcAddressOut[31:0]</obj_property>
          <obj_property name="ObjectShortName">o_pcAddressOut[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_PC/i_stallPC_fromHU" type="logic">
          <obj_property name="ElementShortName">i_stallPC_fromHU</obj_property>
          <obj_property name="ObjectShortName">i_stallPC_fromHU</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_PC/i_clockIgnore_fromDU" type="logic">
          <obj_property name="ElementShortName">i_clockIgnore_fromDU</obj_property>
          <obj_property name="ObjectShortName">i_clockIgnore_fromDU</obj_property>
+         <obj_property name="CustomSignalColor">#0000A0</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_PC/INS_LEN" type="array">
          <obj_property name="ElementShortName">INS_LEN[31:0]</obj_property>
@@ -503,6 +549,8 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/o_instruction" type="array">
          <obj_property name="ElementShortName">o_instruction[31:0]</obj_property>
          <obj_property name="ObjectShortName">o_instruction[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/i_writeEnable_fromDU" type="logic">
          <obj_property name="ElementShortName">i_writeEnable_fromDU</obj_property>
@@ -515,34 +563,12 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/i_clockIgnore_fromDU" type="logic">
          <obj_property name="ElementShortName">i_clockIgnore_fromDU</obj_property>
          <obj_property name="ObjectShortName">i_clockIgnore_fromDU</obj_property>
+         <obj_property name="CustomSignalColor">#0000A0</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/reg_memory" type="array">
-         <obj_property name="ElementShortName">reg_memory[19:0][7:0]</obj_property>
-         <obj_property name="ObjectShortName">reg_memory[19:0][7:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/i" type="array">
-         <obj_property name="ElementShortName">i[31:0]</obj_property>
-         <obj_property name="ObjectShortName">i[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/INSMEM_DEPTH" type="array">
-         <obj_property name="ElementShortName">INSMEM_DEPTH[31:0]</obj_property>
-         <obj_property name="ObjectShortName">INSMEM_DEPTH[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/INSMEM_ADDR_LEN" type="array">
-         <obj_property name="ElementShortName">INSMEM_ADDR_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">INSMEM_ADDR_LEN[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/INS_LEN" type="array">
-         <obj_property name="ElementShortName">INS_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">INS_LEN[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/INSMEM_DAT_LEN" type="array">
-         <obj_property name="ElementShortName">INSMEM_DAT_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">INSMEM_DAT_LEN[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/ZERO" type="logic">
-         <obj_property name="ElementShortName">ZERO</obj_property>
-         <obj_property name="ObjectShortName">ZERO</obj_property>
+         <obj_property name="ElementShortName">reg_memory[47:0][7:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_memory[47:0][7:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group1398" type="group">
@@ -567,6 +593,8 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Reg_IF_ID/o_instruction" type="array">
          <obj_property name="ElementShortName">o_instruction[31:0]</obj_property>
          <obj_property name="ObjectShortName">o_instruction[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Reg_IF_ID/o_pcMas4" type="array">
          <obj_property name="ElementShortName">o_pcMas4[31:0]</obj_property>
@@ -575,18 +603,14 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Reg_IF_ID/i_stallIFID_fromHU" type="logic">
          <obj_property name="ElementShortName">i_stallIFID_fromHU</obj_property>
          <obj_property name="ObjectShortName">i_stallIFID_fromHU</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Reg_IF_ID/i_clockIgnore_fromDU" type="logic">
          <obj_property name="ElementShortName">i_clockIgnore_fromDU</obj_property>
          <obj_property name="ObjectShortName">i_clockIgnore_fromDU</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Reg_IF_ID/INS_LEN" type="array">
-         <obj_property name="ElementShortName">INS_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">INS_LEN[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Reg_IF_ID/INSMEM_ADDR_LEN" type="array">
-         <obj_property name="ElementShortName">INSMEM_ADDR_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">INSMEM_ADDR_LEN[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#0000A0</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group1409" type="group">
@@ -603,6 +627,7 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/i_AddressLecturaA" type="array">
          <obj_property name="ElementShortName">i_AddressLecturaA[4:0]</obj_property>
          <obj_property name="ObjectShortName">i_AddressLecturaA[4:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/i_AddressLecturaB" type="array">
          <obj_property name="ElementShortName">i_AddressLecturaB[4:0]</obj_property>
@@ -611,6 +636,7 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/i_AddressEscritura" type="array">
          <obj_property name="ElementShortName">i_AddressEscritura[4:0]</obj_property>
          <obj_property name="ObjectShortName">i_AddressEscritura[4:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/i_DatoAEscribir" type="array">
          <obj_property name="ElementShortName">i_DatoAEscribir[31:0]</obj_property>
@@ -631,32 +657,91 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/i_clockIgnore_fromDU" type="logic">
          <obj_property name="ElementShortName">i_clockIgnore_fromDU</obj_property>
          <obj_property name="ObjectShortName">i_clockIgnore_fromDU</obj_property>
+         <obj_property name="CustomSignalColor">#0000A0</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers" type="array">
          <obj_property name="ElementShortName">registers[31:0][31:0]</obj_property>
          <obj_property name="ObjectShortName">registers[31:0][31:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/i" type="array">
-         <obj_property name="ElementShortName">i[31:0]</obj_property>
-         <obj_property name="ObjectShortName">i[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="group1573" type="group">
+      <obj_property name="label">E2 Hazard</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/o_stallPC_fromHUToE1" type="logic">
+         <obj_property name="ElementShortName">o_stallPC_fromHUToE1</obj_property>
+         <obj_property name="ObjectShortName">o_stallPC_fromHUToE1</obj_property>
       </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/REGFILE_LEN" type="array">
-         <obj_property name="ElementShortName">REGFILE_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">REGFILE_LEN[31:0]</obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/o_stallIFID_fromHUToE1" type="logic">
+         <obj_property name="ElementShortName">o_stallIFID_fromHUToE1</obj_property>
+         <obj_property name="ObjectShortName">o_stallIFID_fromHUToE1</obj_property>
       </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/REGFILE_DEPTH" type="array">
-         <obj_property name="ElementShortName">REGFILE_DEPTH[31:0]</obj_property>
-         <obj_property name="ObjectShortName">REGFILE_DEPTH[31:0]</obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/o_stallIDEX_fromHUToE2" type="logic">
+         <obj_property name="ElementShortName">o_stallIDEX_fromHUToE2</obj_property>
+         <obj_property name="ObjectShortName">o_stallIDEX_fromHUToE2</obj_property>
       </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/REGFILE_ADDR_LEN" type="array">
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/o_reset_fromHUToCU" type="logic">
+         <obj_property name="ElementShortName">o_reset_fromHUToCU</obj_property>
+         <obj_property name="ObjectShortName">o_reset_fromHUToCU</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/o_flushEXMEM_fromHUToE3" type="logic">
+         <obj_property name="ElementShortName">o_flushEXMEM_fromHUToE3</obj_property>
+         <obj_property name="ObjectShortName">o_flushEXMEM_fromHUToE3</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/i_takeJumpR_fromE2ToHU" type="logic">
+         <obj_property name="ElementShortName">i_takeJumpR_fromE2ToHU</obj_property>
+         <obj_property name="ObjectShortName">i_takeJumpR_fromE2ToHU</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/i_controlBranch_fromE2ToHU" type="logic">
+         <obj_property name="ElementShortName">i_controlBranch_fromE2ToHU</obj_property>
+         <obj_property name="ObjectShortName">i_controlBranch_fromE2ToHU</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/i_reset" type="logic">
+         <obj_property name="ElementShortName">i_reset</obj_property>
+         <obj_property name="ObjectShortName">i_reset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/stall_PC_a" type="logic">
+         <obj_property name="ElementShortName">stall_PC_a</obj_property>
+         <obj_property name="ObjectShortName">stall_PC_a</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/stall_IFID_a" type="logic">
+         <obj_property name="ElementShortName">stall_IFID_a</obj_property>
+         <obj_property name="ObjectShortName">stall_IFID_a</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/stall_IDEX_a" type="logic">
+         <obj_property name="ElementShortName">stall_IDEX_a</obj_property>
+         <obj_property name="ObjectShortName">stall_IDEX_a</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/flush_EXMEM_a" type="logic">
+         <obj_property name="ElementShortName">flush_EXMEM_a</obj_property>
+         <obj_property name="ObjectShortName">flush_EXMEM_a</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/stall_PC_b" type="logic">
+         <obj_property name="ElementShortName">stall_PC_b</obj_property>
+         <obj_property name="ObjectShortName">stall_PC_b</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/stall_IFID_b" type="logic">
+         <obj_property name="ElementShortName">stall_IFID_b</obj_property>
+         <obj_property name="ObjectShortName">stall_IFID_b</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/foo_IDEX_b" type="logic">
+         <obj_property name="ElementShortName">foo_IDEX_b</obj_property>
+         <obj_property name="ObjectShortName">foo_IDEX_b</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/reset_CU" type="logic">
+         <obj_property name="ElementShortName">reset_CU</obj_property>
+         <obj_property name="ObjectShortName">reset_CU</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/REGFILE_ADDR_LEN" type="array">
          <obj_property name="ElementShortName">REGFILE_ADDR_LEN[31:0]</obj_property>
          <obj_property name="ObjectShortName">REGFILE_ADDR_LEN[31:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/ZERO" type="logic">
-         <obj_property name="ElementShortName">ZERO</obj_property>
-         <obj_property name="ObjectShortName">ZERO</obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/LOW" type="logic">
+         <obj_property name="ElementShortName">LOW</obj_property>
+         <obj_property name="ObjectShortName">LOW</obj_property>
       </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/HIGH" type="logic">
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/HIGH" type="logic">
          <obj_property name="ElementShortName">HIGH</obj_property>
          <obj_property name="ObjectShortName">HIGH</obj_property>
       </wvobject>
@@ -691,6 +776,8 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/i_controlMemtoReg" type="logic">
          <obj_property name="ElementShortName">i_controlMemtoReg</obj_property>
          <obj_property name="ObjectShortName">i_controlMemtoReg</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/i_controlRegDst" type="logic">
          <obj_property name="ElementShortName">i_controlRegDst</obj_property>
@@ -707,6 +794,7 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/i_controlWHBLS" type="array">
          <obj_property name="ElementShortName">i_controlWHBLS[2:0]</obj_property>
          <obj_property name="ObjectShortName">i_controlWHBLS[2:0]</obj_property>
+         <obj_property name="Radix">BINARYRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/i_controlSignedLoad" type="logic">
          <obj_property name="ElementShortName">i_controlSignedLoad</obj_property>
@@ -715,6 +803,8 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/i_controlHalt" type="logic">
          <obj_property name="ElementShortName">i_controlHalt</obj_property>
          <obj_property name="ObjectShortName">i_controlHalt</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/i_controlALUOp" type="array">
          <obj_property name="ElementShortName">i_controlALUOp[5:0]</obj_property>
@@ -767,6 +857,8 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/o_controlMemtoReg" type="logic">
          <obj_property name="ElementShortName">o_controlMemtoReg</obj_property>
          <obj_property name="ObjectShortName">o_controlMemtoReg</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/o_controlRegDst" type="logic">
          <obj_property name="ElementShortName">o_controlRegDst</obj_property>
@@ -783,6 +875,7 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/o_controlWHBLS" type="array">
          <obj_property name="ElementShortName">o_controlWHBLS[2:0]</obj_property>
          <obj_property name="ObjectShortName">o_controlWHBLS[2:0]</obj_property>
+         <obj_property name="Radix">BINARYRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/o_controlSignedLoad" type="logic">
          <obj_property name="ElementShortName">o_controlSignedLoad</obj_property>
@@ -791,10 +884,14 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/o_controlHalt" type="logic">
          <obj_property name="ElementShortName">o_controlHalt</obj_property>
          <obj_property name="ObjectShortName">o_controlHalt</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/o_controlALUOp" type="array">
          <obj_property name="ElementShortName">o_controlALUOp[5:0]</obj_property>
          <obj_property name="ObjectShortName">o_controlALUOp[5:0]</obj_property>
+         <obj_property name="CustomSignalColor">#00FF00</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/o_pcMas4" type="array">
          <obj_property name="ElementShortName">o_pcMas4[31:0]</obj_property>
@@ -815,14 +912,20 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/o_instruction" type="array">
          <obj_property name="ElementShortName">o_instruction[31:0]</obj_property>
          <obj_property name="ObjectShortName">o_instruction[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/i_stall_fromHU" type="logic">
          <obj_property name="ElementShortName">i_stall_fromHU</obj_property>
          <obj_property name="ObjectShortName">i_stall_fromHU</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/i_clockIgnore_fromDU" type="logic">
          <obj_property name="ElementShortName">i_clockIgnore_fromDU</obj_property>
          <obj_property name="ObjectShortName">i_clockIgnore_fromDU</obj_property>
+         <obj_property name="CustomSignalColor">#0000A0</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/i_clock" type="logic">
          <obj_property name="ElementShortName">i_clock</obj_property>
@@ -832,33 +935,109 @@
          <obj_property name="ElementShortName">i_reset</obj_property>
          <obj_property name="ObjectShortName">i_reset</obj_property>
       </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/INS_LEN" type="array">
-         <obj_property name="ElementShortName">INS_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">INS_LEN[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="group3791" type="group">
+      <obj_property name="label">E3 FW</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_E3_ForwardingUnit/i_rs_fromE3ToFU" type="array">
+         <obj_property name="ElementShortName">i_rs_fromE3ToFU[4:0]</obj_property>
+         <obj_property name="ObjectShortName">i_rs_fromE3ToFU[4:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/INSMEM_ADDR_LEN" type="array">
-         <obj_property name="ElementShortName">INSMEM_ADDR_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">INSMEM_ADDR_LEN[31:0]</obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_E3_ForwardingUnit/i_rt_fromE3ToFU" type="array">
+         <obj_property name="ElementShortName">i_rt_fromE3ToFU[4:0]</obj_property>
+         <obj_property name="ObjectShortName">i_rt_fromE3ToFU[4:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/REGFILE_LEN" type="array">
-         <obj_property name="ElementShortName">REGFILE_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">REGFILE_LEN[31:0]</obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_E3_ForwardingUnit/i_MemWrite_fromE3ToFU" type="logic">
+         <obj_property name="ElementShortName">i_MemWrite_fromE3ToFU</obj_property>
+         <obj_property name="ObjectShortName">i_MemWrite_fromE3ToFU</obj_property>
       </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/LOW" type="logic">
-         <obj_property name="ElementShortName">LOW</obj_property>
-         <obj_property name="ObjectShortName">LOW</obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_E3_ForwardingUnit/i_RegDst_fromE3ToFU" type="logic">
+         <obj_property name="ElementShortName">i_RegDst_fromE3ToFU</obj_property>
+         <obj_property name="ObjectShortName">i_RegDst_fromE3ToFU</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_E3_ForwardingUnit/i_RegWrite_fromE4ToFU" type="logic">
+         <obj_property name="ElementShortName">i_RegWrite_fromE4ToFU</obj_property>
+         <obj_property name="ObjectShortName">i_RegWrite_fromE4ToFU</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_E3_ForwardingUnit/i_rd_fromE4ToFU" type="array">
+         <obj_property name="ElementShortName">i_rd_fromE4ToFU[4:0]</obj_property>
+         <obj_property name="ObjectShortName">i_rd_fromE4ToFU[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_E3_ForwardingUnit/i_RegWrite_fromE5ToFU" type="logic">
+         <obj_property name="ElementShortName">i_RegWrite_fromE5ToFU</obj_property>
+         <obj_property name="ObjectShortName">i_RegWrite_fromE5ToFU</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_E3_ForwardingUnit/i_rd_fromE5ToFU" type="array">
+         <obj_property name="ElementShortName">i_rd_fromE5ToFU[4:0]</obj_property>
+         <obj_property name="ObjectShortName">i_rd_fromE5ToFU[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_E3_ForwardingUnit/o_forwardA_muxSel" type="array">
+         <obj_property name="ElementShortName">o_forwardA_muxSel[1:0]</obj_property>
+         <obj_property name="ObjectShortName">o_forwardA_muxSel[1:0]</obj_property>
+         <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_E3_ForwardingUnit/o_forwardB_muxSel" type="array">
+         <obj_property name="ElementShortName">o_forwardB_muxSel[1:0]</obj_property>
+         <obj_property name="ObjectShortName">o_forwardB_muxSel[1:0]</obj_property>
+         <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_E3_ForwardingUnit/o_forwardC_muxSel" type="array">
+         <obj_property name="ElementShortName">o_forwardC_muxSel[1:0]</obj_property>
+         <obj_property name="ObjectShortName">o_forwardC_muxSel[1:0]</obj_property>
+         <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_E3_ForwardingUnit/REGFILE_ADDR_LEN" type="array">
+         <obj_property name="ElementShortName">REGFILE_ADDR_LEN[31:0]</obj_property>
+         <obj_property name="ObjectShortName">REGFILE_ADDR_LEN[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_E3_ForwardingUnit/NO_FORWARD" type="array">
+         <obj_property name="ElementShortName">NO_FORWARD[1:0]</obj_property>
+         <obj_property name="ObjectShortName">NO_FORWARD[1:0]</obj_property>
+         <obj_property name="CustomSignalColor">#0000A0</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_E3_ForwardingUnit/FORWARD_FROM_E5" type="array">
+         <obj_property name="ElementShortName">FORWARD_FROM_E5[1:0]</obj_property>
+         <obj_property name="ObjectShortName">FORWARD_FROM_E5[1:0]</obj_property>
+         <obj_property name="CustomSignalColor">#0000A0</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_E3_ForwardingUnit/FORWARD_FROM_E4" type="array">
+         <obj_property name="ElementShortName">FORWARD_FROM_E4[1:0]</obj_property>
+         <obj_property name="ObjectShortName">FORWARD_FROM_E4[1:0]</obj_property>
+         <obj_property name="CustomSignalColor">#0000A0</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_E3_ForwardingUnit/HIGH" type="logic">
+         <obj_property name="ElementShortName">HIGH</obj_property>
+         <obj_property name="ObjectShortName">HIGH</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/i_dataForwarded_fromE4ToE3" type="array">
+         <obj_property name="ElementShortName">i_dataForwarded_fromE4ToE3[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_dataForwarded_fromE4ToE3[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/i_dataForwarded_fromE5ToE3" type="array">
+         <obj_property name="ElementShortName">i_dataForwarded_fromE5ToE3[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_dataForwarded_fromE5ToE3[31:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group1474" type="group">
       <obj_property name="label">E3 ALU</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_ALU/i_dataA" type="array">
          <obj_property name="ElementShortName">i_dataA[31:0]</obj_property>
          <obj_property name="ObjectShortName">i_dataA[31:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_ALU/i_dataB" type="array">
          <obj_property name="ElementShortName">i_dataB[31:0]</obj_property>
          <obj_property name="ObjectShortName">i_dataB[31:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_ALU/i_controlOperationCode" type="array">
          <obj_property name="ElementShortName">i_controlOperationCode[5:0]</obj_property>
@@ -867,6 +1046,7 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_ALU/o_ALUResult" type="array">
          <obj_property name="ElementShortName">o_ALUResult[31:0]</obj_property>
          <obj_property name="ObjectShortName">o_ALUResult[31:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_ALU/o_Zero" type="logic">
          <obj_property name="ElementShortName">o_Zero</obj_property>
@@ -951,6 +1131,8 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/i_controlMemtoReg" type="logic">
          <obj_property name="ElementShortName">i_controlMemtoReg</obj_property>
          <obj_property name="ObjectShortName">i_controlMemtoReg</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/i_controlPC4WB" type="logic">
          <obj_property name="ElementShortName">i_controlPC4WB</obj_property>
@@ -959,6 +1141,8 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/i_controlWHBLS" type="array">
          <obj_property name="ElementShortName">i_controlWHBLS[2:0]</obj_property>
          <obj_property name="ObjectShortName">i_controlWHBLS[2:0]</obj_property>
+         <obj_property name="Radix">BINARYRADIX</obj_property>
+         <obj_property name="isExpanded"></obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/i_controlSignedLoad" type="logic">
          <obj_property name="ElementShortName">i_controlSignedLoad</obj_property>
@@ -967,6 +1151,8 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/i_controlHalt" type="logic">
          <obj_property name="ElementShortName">i_controlHalt</obj_property>
          <obj_property name="ObjectShortName">i_controlHalt</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/i_PcMas4" type="array">
          <obj_property name="ElementShortName">i_PcMas4[31:0]</obj_property>
@@ -999,6 +1185,8 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/o_controlMemtoReg" type="logic">
          <obj_property name="ElementShortName">o_controlMemtoReg</obj_property>
          <obj_property name="ObjectShortName">o_controlMemtoReg</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/o_controlPC4WB" type="logic">
          <obj_property name="ElementShortName">o_controlPC4WB</obj_property>
@@ -1015,6 +1203,8 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/o_controlHalt" type="logic">
          <obj_property name="ElementShortName">o_controlHalt</obj_property>
          <obj_property name="ObjectShortName">o_controlHalt</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/o_PcMas4" type="array">
          <obj_property name="ElementShortName">o_PcMas4[31:0]</obj_property>
@@ -1035,10 +1225,14 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/i_flushEXMEM_fromHU" type="logic">
          <obj_property name="ElementShortName">i_flushEXMEM_fromHU</obj_property>
          <obj_property name="ObjectShortName">i_flushEXMEM_fromHU</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/i_clockIgnore_fromDU" type="logic">
          <obj_property name="ElementShortName">i_clockIgnore_fromDU</obj_property>
          <obj_property name="ObjectShortName">i_clockIgnore_fromDU</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/i_clock" type="logic">
          <obj_property name="ElementShortName">i_clock</obj_property>
@@ -1047,26 +1241,6 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/i_reset" type="logic">
          <obj_property name="ElementShortName">i_reset</obj_property>
          <obj_property name="ObjectShortName">i_reset</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/REGFILE_ADDR_LEN" type="array">
-         <obj_property name="ElementShortName">REGFILE_ADDR_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">REGFILE_ADDR_LEN[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/INS_LEN" type="array">
-         <obj_property name="ElementShortName">INS_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">INS_LEN[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/INSMEM_ADDR_LEN" type="array">
-         <obj_property name="ElementShortName">INSMEM_ADDR_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">INSMEM_ADDR_LEN[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/ALU_LEN" type="array">
-         <obj_property name="ElementShortName">ALU_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">ALU_LEN[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u_Reg_EX_MEM/DATMEM_LEN" type="array">
-         <obj_property name="ElementShortName">DATMEM_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">DATMEM_LEN[31:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group1529" type="group">
@@ -1087,22 +1261,27 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/i_addr_forWordMode" type="array">
          <obj_property name="ElementShortName">i_addr_forWordMode[31:0]</obj_property>
          <obj_property name="ObjectShortName">i_addr_forWordMode[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/i_data_forWordMode" type="array">
-         <obj_property name="ElementShortName">i_data_forWordMode[31:0]</obj_property>
-         <obj_property name="ObjectShortName">i_data_forWordMode[31:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/o_data_forWordMode" type="array">
          <obj_property name="ElementShortName">o_data_forWordMode[31:0]</obj_property>
          <obj_property name="ObjectShortName">o_data_forWordMode[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/i_writeEnable_forWordMode" type="logic">
-         <obj_property name="ElementShortName">i_writeEnable_forWordMode</obj_property>
-         <obj_property name="ObjectShortName">i_writeEnable_forWordMode</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/i_readEnable_forWordMode" type="logic">
          <obj_property name="ElementShortName">i_readEnable_forWordMode</obj_property>
          <obj_property name="ObjectShortName">i_readEnable_forWordMode</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/i_data_forWordMode" type="array">
+         <obj_property name="ElementShortName">i_data_forWordMode[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_data_forWordMode[31:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/i_writeEnable_forWordMode" type="logic">
+         <obj_property name="ElementShortName">i_writeEnable_forWordMode</obj_property>
+         <obj_property name="ObjectShortName">i_writeEnable_forWordMode</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/i_addr_forHalfMode" type="array">
          <obj_property name="ElementShortName">i_addr_forHalfMode[31:0]</obj_property>
@@ -1127,6 +1306,7 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/i_addr_forByteMode" type="array">
          <obj_property name="ElementShortName">i_addr_forByteMode[31:0]</obj_property>
          <obj_property name="ObjectShortName">i_addr_forByteMode[31:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/i_data_forByteMode" type="array">
          <obj_property name="ElementShortName">i_data_forByteMode[7:0]</obj_property>
@@ -1147,46 +1327,7 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/reg_data_memory" type="array">
          <obj_property name="ElementShortName">reg_data_memory[15:0][7:0]</obj_property>
          <obj_property name="ObjectShortName">reg_data_memory[15:0][7:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/i" type="array">
-         <obj_property name="ElementShortName">i[31:0]</obj_property>
-         <obj_property name="ObjectShortName">i[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/DATMEM_DEPTH" type="array">
-         <obj_property name="ElementShortName">DATMEM_DEPTH[31:0]</obj_property>
-         <obj_property name="ObjectShortName">DATMEM_DEPTH[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/DAT_ENTRY_LEN" type="array">
-         <obj_property name="ElementShortName">DAT_ENTRY_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">DAT_ENTRY_LEN[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/DAT_LEN" type="array">
-         <obj_property name="ElementShortName">DAT_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">DAT_LEN[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/DATMEM_ADDR_LEN" type="array">
-         <obj_property name="ElementShortName">DATMEM_ADDR_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">DATMEM_ADDR_LEN[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/WORD_LEN" type="array">
-         <obj_property name="ElementShortName">WORD_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">WORD_LEN[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/HALF_LEN" type="array">
-         <obj_property name="ElementShortName">HALF_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">HALF_LEN[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/BYTE_LEN" type="array">
-         <obj_property name="ElementShortName">BYTE_LEN[31:0]</obj_property>
-         <obj_property name="ObjectShortName">BYTE_LEN[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/ZERO" type="logic">
-         <obj_property name="ElementShortName">ZERO</obj_property>
-         <obj_property name="ObjectShortName">ZERO</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_DataMemory/HIGH" type="logic">
-         <obj_property name="ElementShortName">HIGH</obj_property>
-         <obj_property name="ObjectShortName">HIGH</obj_property>
+         <obj_property name="isExpanded"></obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group1559" type="group">
@@ -1219,6 +1360,8 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_Reg_MEM_WB/i_clockIgnore_fromDU" type="logic">
          <obj_property name="ElementShortName">i_clockIgnore_fromDU</obj_property>
          <obj_property name="ObjectShortName">i_clockIgnore_fromDU</obj_property>
+         <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa4_MemoryAccess/u_Reg_MEM_WB/i_clock" type="logic">
          <obj_property name="ElementShortName">i_clock</obj_property>
