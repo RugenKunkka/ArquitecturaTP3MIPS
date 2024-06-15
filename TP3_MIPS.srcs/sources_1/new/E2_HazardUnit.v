@@ -56,12 +56,12 @@ module E2_HazardUnit
             reset_CU <= LOW;
 
         end else begin
-        
-            if ( (i_MemToReg_fromE4ToHU == HIGH) & ((i_rd_fromE4ToHU == i_rs_fromE3ToHU) |( (i_RegDst_fromE3ToHU) & (i_rd_fromE4ToHU == i_rt_fromE3ToHU )))) begin
-                    stall_PC_a      <= LOW;
-                    stall_IFID_a    <= LOW;
-                    stall_IDEX_a    <= LOW;
-                    flush_EXMEM_a   <= LOW;               
+           //if(i_mem_to_reg & ((i_rd == i_rs) | (i_reg_dst & (i_rd == i_rt))))  // Idea
+            if ( i_MemToReg_fromE4ToHU  & ((i_rd_fromE4ToHU == i_rs_fromE3ToHU) | ( i_RegDst_fromE3ToHU & (i_rd_fromE4ToHU == i_rt_fromE3ToHU )))) begin
+                    stall_PC_a      <= HIGH;
+                    stall_IFID_a    <= HIGH;
+                    stall_IDEX_a    <= HIGH;
+                    flush_EXMEM_a   <= HIGH;               
             end else begin
                 stall_PC_a      <= LOW;
                 stall_IFID_a    <= LOW;
