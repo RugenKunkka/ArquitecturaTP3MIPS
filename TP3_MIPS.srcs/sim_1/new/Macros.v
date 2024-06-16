@@ -14,7 +14,7 @@
 // For the Program.hex
 `define PROG_FILE   "Program.hex"
 `define PROG_LEN    32
-`define PROG_DEPTH  5 // Number of lines of Program.hex
+`define PROG_DEPTH  24 // Number of lines of Program.hex
 
 `define BAUDRATE            9600
 `define UART_BIT_TIME       ((`CLK_FREQ * `STEPS_PER_CYCLE) / `BAUDRATE)
@@ -52,7 +52,7 @@
 ******************/
 
 // For Instruction Memory
-`define INSMEM_DEPTH    20  // Instruction Memory Depth <----
+`define INSMEM_DEPTH    96  // Instruction Memory Depth <----
 `define INSMEM_ADDR_LEN 32  // Instruction Address Length
 `define INSMEM_DAT_LEN  8   // Entry Length
 `define INS_LEN         32  // Instruction Length
@@ -85,7 +85,7 @@
 `define HALF_LEN 16
 `define BYTE_LEN 8
 
-`define DATMEM_DEPTH       128 // Data Memory Depth (IMPORTANT: Must be multiples of 4)
+`define DATMEM_DEPTH       16 // Data Memory Depth (IMPORTANT: Must be multiples of 4)
 `define DATMEM_ADDR_LEN    32   // Data Address Length
 `define DAT_LEN            32   
 `define DAT_ENTRY_LEN      8   
