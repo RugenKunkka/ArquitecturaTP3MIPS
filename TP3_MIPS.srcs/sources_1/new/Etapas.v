@@ -142,6 +142,8 @@ module Etapas
     )
     u_Etapa2_InstructionDecode
     (
+        .o_branchAddress        (w_addrForBranchMux_fromE3ToE1),
+        .o_controlIsBranchControlUnit   (w_muxSelForBranchMux_fromE3ToE1),
         // Control Signals To The Next Stage
         .o_controlBNEQ          (w_BNEQ_fromE2ToE3),
         .o_controlBranch        (w_Branch_fromE2ToE3),
@@ -267,9 +269,9 @@ module Etapas
         .o_rdToWrite            (w_rdToWrite_fromE3ToE4), 
 
         // From E3 To E1 , (For BEQ, BNEQ, JAR, JALR)
-        .o_controlIsBranchControlUnit   (w_muxSelForBranchMux_fromE3ToE1),
+        //.o_controlIsBranchControlUnit   (w_muxSelForBranchMux_fromE3ToE1),
         .o_controlIsJumpR               (w_muxSelForJumpRMux_fromE3ToE1),
-        .o_branchAddress                (w_addrForBranchMux_fromE3ToE1),
+        //.o_branchAddress                (w_addrForBranchMux_fromE3ToE1),
         .o_jumpRAddress                 (w_addrForJumpRMux_fromE3ToE1),
 
         // For Forwarding

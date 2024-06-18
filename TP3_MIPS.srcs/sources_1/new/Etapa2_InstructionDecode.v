@@ -13,6 +13,8 @@ module Etapa2_InstructionDecode
     )
     (
         // Control Signals To The Next Stage
+        output wire [INSMEM_ADDR_LEN-1:0]   o_branchAddress,
+        output wire                         o_controlIsBranchControlUnit,
         output wire         o_controlBNEQ,       
         output wire         o_controlBranch,     
         output wire         o_controlJumpR,      
@@ -325,6 +327,7 @@ module Etapa2_InstructionDecode
     wire w_stallPC_fromHUToE1;
     wire w_stallIFID_fromHUToE1;
     
+    wire wire_o_isZeroFromALU;
     E2_HazardUnit
     #(
 
@@ -349,9 +352,91 @@ module Etapa2_InstructionDecode
         .i_controlIsJump        (o_controlJump),
         
         .i_post_bloqueo_1       (o_wire_PostBloqueo1FromRegIdExToHU),
+        .i_isZero               (wire_o_isZeroFromALU),
+        .i_controlIsBNQ         (o_wire_controlBNEQ),
         
         .i_reset(i_reset)
     );
+    
+    //BEQ BNQ 
+    
+    
+    wire [18-1:0] wire_o_shiftedData;
+    
+    wire [16-1:0] wire_subtraction;
+    GenericSubtractor
+    #(
+        .LEN(16)
+    )
+    u1_RestaMenos4
+    (
+        .i_dataA  (i_instruction[15:0]),
+        .i_dataB  (16'b0000_0000_0000_0001),
+        .o_result (wire_subtraction)
+    );
+    
+    GenericShifter
+    #(
+        .IN_LEN(16),
+        .OUT_LEN(18),
+        .NUM_TO_SHIFT(2)
+    )
+    u2_Shift2Unit
+    (
+        .i_data(wire_subtraction),
+        .o_shiftedData(wire_o_shiftedData)
+    );
+    
+    wire [32-1:0] wire_o_extendedSignedData;
+
+    GenericSignExtender
+    #(
+        .SIGNEXT_IN_LEN(18),
+        .SIGNEXT_OUT_LEN(32)
+    )
+    u2_ExtensorDeSigno
+    (
+        .i_data(wire_o_shiftedData),
+        .o_extendedSignedData(wire_o_extendedSignedData)
+    );
+
+    GenericAdder
+    #(
+        .LEN(32)
+    )
+    u1_Sumador
+    (
+        .i_dataA    (i_pcMas4),
+        .i_dataB    (wire_o_extendedSignedData),
+        .o_result    (o_branchAddress) // NonRegister output
+    );
+    
+    E2_BranchPredictor
+    #(
+
+    )
+    u1_E2_BranchPredictor
+    (
+        .i_dataA (w_dataA),
+        .i_dataB (wire_o_dataBFromRegisterMemoryToMuxALU),    
+        .i_isBEQ (o_wire_controlBranch),
+        .i_isBNQ (o_wire_controlBNEQ),
+        
+        .o_isZero (wire_o_isZeroFromALU)
+    );
+    
+    E3_BranchControl
+    #(
+
+    )
+    u1_E3_BranchControl
+    (
+        .i_zeroBit  (wire_o_isZeroFromALU),
+        .i_isBNEQ   (o_wire_controlBNEQ),
+        .i_isBranch (o_wire_controlBranch),
+        .o_controlBranchAddressMux  (o_controlIsBranchControlUnit) // NonRegister output
+    );
+    
     assign o_data_fromRegFileToDU = w_dataA;
     
 endmodule

@@ -23,6 +23,8 @@ module E2_HazardUnit
         input wire                          i_controlIsJump,
         
         input wire                          i_post_bloqueo_1,
+        input wire                          i_isZero,
+        input wire                          i_controlIsBNQ,
         
 
         input wire  i_reset
@@ -75,15 +77,30 @@ module E2_HazardUnit
 
             if(!i_post_bloqueo_1) begin
                 o_reset_fromHUToCU<=LOW;
-                if(i_takeJumpR_fromE2ToHU | i_controlBranch_fromE2ToHU)begin//JR JALR y para BEQ y BNE
-                    stall_PC_b  <= HIGH;
-                    stall_IFID_b <= HIGH;
-                    o_post_bloqueo_1<=HIGH;
-                end
-                else if (i_controlIsJump) begin
+                if(i_takeJumpR_fromE2ToHU) begin // | i_controlBranch_fromE2ToHU)begin//JR JALR y para BEQ y BNE
                     stall_PC_b  <= LOW;
                     stall_IFID_b <= HIGH;
                     o_post_bloqueo_1<=HIGH;
+                end
+                else if (i_controlBranch_fromE2ToHU==1'b1 && i_isZero==1'b1 && i_controlIsBNQ==1'b0) begin //ok debe de entrar solo para BEQ
+                    stall_PC_b  <= LOW;
+                    stall_IFID_b <= HIGH;
+                    o_post_bloqueo_1<=HIGH;
+                end
+                else if (i_controlBranch_fromE2ToHU==1'b1 && i_isZero==1'b0 && i_controlIsBNQ==1'b1) begin //debe de entrar para BNQ
+                    stall_PC_b  <= LOW;
+                    stall_IFID_b <= HIGH;
+                    o_post_bloqueo_1<=HIGH;
+                end
+                else if (i_controlIsJump) begin //ok
+                    stall_PC_b  <= LOW;
+                    stall_IFID_b <= HIGH;
+                    o_post_bloqueo_1<=HIGH;
+                end
+                else begin //si o si tuve que poner esto xq si no en BNQ cuando era un caso negativo... entraba lo mismo como si fuera positivo.. no se xq...
+                    stall_PC_b  <= LOW;
+                    stall_IFID_b <= LOW;
+                    o_post_bloqueo_1<=LOW;
                 end
                 
             end     
@@ -91,7 +108,7 @@ module E2_HazardUnit
                 stall_PC_b  <= LOW;
                 stall_IFID_b <= LOW;
                 o_post_bloqueo_1<=LOW;
-                o_reset_fromHUToCU<=HIGH;
+                o_reset_fromHUToCU<=LOW;
             end       
         end
     end

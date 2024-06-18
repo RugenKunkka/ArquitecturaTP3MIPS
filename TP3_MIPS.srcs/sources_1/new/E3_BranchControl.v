@@ -20,11 +20,13 @@ module E3_BranchControl
     */    
     
     always@(*) begin
-        if(i_zeroBit==0 && i_isBNEQ) begin
-            o_controlBranchAddressMux=1;
-        end
-        else if (i_zeroBit && i_isBranch) begin
-            o_controlBranchAddressMux=1;
+        if(i_isBranch) begin
+            if(i_isBNEQ)begin
+                o_controlBranchAddressMux=~i_zeroBit;
+            end
+            else begin
+                o_controlBranchAddressMux=i_zeroBit;
+            end
         end
         else begin
             o_controlBranchAddressMux=0;

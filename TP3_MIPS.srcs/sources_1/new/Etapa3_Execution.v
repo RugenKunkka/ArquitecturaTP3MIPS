@@ -54,9 +54,9 @@ module Etapa3_Execution
         output wire [REGFILE_ADDR_LEN-1:0]  o_rdToWrite,
 
         // From E3 To E1 , (For BEQ, BNEQ, JAR, JALR)
-        output wire                         o_controlIsBranchControlUnit,
+        //output wire                         o_controlIsBranchControlUnit,
         output wire                         o_controlIsJumpR,
-        output wire [INSMEM_ADDR_LEN-1:0]   o_branchAddress,
+        //output wire [INSMEM_ADDR_LEN-1:0]   o_branchAddress,
         output wire [INSMEM_ADDR_LEN-1:0]   o_jumpRAddress,
 
         // For Forwarding
@@ -143,60 +143,6 @@ module Etapa3_Execution
         .i_controlOperationCode (i_controlALUOperationCode),
         .o_ALUResult    (wire_o_ALUResultToEX_MEM),
         .o_Zero     (wire_o_isZeroFromALU)
-    );
-
-    /*
-        For Branching 
-    */
-
-    wire [18-1:0] wire_o_shiftedData;
-    
-    GenericShifter
-    #(
-        .IN_LEN(16),
-        .OUT_LEN(18),
-        .NUM_TO_SHIFT(2)
-    )
-    u1_Shift2Unit
-    (
-        .i_data(i_instruction[15:0]),
-        .o_shiftedData(wire_o_shiftedData)
-    );
-
-    wire [32-1:0] wire_o_extendedSignedData;
-
-    GenericSignExtender
-    #(
-        .SIGNEXT_IN_LEN(18),
-        .SIGNEXT_OUT_LEN(32)
-    )
-    u1_ExtensorDeSigno
-    (
-        .i_data(wire_o_shiftedData),
-        .o_extendedSignedData(wire_o_extendedSignedData)
-    );
-
-    GenericAdder
-    #(
-        .LEN(32)
-    )
-    u1_Sumador
-    (
-        .i_dataA    (i_pcMas4),
-        .i_dataB    (wire_o_extendedSignedData),
-        .o_result    (o_branchAddress) // NonRegister output
-    );
-    
-    E3_BranchControl
-    #(
-
-    )
-    u1_E3_BranchControl
-    (
-        .i_zeroBit  (wire_o_isZeroFromALU),
-        .i_isBNEQ   (i_controlIsBNEQ),
-        .i_isBranch (i_controlIsBranch),
-        .o_controlBranchAddressMux  (o_controlIsBranchControlUnit) // NonRegister output
     );
 
     /*
