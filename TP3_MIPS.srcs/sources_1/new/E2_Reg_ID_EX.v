@@ -28,6 +28,7 @@ module E2_Reg_ID_EX
         input wire [REGFILE_LEN-1:0]        i_dataBFromMux,
         input wire [REGFILE_LEN-1:0]        i_ReadData2,
         input wire [INS_LEN-1:0]            i_instruction,
+        input wire          i_post_bloqueo_1,
 
         output reg          o_controlBNEQ,
         output reg          o_controlBranch,
@@ -49,6 +50,7 @@ module E2_Reg_ID_EX
         output reg [REGFILE_LEN-1:0]        o_dataBFromMux,
         output reg [REGFILE_LEN-1:0]        o_ReadData2,
         output reg [INS_LEN-1:0]            o_instruction,
+        output reg          o_post_bloqueo_1,
                 
         // From Hazard Detection Unit        
         input wire i_stall_fromHU,
@@ -85,6 +87,7 @@ module E2_Reg_ID_EX
             o_dataBFromMux  <= 0;
             o_ReadData2     <= 0;
             o_instruction   <= 0;
+            o_post_bloqueo_1<= 0;
 
         end else begin
             if(i_clockIgnore_fromDU == LOW) begin
@@ -110,6 +113,7 @@ module E2_Reg_ID_EX
                     o_dataBFromMux  <= i_dataBFromMux;
                     o_ReadData2     <= i_ReadData2;
                     o_instruction   <= i_instruction;
+                    o_post_bloqueo_1<= i_post_bloqueo_1;
                     
                 end
             end

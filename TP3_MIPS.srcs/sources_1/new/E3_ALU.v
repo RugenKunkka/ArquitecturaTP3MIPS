@@ -58,7 +58,7 @@ module E3_ALU
 		    6'b010000: o_ALUResult = i_dataB >> i_dataA; //SRL SRLV (right logico) // ok
 		    6'b001000: o_ALUResult = i_dataB >>> i_dataA; //SRA SRAV(right aritmetico) // ok
 		    6'b000111: o_ALUResult = i_dataB << 16; //LUI //PROBAR QUE NO SEA CIRCULAR SI NO CONCATENAR 00 //ok
-		    6'b000001: o_ALUResult = reg_signedDataA + reg_signedDataB; //ADDI //no tengo
+		    6'b000001: o_ALUResult = reg_signedDataA + reg_signedDataB; //ADDI --> ADDU LB LH LW //no tengo
 		    //6'b00_0110: o_ALUResult = i_dataA + i_dataB; //ADDU //ver
 			6'b000010: //resta SUBU
 			begin
@@ -68,7 +68,10 @@ module E3_ALU
 			6'b000011: o_ALUResult = i_dataA & i_dataB; //AND //ANDI
 			6'b000100: o_ALUResult = i_dataA | i_dataB; //OR //ORI
 			6'b000101: o_ALUResult = i_dataA ^ i_dataB; // XOR //XORI
-			6'b000110: o_ALUResult = ~(i_dataA | i_dataB); //NOR		
+			6'b000110: o_ALUResult = ~(i_dataA | i_dataB); //NOR	
+			6'b100001: o_ALUResult = i_dataA << i_dataB;//SLLV
+			6'b100010: o_ALUResult = i_dataA >> i_dataB;//SRLV
+			6'b100011: o_ALUResult = i_dataA >>> i_dataB;//SRAV
 			6'b111111: o_ALUResult = reg_signedDataA < reg_signedDataB; //SLT SLTI //lo tengo en resta.. no se xq.. XD
 			default: o_ALUResult = 0;
 		endcase	

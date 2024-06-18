@@ -8,8 +8,9 @@ module E2_HazardUnit
         output wire o_stallPC_fromHUToE1,
         output wire o_stallIFID_fromHUToE1,
         output wire o_stallIDEX_fromHUToE2,
-        output wire o_reset_fromHUToCU,
+        output reg o_reset_fromHUToCU,
         output wire o_flushEXMEM_fromHUToE3,
+        output reg  o_post_bloqueo_1,
         
         input wire i_takeJumpR_fromE2ToHU,  
         input wire i_controlBranch_fromE2ToHU,
@@ -19,6 +20,10 @@ module E2_HazardUnit
         input wire [REGFILE_ADDR_LEN-1:0]   i_rt_fromE3ToHU,
         input wire [REGFILE_ADDR_LEN-1:0]   i_rd_fromE4ToHU,
         input wire                          i_RegDst_fromE3ToHU,
+        input wire                          i_controlIsJump,
+        
+        input wire                          i_post_bloqueo_1,
+        
 
         input wire  i_reset
     );
@@ -36,9 +41,7 @@ module E2_HazardUnit
 
     reg stall_PC_b;
     reg stall_IFID_b;
-    reg foo_IDEX_b;
 
-    reg reset_CU;
 
     always @(*) begin
 
@@ -51,17 +54,18 @@ module E2_HazardUnit
 
             stall_PC_b      <= LOW;
             stall_IFID_b    <= LOW;
-            foo_IDEX_b      <= LOW;
 
-            reset_CU <= LOW;
+            o_reset_fromHUToCU <= LOW;
+            
+            o_post_bloqueo_1 <= LOW;
 
         end else begin
            //if(i_mem_to_reg & ((i_rd == i_rs) | (i_reg_dst & (i_rd == i_rt))))  // Idea
             if ( i_MemToReg_fromE4ToHU  & ((i_rd_fromE4ToHU == i_rs_fromE3ToHU) | ( i_RegDst_fromE3ToHU & (i_rd_fromE4ToHU == i_rt_fromE3ToHU )))) begin
-                    stall_PC_a      <= HIGH;
-                    stall_IFID_a    <= HIGH;
-                    stall_IDEX_a    <= HIGH;
-                    flush_EXMEM_a   <= HIGH;               
+                stall_PC_a      <= HIGH;
+                stall_IFID_a    <= HIGH;
+                stall_IDEX_a    <= HIGH;
+                flush_EXMEM_a   <= HIGH;               
             end else begin
                 stall_PC_a      <= LOW;
                 stall_IFID_a    <= LOW;
@@ -69,11 +73,26 @@ module E2_HazardUnit
                 flush_EXMEM_a   <= LOW;
             end
 
-            if(i_takeJumpR_fromE2ToHU | i_controlBranch_fromE2ToHU )begin
+            if(!i_post_bloqueo_1) begin
+                o_reset_fromHUToCU<=LOW;
+                if(i_takeJumpR_fromE2ToHU | i_controlBranch_fromE2ToHU)begin//JR JALR y para BEQ y BNE
+                    stall_PC_b  <= HIGH;
+                    stall_IFID_b <= HIGH;
+                    o_post_bloqueo_1<=HIGH;
+                end
+                else if (i_controlIsJump) begin
+                    stall_PC_b  <= LOW;
+                    stall_IFID_b <= HIGH;
+                    o_post_bloqueo_1<=HIGH;
+                end
+                
+            end     
+            else begin 
                 stall_PC_b  <= LOW;
                 stall_IFID_b <= LOW;
-                foo_IDEX_b <= LOW;
-            end
+                o_post_bloqueo_1<=LOW;
+                o_reset_fromHUToCU<=HIGH;
+            end       
         end
     end
 
@@ -83,7 +102,6 @@ module E2_HazardUnit
     assign o_stallPC_fromHUToE1 =  stall_PC_a |  stall_PC_b;
     assign o_stallIFID_fromHUToE1 = stall_IFID_a | stall_IFID_b;
     assign o_stallIDEX_fromHUToE2 = stall_IDEX_a;
-    assign o_reset_fromHUToCU = reset_CU;
     assign o_flushEXMEM_fromHUToE3 = flush_EXMEM_a ;
 
 

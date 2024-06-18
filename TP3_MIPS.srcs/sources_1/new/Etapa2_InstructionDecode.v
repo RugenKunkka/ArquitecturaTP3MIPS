@@ -26,7 +26,7 @@ module Etapa2_InstructionDecode
         output wire [3-1:0] o_controlWHBLS,      
         output wire         o_controlSignedLoad, 
         output wire         o_controlHalt,  
-        output wire [6-1:0] o_controlALUOp,      
+        output wire [6-1:0] o_controlALUOp,     
              
 
         // Data to the next stage
@@ -80,6 +80,7 @@ module Etapa2_InstructionDecode
     wire            o_wire_controlALUSrc;
     wire            o_wire_controlRegWrite;
     wire            o_wire_controlHalt;
+    wire            o_wire_isSLL_SRL_SRA;
     wire [3-1:0]    o_wire_control_whbLS ;
     wire            o_wire_controlBNEQ;
     wire            o_wire_controlIsJumpTipoR;
@@ -112,6 +113,7 @@ module Etapa2_InstructionDecode
         .o_controlSignedLoad    (o_wire_controlSignedLoad),
         .o_controlALUSrc        (o_wire_controlALUSrc),
         .o_controlHalt          (o_wire_controlHalt),
+        .o_isSLL_SRL_SRA        (o_wire_isSLL_SRL_SRA),
         //.o_controlALUOp         (o_wire_controlALUOp),
 
         .i_resetForHazard       (w_reset_fromHUToCU),
@@ -190,6 +192,31 @@ module Etapa2_InstructionDecode
     
     wire [32-1:0] wire_o_dataMuxAluSrc;
     wire  [32-1:0] w_dataBFromMux;
+    wire  [32-1:0] w_dataAFromMux;
+    wire  [32-1:0] w_o_ExtendedSLLFromExtensorPalabraToMuxAluInputA;
+    
+    GenericZeroExtender
+    #(
+        .ZEXT_IN_LEN(5),
+        .ZEXT_OUT_LEN(32)
+    )
+    u1_ExtensorDePalabraSLL
+    (
+        .i_data(i_instruction[10:6]),//esto es para operaciones distintos del tipo R xq tiene el campo inmediato ahi... 
+        .o_extendedData(w_o_ExtendedSLLFromExtensorPalabraToMuxAluInputA)
+    );
+    
+    GenericMux2to1 
+    #(
+        .LEN(32)
+    ) 
+    u1_MuxAluInputA 
+    (
+        .i_bus0 (w_dataA),
+        .i_bus1 (w_o_ExtendedSLLFromExtensorPalabraToMuxAluInputA),
+        .i_muxSel(o_wire_isSLL_SRL_SRA),
+        .o_bus  (w_dataAFromMux)
+    );
 
     GenericMux2to1 
     #(
@@ -229,6 +256,10 @@ module Etapa2_InstructionDecode
     );
     
     wire w_stallIDEX_fromHUToE2;
+    
+    //es de la hazzard
+    wire o_wire_PostBloqueo1FromRegIdExToHU;
+    wire o_wire_PostBloqueo1FromHUToRegIdEx;
 
     E2_Reg_ID_EX
     #(
@@ -252,10 +283,11 @@ module Etapa2_InstructionDecode
         .i_controlALUOp     (o_wire_controlALUOp),
 
         .i_pcMas4       (i_pcMas4),
-        .i_dataA        (w_dataA),
+        .i_dataA        (w_dataAFromMux),
         .i_dataBFromMux (w_dataBFromMux),
         .i_ReadData2    (wire_o_dataBFromRegisterMemoryToMuxALU),
         .i_instruction  (i_instruction),
+        .i_post_bloqueo_1 (o_wire_PostBloqueo1FromHUToRegIdEx),
 
         .o_controlBNEQ      (o_controlBNEQ),
         .o_controlBranch    (o_controlBranch),
@@ -271,6 +303,7 @@ module Etapa2_InstructionDecode
         .o_controlSignedLoad(o_controlSignedLoad),
         .o_controlHalt      (o_controlHalt),
         .o_controlALUOp     (o_controlALUOp),
+        .o_post_bloqueo_1  (o_wire_PostBloqueo1FromRegIdExToHU),
 
         .o_pcMas4       (o_pcMas4),
         .o_dataA        (o_dataA),
@@ -303,6 +336,7 @@ module Etapa2_InstructionDecode
         .o_stallIDEX_fromHUToE2 (w_stallIDEX_fromHUToE2),
         .o_reset_fromHUToCU     (w_reset_fromHUToCU),
         .o_flushEXMEM_fromHUToE3(o_flushEXMEM_fromHUToE3),
+        .o_post_bloqueo_1       (o_wire_PostBloqueo1FromHUToRegIdEx),
     
         .i_takeJumpR_fromE2ToHU (o_wire_controlIsJumpTipoR),  
         .i_controlBranch_fromE2ToHU(o_wire_controlBranch),
@@ -312,7 +346,10 @@ module Etapa2_InstructionDecode
         .i_rt_fromE3ToHU        (i_rt_fromE3ToHU),
         .i_rd_fromE4ToHU        (i_rd_fromE4ToHU),
         .i_RegDst_fromE3ToHU    (i_RegDst_fromE3ToHU),
-
+        .i_controlIsJump        (o_controlJump),
+        
+        .i_post_bloqueo_1       (o_wire_PostBloqueo1FromRegIdExToHU),
+        
         .i_reset(i_reset)
     );
     assign o_data_fromRegFileToDU = w_dataA;

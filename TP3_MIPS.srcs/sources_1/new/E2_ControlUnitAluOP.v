@@ -75,13 +75,13 @@ module E2_ControlUnitAluOP(
         //VER SLL Y SRL a que grupo pertenecen xq se me armo quilombo ahi
             case (i_functionCode)
                 6'b000100: begin//SLLV
-                    o_controlALUOp<=6'b100000;
+                    o_controlALUOp<=6'b100001;
                 end
                 6'b000110: begin//SRLV
-                    o_controlALUOp<=6'b010000;
+                    o_controlALUOp<=6'b100010;
                 end
                 6'b000111: begin//SRAV
-                    o_controlALUOp<=6'b001000;
+                    o_controlALUOp<=6'b100011;
                 end
                 6'b100001: begin//ADDU
                     o_controlALUOp<=6'b000001;
@@ -136,8 +136,9 @@ module E2_ControlUnitAluOP(
                 6'b100011: begin//LW
                     o_controlALUOp<=6'b000001;
                 end
-                //6'b100111: begin//LWU
-                //end
+                6'b100111: begin//LWU
+                    o_controlALUOp<=6'b000001;
+                end
                 6'b100100: begin//LBU
                     o_controlALUOp<=6'b000001;
                 end

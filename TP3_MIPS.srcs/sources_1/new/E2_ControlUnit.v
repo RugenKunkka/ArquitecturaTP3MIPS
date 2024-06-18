@@ -27,7 +27,8 @@ module E2_ControlUnit
         output reg          o_controlSignedLoad,//bit 4 MSB
         
         output reg          o_controlALUSrc,//selecciona la fuente del dato 2 para la ALU, tiene un multiplexor
-        output reg          o_controlHalt,           
+        output reg          o_controlHalt,
+        output reg          o_isSLL_SRL_SRA,           
         //output reg o_controlisJALRBit31,//te dice si es la instruccion JALR especificamente para poder guardar la direccion de retorno (PC+4) en la posicion 31 de la memoria de registros
         input wire i_resetForHazard,
         input wire i_reset
@@ -50,6 +51,7 @@ module E2_ControlUnit
             o_controlSignedLoad <= 0;
             o_controlALUSrc     <= 0;
             o_controlHalt       <= 0;
+            o_isSLL_SRL_SRA     <= 0;
         end
         
         
@@ -70,6 +72,7 @@ module E2_ControlUnit
             o_controlIsBNEQ<=0;
             
             o_controlHalt<=1;
+            o_isSLL_SRL_SRA<= 0;
         end
         
         //JALR ok
@@ -91,6 +94,7 @@ module E2_ControlUnit
             o_controlIsBNEQ<=0;
             
             o_controlHalt<=0;
+            o_isSLL_SRL_SRA<= 0;
         end
         //JR ok
         else if (i_operationCode==6'b000000 && i_bits20_6==15'b000000000000000) begin
@@ -105,11 +109,12 @@ module E2_ControlUnit
             o_controlWHBLS<=3'b000;
             o_controlSignedLoad<=0;
             o_controlIsJump<=0;
-            o_controlIsJumpTipoR<=0;//stefanooo fraannn hazard unit ==> estaba en 1
+            o_controlIsJumpTipoR<=1;//stefanooo fraannn hazard unit ==> estaba en 1
             o_controlIsBranch<=0;
             o_controlIsBNEQ<=0;
             
             o_controlHalt<=0;
+            o_isSLL_SRL_SRA<= 0;
         end
         
         else if(i_operationCode==6'b000000) begin //TIPO - R y a partir de ahora me queda verificar el func code
@@ -142,14 +147,15 @@ module E2_ControlUnit
                 o_controlIsBNEQ<=0;
                 
                 o_controlHalt<=0;
+                o_isSLL_SRL_SRA<= 0;
             end 
             else if(i_functionCode==6'b000000 || //SLL
             i_functionCode==6'b000010 ||//SRL
             i_functionCode==6'b000011 //SRA
             ) begin 
-                o_controlRegDst<=0;
+                o_controlRegDst<=1;
                 o_controlRegWrite<=1;
-                o_controlALUSrc<=1;
+                o_controlALUSrc<=0;
                 o_controlMemWrite<=0;
                 o_controlMemtoReg<=0;
                 o_controlPC4WB<=0;
@@ -163,6 +169,7 @@ module E2_ControlUnit
                 o_controlIsBNEQ<=0;
                 
                 o_controlHalt<=0;
+                o_isSLL_SRL_SRA<=1;
             end
             else begin
                 o_controlRegDst<=0;
@@ -181,6 +188,7 @@ module E2_ControlUnit
                 o_controlIsBNEQ<=0;
                 
                 o_controlHalt<=0;
+                o_isSLL_SRL_SRA<=0;
             end
         end
         else begin
@@ -202,6 +210,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 6'b000011: begin//JAL OK
                     o_controlRegDst<=0;
@@ -214,12 +223,13 @@ module E2_ControlUnit
                     //el memwidth xxxx
                     o_controlWHBLS<=3'b000;
                     o_controlSignedLoad<=0;
-                    o_controlIsJump<=0;
-                    o_controlIsJumpTipoR<=1;//stefanooo fraannn hazard unit ==> estaba en 1
+                    o_controlIsJump<=1;
+                    o_controlIsJumpTipoR<=0;
                     o_controlIsBranch<=0;
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 6'b100000: begin//LB
                     o_controlRegDst<=0;
@@ -238,6 +248,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 6'b100001: begin//LH
                     o_controlRegDst<=0;
@@ -256,6 +267,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 6'b100011: begin//LW
                     o_controlRegDst<=0;
@@ -274,9 +286,27 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
-                //6'b100111: begin//LWU
-                //end
+                6'b100111: begin//LWU
+                    o_controlRegDst<=0;
+                    o_controlRegWrite<=1;
+                    o_controlALUSrc<=1;
+                    o_controlMemWrite<=0;
+                    o_controlMemtoReg<=1;
+                    o_controlPC4WB<=0;
+                    o_controlGpr31<=0;
+                    //el memwidth xxxx
+                    o_controlWHBLS<=3'b001;//0001
+                    o_controlSignedLoad<=0;
+                    o_controlIsJump<=0;
+                    o_controlIsJumpTipoR<=0;
+                    o_controlIsBranch<=0;
+                    o_controlIsBNEQ<=0;
+                    
+                    o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
+                end
                 6'b100100: begin//LBU
                     o_controlRegDst<=0;
                     o_controlRegWrite<=1;
@@ -294,6 +324,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 6'b100101: begin//LHU
                     o_controlRegDst<=0;
@@ -312,6 +343,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 6'b101000: begin//SB
                     o_controlRegDst<=0;
@@ -322,7 +354,7 @@ module E2_ControlUnit
                     o_controlPC4WB<=0;
                     o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS<=3'b100;//1001
+                    o_controlWHBLS<=3'b001;//1001
                     o_controlSignedLoad<=1;
                     o_controlIsJump<=0;
                     o_controlIsJumpTipoR<=0;
@@ -330,6 +362,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 6'b101001: begin//SH
                     o_controlRegDst<=0;
@@ -348,6 +381,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 6'b101011: begin//SW
                     o_controlRegDst<=0;
@@ -366,6 +400,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 6'b001010: begin//SLTI
                     o_controlRegDst<=0;
@@ -384,6 +419,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 6'b000100: begin//BEQ
                     o_controlRegDst<=1;
@@ -402,6 +438,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 6'b000101: begin//BNE
                     o_controlRegDst<=1;
@@ -420,6 +457,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=1;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 //-------------------------------------------
                 //a partir de aca van las isntrucciones que son tipo I y tienen el mismo output
@@ -442,6 +480,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 6'b001000: begin//ADDI
                     o_controlRegDst<=0;
@@ -460,6 +499,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 6'b001100: begin//ANDI
                     o_controlRegDst<=0;
@@ -478,6 +518,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 6'b001101: begin//ORI
                     o_controlRegDst<=0;
@@ -496,6 +537,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 6'b001110: begin//XORI
                     o_controlRegDst<=0;
@@ -514,6 +556,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 6'b001111: begin//LUI
                     o_controlRegDst<=0;
@@ -532,6 +575,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
                 default: begin
                     o_controlRegDst<=0;
@@ -550,6 +594,7 @@ module E2_ControlUnit
                     o_controlIsBNEQ<=0;
                     
                     o_controlHalt<=0;
+                    o_isSLL_SRL_SRA<=0;
                 end
             endcase
         end
