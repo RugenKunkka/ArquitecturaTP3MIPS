@@ -101,20 +101,20 @@ module Etapa4_MemoryAccess
         .i_addr_forWordMode         (w_addr_fromDUMuxToDatMem),     
         .i_data_forWordMode         (i_data_fromE3ToDatMem),   
         .o_data_forWordMode         (w_dataWord_fromDatMemToMuxWHB),
-        .i_writeEnable_forWordMode  (i_controlMemWrite),  
-        .i_readEnable_forWordMode   (i_controlMemToReg | i_controlMemRead | i_re_fromDUToDatMem),       
+        .i_writeEnable_forWordMode  (i_controlMemWrite & i_controlWHBLS[2]),  
+        .i_readEnable_forWordMode   ((i_controlMemToReg & i_controlWHBLS[2]) | i_controlMemRead | i_re_fromDUToDatMem),       
 
         .i_addr_forHalfMode         (i_ALUResult_fromE3ToE4),     
         .i_data_forHalfMode         (i_data_fromE3ToDatMem[16-1:0]),   
         .o_data_forHalfMode         (w_dataHalf_fromDatMemToExtenders),
-        .i_writeEnable_forHalfMode  (i_controlMemWrite),  
-        .i_readEnable_forHalfMode   (i_controlMemRead),       
+        .i_writeEnable_forHalfMode  (i_controlMemWrite & i_controlWHBLS[1]),  
+        .i_readEnable_forHalfMode   ((i_controlMemToReg & i_controlWHBLS[1]) | i_controlMemRead),      
         
         .i_addr_forByteMode         (i_ALUResult_fromE3ToE4),     
         .i_data_forByteMode         (i_data_fromE3ToDatMem[8-1:0]),   
         .o_data_forByteMode         (w_dataByte_fromDatMemToExtenders),
-        .i_writeEnable_forByteMode  (i_controlMemWrite),  
-        .i_readEnable_forByteMode   (i_controlMemRead)
+        .i_writeEnable_forByteMode  (i_controlMemWrite & i_controlWHBLS[0]),  
+        .i_readEnable_forByteMode   ((i_controlMemToReg & i_controlWHBLS[0]) | i_controlMemRead)
     );
 
     wire [DAT_LEN-1:0] w_extended_fromZeroExtHToMuxHalfSigned;

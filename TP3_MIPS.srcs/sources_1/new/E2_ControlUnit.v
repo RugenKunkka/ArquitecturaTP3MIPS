@@ -240,7 +240,7 @@ module E2_ControlUnit
                     o_controlPC4WB<=0;
                     o_controlGpr31<= 0;
                     //el memwidth xxxx
-                    o_controlWHBLS<=3'b100;//1001
+                    o_controlWHBLS<=3'b001;//1001
                     o_controlSignedLoad<=1;
                     o_controlIsJump<=0;
                     o_controlIsJumpTipoR<=0;
@@ -297,7 +297,7 @@ module E2_ControlUnit
                     o_controlPC4WB<=0;
                     o_controlGpr31<=0;
                     //el memwidth xxxx
-                    o_controlWHBLS<=3'b001;//0001
+                    o_controlWHBLS<=3'b100;//0100
                     o_controlSignedLoad<=0;
                     o_controlIsJump<=0;
                     o_controlIsJumpTipoR<=0;
