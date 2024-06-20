@@ -168,7 +168,8 @@ module Etapas
         // For J, JAL (From E2 To E1)
         .o_incoditionalJumpAddress  (w_addrForJumpMux_fromE2ToE1),
         .o_controlJump              (w_muxSelForJumpMux_fromE2ToE1),
-
+        .o_controlIsJumpR           (w_muxSelForJumpRMux_fromE3ToE1),
+        .o_jumpRAddress             (w_addrForJumpRMux_fromE3ToE1),
         // Directly between stages
         .i_pcMas4       (w_pcMas4_fromE1ToE2),
         .o_pcMas4       (w_pcMas4_fromE2ToE3),
@@ -270,9 +271,9 @@ module Etapas
 
         // From E3 To E1 , (For BEQ, BNEQ, JAR, JALR)
         //.o_controlIsBranchControlUnit   (w_muxSelForBranchMux_fromE3ToE1),
-        .o_controlIsJumpR               (w_muxSelForJumpRMux_fromE3ToE1),
+        //.o_controlIsJumpR               (w_muxSelForJumpRMux_fromE3ToE1),
         //.o_branchAddress                (w_addrForBranchMux_fromE3ToE1),
-        .o_jumpRAddress                 (w_addrForJumpRMux_fromE3ToE1),
+        //.o_jumpRAddress                 (w_addrForJumpRMux_fromE3ToE1),
 
         // For Forwarding
         .i_rd_fromE4ToFU            (w_rdForFU_fromE4ToE3),

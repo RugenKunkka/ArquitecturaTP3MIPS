@@ -39,6 +39,8 @@ module Etapa2_InstructionDecode
         // For J, JAL (From E2 To E1)
         output wire [INSMEM_ADDR_LEN-1:0]   o_incoditionalJumpAddress,
         output wire                         o_controlJump,  
+        output wire                         o_controlIsJumpR,
+        output wire [INSMEM_ADDR_LEN-1:0]   o_jumpRAddress,
 
         // Directly between stages
         input  wire [INSMEM_ADDR_LEN-1:0]   i_pcMas4,
@@ -156,6 +158,7 @@ module Etapa2_InstructionDecode
       
     wire [32-1:0] wire_o_dataBFromRegisterMemoryToMuxALU;
     wire [REGFILE_LEN-1:0] w_dataA;
+    wire [REGFILE_LEN-1:0] w_dataACombinational;
     //wire o_wire_dataA
     E2_RegisterMemory
     #(
@@ -177,7 +180,8 @@ module Etapa2_InstructionDecode
         .i_DatoAEscribir    (i_datoAEscribirToRegisterMemory),
         
         .o_dataA    (w_dataA),
-        .o_dataB    (wire_o_dataBFromRegisterMemoryToMuxALU)
+        .o_dataB    (wire_o_dataBFromRegisterMemoryToMuxALU),
+        .o_dataACombinational (w_dataACombinational)
     );
     
     wire [32-1:0] wire_o_extendedDataFromExtensorDePalabraToMuxAluInputB;
@@ -272,7 +276,7 @@ module Etapa2_InstructionDecode
     (
         .i_controlBNEQ      (o_wire_controlBNEQ),
         .i_controlBranch    (o_wire_controlBranch),
-        .i_controlJumpR     (o_wire_controlIsJumpTipoR),
+        .i_controlJumpR     (o_wire_controlIsJumpTipoR),//acordate de este
         .i_controlRegWrite  (o_wire_controlRegWrite),
         .i_controlMemWrite  (o_wire_controlMemWrite),
         .i_controlMemRead   (o_wire_controlMemRead),
@@ -294,7 +298,7 @@ module Etapa2_InstructionDecode
 
         .o_controlBNEQ      (o_controlBNEQ),
         .o_controlBranch    (o_controlBranch),
-        .o_controlJumpR     (o_controlJumpR),
+        .o_controlJumpR     (o_controlJumpR),//acordate de este
         .o_controlRegWrite  (o_controlRegWrite),
         .o_controlMemWrite  (o_controlMemWrite),
         .o_controlMemRead   (o_controlMemRead),
@@ -439,5 +443,7 @@ module Etapa2_InstructionDecode
     );
     
     assign o_data_fromRegFileToDU = w_dataA;
+    assign o_controlIsJumpR = o_wire_controlIsJumpTipoR;
+    assign o_jumpRAddress = w_dataACombinational;//w_dataA;
     
 endmodule

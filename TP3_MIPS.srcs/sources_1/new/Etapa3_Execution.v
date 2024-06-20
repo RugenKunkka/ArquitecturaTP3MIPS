@@ -55,9 +55,9 @@ module Etapa3_Execution
 
         // From E3 To E1 , (For BEQ, BNEQ, JAR, JALR)
         //output wire                         o_controlIsBranchControlUnit,
-        output wire                         o_controlIsJumpR,
+        //output wire                         o_controlIsJumpR,
         //output wire [INSMEM_ADDR_LEN-1:0]   o_branchAddress,
-        output wire [INSMEM_ADDR_LEN-1:0]   o_jumpRAddress,
+        //output wire [INSMEM_ADDR_LEN-1:0]   o_jumpRAddress,
 
         // For Forwarding
         input wire                          i_RegWrite_fromE4ToFU,
@@ -220,8 +220,8 @@ module Etapa3_Execution
         .i_reset(i_reset)
     );
 
-    assign o_controlIsJumpR = i_controlIsJumpR;
-    assign o_jumpRAddress = wire_o_dataAFromMux3ToALU;
+    //assign o_controlIsJumpR = i_controlIsJumpR;
+    //assign o_jumpRAddress = wire_o_dataAFromMux3ToALU;
 
     E3_ForwardingUnit
     #(
