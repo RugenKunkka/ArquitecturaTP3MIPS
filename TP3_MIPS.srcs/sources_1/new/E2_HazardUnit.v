@@ -92,7 +92,7 @@ module E2_HazardUnit
                     stall_IFID_b <= HIGH;
                     o_post_bloqueo_1<=HIGH;
                 end
-                else if (i_controlIsJump) begin //ok
+                else if (i_controlIsJump) begin //ok debe de entrar para J y JAL
                     stall_PC_b  <= LOW;
                     stall_IFID_b <= HIGH;
                     o_post_bloqueo_1<=HIGH;

@@ -98,8 +98,8 @@ module Etapa2_InstructionDecode
     (
         .i_instruction      (i_instruction),
         .i_operationCode    (i_instruction[31:26]),
-        .i_bits20_16        (i_instruction[20:15]),
-        .i_bits10_6         (i_instruction[11:6]), 
+        .i_bits20_16        (i_instruction[20:16]),
+        .i_bits10_6         (i_instruction[10:6]), 
         .i_bits20_6         (i_instruction[20:6]),
         .i_functionCode     (i_instruction[5:0]),
 
@@ -441,7 +441,7 @@ module Etapa2_InstructionDecode
         .i_isBranch (o_wire_controlBranch),
         .o_controlBranchAddressMux  (o_controlIsBranchControlUnit) // NonRegister output
     );
-    
+           
     assign o_data_fromRegFileToDU = w_dataA;
     assign o_controlIsJumpR = o_wire_controlIsJumpTipoR;
     assign o_jumpRAddress = w_dataACombinational;//w_dataA;

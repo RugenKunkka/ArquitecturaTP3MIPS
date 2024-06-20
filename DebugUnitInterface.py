@@ -14,7 +14,7 @@ def setup_argparse():
     parser.add_argument('--mode', type=str, default='CONT', help='Modo de Operacion del MIPS. (CONT or STEP)')
     parser.add_argument('--port', type=str, default='COM4', help='Puerto de comunicacion serial.')
     parser.add_argument('--baudrate', type=int, default=9600, help='Baud Rate de la comunicacion serial.')
-    parser.add_argument('--path', type=str, default=r"D:\Facultad\Arquitectura de computadoras\MIS_TPS\ArquitecturaTP3MIPS\pruebaJ1.hex"  , help='Path hacia el programa a cargar.')
+    parser.add_argument('--path', type=str, default=r"D:\Facultad\Arquitectura de computadoras\MIS_TPS\ArquitecturaTP3MIPS\pruebaJALR.hex"  , help='Path hacia el programa a cargar.')
     parser.add_argument('--log', action='store_true', help='Para loggear la terminal')
     args = parser.parse_args()
     print(args)

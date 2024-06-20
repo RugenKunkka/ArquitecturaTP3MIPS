@@ -11,15 +11,141 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="100,066.668333 us"></ZoomStartTime>
-      <ZoomEndTime time="100,466.678334 us"></ZoomEndTime>
-      <Cursor1Time time="100,400.010000 us"></Cursor1Time>
+      <ZoomStartTime time="123,426,000.199 ns"></ZoomStartTime>
+      <ZoomEndTime time="123,426,122.700 ns"></ZoomEndTime>
+      <Cursor1Time time="123,426,072.799 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="306"></NameColumnWidth>
-      <ValueColumnWidth column_width="134"></ValueColumnWidth>
+      <NameColumnWidth column_width="256"></NameColumnWidth>
+      <ValueColumnWidth column_width="120"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="5" />
+   <WVObjectSize size="16" />
+   <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/o_controlIsJumpR" type="logic">
+      <obj_property name="ElementShortName">o_controlIsJumpR</obj_property>
+      <obj_property name="ObjectShortName">o_controlIsJumpR</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/o_jumpRAddress" type="array">
+      <obj_property name="ElementShortName">o_jumpRAddress[31:0]</obj_property>
+      <obj_property name="ObjectShortName">o_jumpRAddress[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="group1217" type="group">
+      <obj_property name="label">Etapa 1</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="group1411" type="group">
+         <obj_property name="label">Mux 1 Normal Jump</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Mux1/i_bus0" type="array">
+            <obj_property name="ElementShortName">i_bus0[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_bus0[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Mux1/i_bus1" type="array">
+            <obj_property name="ElementShortName">i_bus1[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_bus1[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Mux1/o_bus" type="array">
+            <obj_property name="ElementShortName">o_bus[31:0]</obj_property>
+            <obj_property name="ObjectShortName">o_bus[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Mux1/i_muxSel" type="logic">
+            <obj_property name="ElementShortName">i_muxSel</obj_property>
+            <obj_property name="ObjectShortName">i_muxSel</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Mux1/LEN" type="array">
+            <obj_property name="ElementShortName">LEN[31:0]</obj_property>
+            <obj_property name="ObjectShortName">LEN[31:0]</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group464" type="group">
+         <obj_property name="label">Mux2 JR</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Mux2/i_bus0" type="array">
+            <obj_property name="ElementShortName">i_bus0[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_bus0[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Mux2/i_bus1" type="array">
+            <obj_property name="ElementShortName">i_bus1[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_bus1[31:0]</obj_property>
+            <obj_property name="CustomSignalColor">#FF0080</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Mux2/o_bus" type="array">
+            <obj_property name="ElementShortName">o_bus[31:0]</obj_property>
+            <obj_property name="ObjectShortName">o_bus[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Mux2/i_muxSel" type="logic">
+            <obj_property name="ElementShortName">i_muxSel</obj_property>
+            <obj_property name="ObjectShortName">i_muxSel</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Mux2/LEN" type="array">
+            <obj_property name="ElementShortName">LEN[31:0]</obj_property>
+            <obj_property name="ObjectShortName">LEN[31:0]</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group1412" type="group">
+         <obj_property name="label">Mux 3 BEQ BNE</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Mux3/i_bus0" type="array">
+            <obj_property name="ElementShortName">i_bus0[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_bus0[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Mux3/i_bus1" type="array">
+            <obj_property name="ElementShortName">i_bus1[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_bus1[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Mux3/o_bus" type="array">
+            <obj_property name="ElementShortName">o_bus[31:0]</obj_property>
+            <obj_property name="ObjectShortName">o_bus[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Mux3/i_muxSel" type="logic">
+            <obj_property name="ElementShortName">i_muxSel</obj_property>
+            <obj_property name="ObjectShortName">i_muxSel</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_Mux3/LEN" type="array">
+            <obj_property name="ElementShortName">LEN[31:0]</obj_property>
+            <obj_property name="ObjectShortName">LEN[31:0]</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group1212" type="group">
+         <obj_property name="label">PC</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_PC/i_pcAddressIn" type="array">
+            <obj_property name="ElementShortName">i_pcAddressIn[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_pcAddressIn[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_PC/o_pcAddressOut" type="array">
+            <obj_property name="ElementShortName">o_pcAddressOut[31:0]</obj_property>
+            <obj_property name="ObjectShortName">o_pcAddressOut[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_PC/i_stallPC_fromHU" type="logic">
+            <obj_property name="ElementShortName">i_stallPC_fromHU</obj_property>
+            <obj_property name="ObjectShortName">i_stallPC_fromHU</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_PC/i_clockIgnore_fromDU" type="logic">
+            <obj_property name="ElementShortName">i_clockIgnore_fromDU</obj_property>
+            <obj_property name="ObjectShortName">i_clockIgnore_fromDU</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group1218" type="group">
+         <obj_property name="label">Memoria de instrucciones</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/i_address" type="array">
+            <obj_property name="ElementShortName">i_address[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_address[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/o_instruction" type="array">
+            <obj_property name="ElementShortName">o_instruction[31:0]</obj_property>
+            <obj_property name="ObjectShortName">o_instruction[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/i_clock" type="logic">
+            <obj_property name="ElementShortName">i_clock</obj_property>
+            <obj_property name="ObjectShortName">i_clock</obj_property>
+         </wvobject>
+      </wvobject>
+   </wvobject>
    <wvobject fp_name="group206" type="group">
       <obj_property name="label">Entrada etapa 2</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -27,6 +153,8 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/i_instruction" type="array">
          <obj_property name="ElementShortName">i_instruction[31:0]</obj_property>
          <obj_property name="ObjectShortName">i_instruction[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#800080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/o_instruction" type="array">
          <obj_property name="ElementShortName">o_instruction[31:0]</obj_property>
@@ -42,31 +170,13 @@
          <obj_property name="ObjectShortName">i_instruction[31:0]</obj_property>
       </wvobject>
    </wvobject>
-   <wvobject fp_name="group202" type="group">
-      <obj_property name="label">ALU</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_ALU/i_dataA" type="array">
-         <obj_property name="ElementShortName">i_dataA[31:0]</obj_property>
-         <obj_property name="ObjectShortName">i_dataA[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_ALU/i_dataB" type="array">
-         <obj_property name="ElementShortName">i_dataB[31:0]</obj_property>
-         <obj_property name="ObjectShortName">i_dataB[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_ALU/o_ALUResult" type="array">
-         <obj_property name="ElementShortName">o_ALUResult[31:0]</obj_property>
-         <obj_property name="ObjectShortName">o_ALUResult[31:0]</obj_property>
-      </wvobject>
-   </wvobject>
    <wvobject fp_name="group209" type="group">
       <obj_property name="label">Instruction Memory</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/reg_memory" type="array">
-         <obj_property name="ElementShortName">reg_memory[191:0][7:0]</obj_property>
-         <obj_property name="ObjectShortName">reg_memory[191:0][7:0]</obj_property>
-         <obj_property name="isExpanded"></obj_property>
+         <obj_property name="ElementShortName">reg_memory[95:0][7:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_memory[95:0][7:0]</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa1_InstructionFetch/u1_InstructionMemory/o_instruction" type="array">
          <obj_property name="ElementShortName">o_instruction[31:0]</obj_property>
@@ -335,6 +445,8 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/regCurrentState" type="array">
          <obj_property name="ElementShortName">regCurrentState[3:0]</obj_property>
          <obj_property name="ObjectShortName">regCurrentState[3:0]</obj_property>
+         <obj_property name="CustomSignalColor">#800000</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/regNextState" type="array">
          <obj_property name="ElementShortName">regNextState[3:0]</obj_property>
@@ -479,6 +591,898 @@
       <wvobject fp_name="/TopLevel_tb/TopLevel/u_DebugUnit/u_DebugUnitFSM/SEND_DATMEM_STATE_D" type="array">
          <obj_property name="ElementShortName">SEND_DATMEM_STATE_D[3:0]</obj_property>
          <obj_property name="ObjectShortName">SEND_DATMEM_STATE_D[3:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group339" type="group">
+      <obj_property name="label">Control unit</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/i_instruction" type="array">
+         <obj_property name="ElementShortName">i_instruction[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_instruction[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/i_operationCode" type="array">
+         <obj_property name="ElementShortName">i_operationCode[5:0]</obj_property>
+         <obj_property name="ObjectShortName">i_operationCode[5:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/i_bits20_16" type="array">
+         <obj_property name="ElementShortName">i_bits20_16[4:0]</obj_property>
+         <obj_property name="ObjectShortName">i_bits20_16[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/i_bits10_6" type="array">
+         <obj_property name="ElementShortName">i_bits10_6[4:0]</obj_property>
+         <obj_property name="ObjectShortName">i_bits10_6[4:0]</obj_property>
+         <obj_property name="Radix">BINARYRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/i_bits20_6" type="array">
+         <obj_property name="ElementShortName">i_bits20_6[14:0]</obj_property>
+         <obj_property name="ObjectShortName">i_bits20_6[14:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/i_functionCode" type="array">
+         <obj_property name="ElementShortName">i_functionCode[5:0]</obj_property>
+         <obj_property name="ObjectShortName">i_functionCode[5:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/o_controlIsBNEQ" type="logic">
+         <obj_property name="ElementShortName">o_controlIsBNEQ</obj_property>
+         <obj_property name="ObjectShortName">o_controlIsBNEQ</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/o_controlIsBranch" type="logic">
+         <obj_property name="ElementShortName">o_controlIsBranch</obj_property>
+         <obj_property name="ObjectShortName">o_controlIsBranch</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/o_controlIsJALR" type="logic">
+         <obj_property name="ElementShortName">o_controlIsJALR</obj_property>
+         <obj_property name="ObjectShortName">o_controlIsJALR</obj_property>
+         <obj_property name="CustomSignalColor">#FF0080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/o_controlIsJumpTipoR" type="logic">
+         <obj_property name="ElementShortName">o_controlIsJumpTipoR</obj_property>
+         <obj_property name="ObjectShortName">o_controlIsJumpTipoR</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/o_controlIsJump" type="logic">
+         <obj_property name="ElementShortName">o_controlIsJump</obj_property>
+         <obj_property name="ObjectShortName">o_controlIsJump</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/o_controlRegWrite" type="logic">
+         <obj_property name="ElementShortName">o_controlRegWrite</obj_property>
+         <obj_property name="ObjectShortName">o_controlRegWrite</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/o_controlMemWrite" type="logic">
+         <obj_property name="ElementShortName">o_controlMemWrite</obj_property>
+         <obj_property name="ObjectShortName">o_controlMemWrite</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/o_controlMemRead" type="logic">
+         <obj_property name="ElementShortName">o_controlMemRead</obj_property>
+         <obj_property name="ObjectShortName">o_controlMemRead</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/o_controlMemtoReg" type="logic">
+         <obj_property name="ElementShortName">o_controlMemtoReg</obj_property>
+         <obj_property name="ObjectShortName">o_controlMemtoReg</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/o_controlRegDst" type="logic">
+         <obj_property name="ElementShortName">o_controlRegDst</obj_property>
+         <obj_property name="ObjectShortName">o_controlRegDst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/o_controlPC4WB" type="logic">
+         <obj_property name="ElementShortName">o_controlPC4WB</obj_property>
+         <obj_property name="ObjectShortName">o_controlPC4WB</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/o_controlGpr31" type="logic">
+         <obj_property name="ElementShortName">o_controlGpr31</obj_property>
+         <obj_property name="ObjectShortName">o_controlGpr31</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/o_controlWHBLS" type="array">
+         <obj_property name="ElementShortName">o_controlWHBLS[2:0]</obj_property>
+         <obj_property name="ObjectShortName">o_controlWHBLS[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/o_controlSignedLoad" type="logic">
+         <obj_property name="ElementShortName">o_controlSignedLoad</obj_property>
+         <obj_property name="ObjectShortName">o_controlSignedLoad</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/o_controlALUSrc" type="logic">
+         <obj_property name="ElementShortName">o_controlALUSrc</obj_property>
+         <obj_property name="ObjectShortName">o_controlALUSrc</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/o_controlHalt" type="logic">
+         <obj_property name="ElementShortName">o_controlHalt</obj_property>
+         <obj_property name="ObjectShortName">o_controlHalt</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/i_resetForHazard" type="logic">
+         <obj_property name="ElementShortName">i_resetForHazard</obj_property>
+         <obj_property name="ObjectShortName">i_resetForHazard</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_ControlUnit/i_reset" type="logic">
+         <obj_property name="ElementShortName">i_reset</obj_property>
+         <obj_property name="ObjectShortName">i_reset</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group363" type="group">
+      <obj_property name="label">Etapa 3</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="group202" type="group">
+         <obj_property name="label">ALU</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_ALU/i_dataA" type="array">
+            <obj_property name="ElementShortName">i_dataA[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_dataA[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_ALU/i_dataB" type="array">
+            <obj_property name="ElementShortName">i_dataB[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_dataB[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_ALU/o_ALUResult" type="array">
+            <obj_property name="ElementShortName">o_ALUResult[31:0]</obj_property>
+            <obj_property name="ObjectShortName">o_ALUResult[31:0]</obj_property>
+            <obj_property name="CustomSignalColor">#FFA500</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="Radix">BINARYRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_ALU/i_controlOperationCode" type="array">
+            <obj_property name="ElementShortName">i_controlOperationCode[5:0]</obj_property>
+            <obj_property name="ObjectShortName">i_controlOperationCode[5:0]</obj_property>
+            <obj_property name="Radix">BINARYRADIX</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group364" type="group">
+         <obj_property name="label">MuxA</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_Mux3Frowarding1DataAToALU/i_bus00" type="array">
+            <obj_property name="ElementShortName">i_bus00[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_bus00[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_Mux3Frowarding1DataAToALU/i_bus01" type="array">
+            <obj_property name="ElementShortName">i_bus01[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_bus01[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_Mux3Frowarding1DataAToALU/i_bus10" type="array">
+            <obj_property name="ElementShortName">i_bus10[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_bus10[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_Mux3Frowarding1DataAToALU/i_muxSel" type="array">
+            <obj_property name="ElementShortName">i_muxSel[1:0]</obj_property>
+            <obj_property name="ObjectShortName">i_muxSel[1:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_Mux3Frowarding1DataAToALU/o_bus" type="array">
+            <obj_property name="ElementShortName">o_bus[31:0]</obj_property>
+            <obj_property name="ObjectShortName">o_bus[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_Mux3Frowarding1DataAToALU/LEN" type="array">
+            <obj_property name="ElementShortName">LEN[31:0]</obj_property>
+            <obj_property name="ObjectShortName">LEN[31:0]</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group371" type="group">
+         <obj_property name="label">MuxB</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_Mux3Frowarding2DataBToALU/i_bus00" type="array">
+            <obj_property name="ElementShortName">i_bus00[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_bus00[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_Mux3Frowarding2DataBToALU/i_bus01" type="array">
+            <obj_property name="ElementShortName">i_bus01[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_bus01[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_Mux3Frowarding2DataBToALU/i_bus10" type="array">
+            <obj_property name="ElementShortName">i_bus10[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_bus10[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_Mux3Frowarding2DataBToALU/i_muxSel" type="array">
+            <obj_property name="ElementShortName">i_muxSel[1:0]</obj_property>
+            <obj_property name="ObjectShortName">i_muxSel[1:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_Mux3Frowarding2DataBToALU/o_bus" type="array">
+            <obj_property name="ElementShortName">o_bus[31:0]</obj_property>
+            <obj_property name="ObjectShortName">o_bus[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa3_Execution/u1_Mux3Frowarding2DataBToALU/LEN" type="array">
+            <obj_property name="ElementShortName">LEN[31:0]</obj_property>
+            <obj_property name="ObjectShortName">LEN[31:0]</obj_property>
+         </wvobject>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group389" type="group">
+      <obj_property name="label">Etapa2</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="group383" type="group">
+         <obj_property name="label">MuxAluInputB</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_MuxAluInputB/i_bus0" type="array">
+            <obj_property name="DisplayName">label</obj_property>
+            <obj_property name="ElementShortName">i_bus0[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_bus0[31:0]</obj_property>
+            <obj_property name="label">i_bus0FromRM[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_MuxAluInputB/i_bus1" type="array">
+            <obj_property name="DisplayName">label</obj_property>
+            <obj_property name="ElementShortName">i_bus1[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_bus1[31:0]</obj_property>
+            <obj_property name="label">i_bus1FromExtPalabra[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_MuxAluInputB/o_bus" type="array">
+            <obj_property name="ElementShortName">o_bus[31:0]</obj_property>
+            <obj_property name="ObjectShortName">o_bus[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_MuxAluInputB/i_muxSel" type="logic">
+            <obj_property name="ElementShortName">i_muxSel</obj_property>
+            <obj_property name="ObjectShortName">i_muxSel</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_MuxAluInputB/LEN" type="array">
+            <obj_property name="ElementShortName">LEN[31:0]</obj_property>
+            <obj_property name="ObjectShortName">LEN[31:0]</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group422" type="group">
+         <obj_property name="label">Extensor palabra</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_ExtensorDePalabra/i_data" type="array">
+            <obj_property name="ElementShortName">i_data[15:0]</obj_property>
+            <obj_property name="ObjectShortName">i_data[15:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_ExtensorDePalabra/o_extendedData" type="array">
+            <obj_property name="ElementShortName">o_extendedData[31:0]</obj_property>
+            <obj_property name="ObjectShortName">o_extendedData[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_ExtensorDePalabra/ZEXT_IN_LEN" type="array">
+            <obj_property name="ElementShortName">ZEXT_IN_LEN[31:0]</obj_property>
+            <obj_property name="ObjectShortName">ZEXT_IN_LEN[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_ExtensorDePalabra/ZEXT_OUT_LEN" type="array">
+            <obj_property name="ElementShortName">ZEXT_OUT_LEN[31:0]</obj_property>
+            <obj_property name="ObjectShortName">ZEXT_OUT_LEN[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_ExtensorDePalabra/LENTOFILL" type="array">
+            <obj_property name="ElementShortName">LENTOFILL[31:0]</obj_property>
+            <obj_property name="ObjectShortName">LENTOFILL[31:0]</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group291" type="group">
+         <obj_property name="label">MuxAluInputA</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_MuxAluInputA/i_bus0" type="array">
+            <obj_property name="ElementShortName">i_bus0[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_bus0[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_MuxAluInputA/i_bus1" type="array">
+            <obj_property name="ElementShortName">i_bus1[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_bus1[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_MuxAluInputA/o_bus" type="array">
+            <obj_property name="ElementShortName">o_bus[31:0]</obj_property>
+            <obj_property name="ObjectShortName">o_bus[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_MuxAluInputA/i_muxSel" type="logic">
+            <obj_property name="ElementShortName">i_muxSel</obj_property>
+            <obj_property name="ObjectShortName">i_muxSel</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_MuxAluInputA/LEN" type="array">
+            <obj_property name="ElementShortName">LEN[31:0]</obj_property>
+            <obj_property name="ObjectShortName">LEN[31:0]</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group285" type="group">
+         <obj_property name="label">Extensor de palabra SLL</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_ExtensorDePalabraSLL/i_data" type="array">
+            <obj_property name="ElementShortName">i_data[4:0]</obj_property>
+            <obj_property name="ObjectShortName">i_data[4:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_ExtensorDePalabraSLL/o_extendedData" type="array">
+            <obj_property name="ElementShortName">o_extendedData[31:0]</obj_property>
+            <obj_property name="ObjectShortName">o_extendedData[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_ExtensorDePalabraSLL/ZEXT_IN_LEN" type="array">
+            <obj_property name="ElementShortName">ZEXT_IN_LEN[31:0]</obj_property>
+            <obj_property name="ObjectShortName">ZEXT_IN_LEN[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_ExtensorDePalabraSLL/ZEXT_OUT_LEN" type="array">
+            <obj_property name="ElementShortName">ZEXT_OUT_LEN[31:0]</obj_property>
+            <obj_property name="ObjectShortName">ZEXT_OUT_LEN[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_ExtensorDePalabraSLL/LENTOFILL" type="array">
+            <obj_property name="ElementShortName">LENTOFILL[31:0]</obj_property>
+            <obj_property name="ObjectShortName">LENTOFILL[31:0]</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group428" type="group">
+         <obj_property name="label">Register Unit/Memory</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/i_clock" type="logic">
+            <obj_property name="ElementShortName">i_clock</obj_property>
+            <obj_property name="ObjectShortName">i_clock</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/i_reset" type="logic">
+            <obj_property name="ElementShortName">i_reset</obj_property>
+            <obj_property name="ObjectShortName">i_reset</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/i_AddressLecturaA" type="array">
+            <obj_property name="ElementShortName">i_AddressLecturaA[4:0]</obj_property>
+            <obj_property name="ObjectShortName">i_AddressLecturaA[4:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/i_AddressLecturaB" type="array">
+            <obj_property name="ElementShortName">i_AddressLecturaB[4:0]</obj_property>
+            <obj_property name="ObjectShortName">i_AddressLecturaB[4:0]</obj_property>
+            <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/i_AddressEscritura" type="array">
+            <obj_property name="ElementShortName">i_AddressEscritura[4:0]</obj_property>
+            <obj_property name="ObjectShortName">i_AddressEscritura[4:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/i_DatoAEscribir" type="array">
+            <obj_property name="ElementShortName">i_DatoAEscribir[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_DatoAEscribir[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/o_dataA" type="array">
+            <obj_property name="ElementShortName">o_dataA[31:0]</obj_property>
+            <obj_property name="ObjectShortName">o_dataA[31:0]</obj_property>
+            <obj_property name="CustomSignalColor">#FAAFBE</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/o_dataB" type="array">
+            <obj_property name="ElementShortName">o_dataB[31:0]</obj_property>
+            <obj_property name="ObjectShortName">o_dataB[31:0]</obj_property>
+            <obj_property name="CustomSignalColor">#FFD700</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/i_RegWrite_fromControl" type="logic">
+            <obj_property name="ElementShortName">i_RegWrite_fromControl</obj_property>
+            <obj_property name="ObjectShortName">i_RegWrite_fromControl</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/i_clockIgnore_fromDU" type="logic">
+            <obj_property name="ElementShortName">i_clockIgnore_fromDU</obj_property>
+            <obj_property name="ObjectShortName">i_clockIgnore_fromDU</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers" type="array">
+            <obj_property name="ElementShortName">registers[31:0][31:0]</obj_property>
+            <obj_property name="ObjectShortName">registers[31:0][31:0]</obj_property>
+            <obj_property name="isExpanded"></obj_property>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[31]" type="array">
+               <obj_property name="ElementShortName">[31][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[31][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[30]" type="array">
+               <obj_property name="ElementShortName">[30][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[30][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[29]" type="array">
+               <obj_property name="ElementShortName">[29][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[29][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[28]" type="array">
+               <obj_property name="ElementShortName">[28][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[28][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[27]" type="array">
+               <obj_property name="ElementShortName">[27][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[27][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[26]" type="array">
+               <obj_property name="ElementShortName">[26][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[26][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[25]" type="array">
+               <obj_property name="ElementShortName">[25][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[25][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[24]" type="array">
+               <obj_property name="ElementShortName">[24][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[24][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[23]" type="array">
+               <obj_property name="ElementShortName">[23][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[23][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[22]" type="array">
+               <obj_property name="ElementShortName">[22][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[22][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[21]" type="array">
+               <obj_property name="ElementShortName">[21][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[21][31:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[20]" type="array">
+               <obj_property name="ElementShortName">[20][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[20][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[19]" type="array">
+               <obj_property name="ElementShortName">[19][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[19][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[18]" type="array">
+               <obj_property name="ElementShortName">[18][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[18][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[17]" type="array">
+               <obj_property name="ElementShortName">[17][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[17][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[16]" type="array">
+               <obj_property name="ElementShortName">[16][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[16][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[15]" type="array">
+               <obj_property name="ElementShortName">[15][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[15][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[14]" type="array">
+               <obj_property name="ElementShortName">[14][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[14][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[13]" type="array">
+               <obj_property name="ElementShortName">[13][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[13][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[12]" type="array">
+               <obj_property name="ElementShortName">[12][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[12][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[11]" type="array">
+               <obj_property name="ElementShortName">[11][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[11][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[10]" type="array">
+               <obj_property name="ElementShortName">[10][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[10][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[9]" type="array">
+               <obj_property name="ElementShortName">[9][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[9][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[8]" type="array">
+               <obj_property name="ElementShortName">[8][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[8][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[7]" type="array">
+               <obj_property name="ElementShortName">[7][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[7][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[6]" type="array">
+               <obj_property name="ElementShortName">[6][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[6][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[5]" type="array">
+               <obj_property name="ElementShortName">[5][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[5][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[4]" type="array">
+               <obj_property name="ElementShortName">[4][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[4][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[3]" type="array">
+               <obj_property name="ElementShortName">[3][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[3][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[2]" type="array">
+               <obj_property name="ElementShortName">[2][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[2][31:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[1]" type="array">
+               <obj_property name="ElementShortName">[1][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[1][31:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[0]" type="array">
+               <obj_property name="ElementShortName">[0][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[0][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[31]" type="array">
+               <obj_property name="ElementShortName">[31][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[31][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[30]" type="array">
+               <obj_property name="ElementShortName">[30][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[30][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[29]" type="array">
+               <obj_property name="ElementShortName">[29][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[29][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[28]" type="array">
+               <obj_property name="ElementShortName">[28][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[28][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[27]" type="array">
+               <obj_property name="ElementShortName">[27][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[27][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[26]" type="array">
+               <obj_property name="ElementShortName">[26][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[26][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[25]" type="array">
+               <obj_property name="ElementShortName">[25][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[25][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[24]" type="array">
+               <obj_property name="ElementShortName">[24][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[24][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[23]" type="array">
+               <obj_property name="ElementShortName">[23][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[23][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[22]" type="array">
+               <obj_property name="ElementShortName">[22][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[22][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[21]" type="array">
+               <obj_property name="ElementShortName">[21][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[21][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[20]" type="array">
+               <obj_property name="ElementShortName">[20][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[20][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[19]" type="array">
+               <obj_property name="ElementShortName">[19][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[19][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[18]" type="array">
+               <obj_property name="ElementShortName">[18][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[18][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[17]" type="array">
+               <obj_property name="ElementShortName">[17][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[17][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[16]" type="array">
+               <obj_property name="ElementShortName">[16][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[16][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[15]" type="array">
+               <obj_property name="ElementShortName">[15][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[15][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[14]" type="array">
+               <obj_property name="ElementShortName">[14][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[14][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[13]" type="array">
+               <obj_property name="ElementShortName">[13][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[13][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[12]" type="array">
+               <obj_property name="ElementShortName">[12][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[12][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[11]" type="array">
+               <obj_property name="ElementShortName">[11][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[11][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[10]" type="array">
+               <obj_property name="ElementShortName">[10][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[10][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[9]" type="array">
+               <obj_property name="ElementShortName">[9][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[9][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[8]" type="array">
+               <obj_property name="ElementShortName">[8][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[8][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[7]" type="array">
+               <obj_property name="ElementShortName">[7][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[7][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[6]" type="array">
+               <obj_property name="ElementShortName">[6][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[6][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[5]" type="array">
+               <obj_property name="ElementShortName">[5][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[5][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[4]" type="array">
+               <obj_property name="ElementShortName">[4][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[4][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[3]" type="array">
+               <obj_property name="ElementShortName">[3][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[3][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[2]" type="array">
+               <obj_property name="ElementShortName">[2][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[2][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[1]" type="array">
+               <obj_property name="ElementShortName">[1][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[1][31:0]</obj_property>
+            </wvobject>
+            <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/registers[0]" type="array">
+               <obj_property name="ElementShortName">[0][31:0]</obj_property>
+               <obj_property name="ObjectShortName">[0][31:0]</obj_property>
+            </wvobject>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/i" type="array">
+            <obj_property name="ElementShortName">i[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/REGFILE_LEN" type="array">
+            <obj_property name="ElementShortName">REGFILE_LEN[31:0]</obj_property>
+            <obj_property name="ObjectShortName">REGFILE_LEN[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/REGFILE_DEPTH" type="array">
+            <obj_property name="ElementShortName">REGFILE_DEPTH[31:0]</obj_property>
+            <obj_property name="ObjectShortName">REGFILE_DEPTH[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/REGFILE_ADDR_LEN" type="array">
+            <obj_property name="ElementShortName">REGFILE_ADDR_LEN[31:0]</obj_property>
+            <obj_property name="ObjectShortName">REGFILE_ADDR_LEN[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/ZERO" type="logic">
+            <obj_property name="ElementShortName">ZERO</obj_property>
+            <obj_property name="ObjectShortName">ZERO</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_RegisterMemory/HIGH" type="logic">
+            <obj_property name="ElementShortName">HIGH</obj_property>
+            <obj_property name="ObjectShortName">HIGH</obj_property>
+         </wvobject>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group4145" type="group">
+      <obj_property name="label">Salida etapa 2</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/i_post_bloqueo_1" type="logic">
+         <obj_property name="ElementShortName">i_post_bloqueo_1</obj_property>
+         <obj_property name="ObjectShortName">i_post_bloqueo_1</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_Reg_ID_EX/o_post_bloqueo_1" type="logic">
+         <obj_property name="ElementShortName">o_post_bloqueo_1</obj_property>
+         <obj_property name="ObjectShortName">o_post_bloqueo_1</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group4148" type="group">
+      <obj_property name="label">Hazard unit</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/i_post_bloqueo_1" type="logic">
+         <obj_property name="ElementShortName">i_post_bloqueo_1</obj_property>
+         <obj_property name="ObjectShortName">i_post_bloqueo_1</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/o_post_bloqueo_1" type="logic">
+         <obj_property name="ElementShortName">o_post_bloqueo_1</obj_property>
+         <obj_property name="ObjectShortName">o_post_bloqueo_1</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/o_stallPC_fromHUToE1" type="logic">
+         <obj_property name="ElementShortName">o_stallPC_fromHUToE1</obj_property>
+         <obj_property name="ObjectShortName">o_stallPC_fromHUToE1</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/o_stallIFID_fromHUToE1" type="logic">
+         <obj_property name="ElementShortName">o_stallIFID_fromHUToE1</obj_property>
+         <obj_property name="ObjectShortName">o_stallIFID_fromHUToE1</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/o_stallIDEX_fromHUToE2" type="logic">
+         <obj_property name="ElementShortName">o_stallIDEX_fromHUToE2</obj_property>
+         <obj_property name="ObjectShortName">o_stallIDEX_fromHUToE2</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/o_reset_fromHUToCU" type="logic">
+         <obj_property name="ElementShortName">o_reset_fromHUToCU</obj_property>
+         <obj_property name="ObjectShortName">o_reset_fromHUToCU</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/o_flushEXMEM_fromHUToE3" type="logic">
+         <obj_property name="ElementShortName">o_flushEXMEM_fromHUToE3</obj_property>
+         <obj_property name="ObjectShortName">o_flushEXMEM_fromHUToE3</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/o_post_bloqueo_1" type="logic">
+         <obj_property name="ElementShortName">o_post_bloqueo_1</obj_property>
+         <obj_property name="ObjectShortName">o_post_bloqueo_1</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/i_MemToReg_fromE4ToHU" type="logic">
+         <obj_property name="ElementShortName">i_MemToReg_fromE4ToHU</obj_property>
+         <obj_property name="ObjectShortName">i_MemToReg_fromE4ToHU</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/i_rs_fromE3ToHU" type="array">
+         <obj_property name="ElementShortName">i_rs_fromE3ToHU[4:0]</obj_property>
+         <obj_property name="ObjectShortName">i_rs_fromE3ToHU[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/i_rt_fromE3ToHU" type="array">
+         <obj_property name="ElementShortName">i_rt_fromE3ToHU[4:0]</obj_property>
+         <obj_property name="ObjectShortName">i_rt_fromE3ToHU[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/i_rd_fromE4ToHU" type="array">
+         <obj_property name="ElementShortName">i_rd_fromE4ToHU[4:0]</obj_property>
+         <obj_property name="ObjectShortName">i_rd_fromE4ToHU[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/i_RegDst_fromE3ToHU" type="logic">
+         <obj_property name="ElementShortName">i_RegDst_fromE3ToHU</obj_property>
+         <obj_property name="ObjectShortName">i_RegDst_fromE3ToHU</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/i_takeJumpR_fromE2ToHU" type="logic">
+         <obj_property name="ElementShortName">i_takeJumpR_fromE2ToHU</obj_property>
+         <obj_property name="ObjectShortName">i_takeJumpR_fromE2ToHU</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/i_controlIsJump" type="logic">
+         <obj_property name="ElementShortName">i_controlIsJump</obj_property>
+         <obj_property name="ObjectShortName">i_controlIsJump</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/i_controlBranch_fromE2ToHU" type="logic">
+         <obj_property name="ElementShortName">i_controlBranch_fromE2ToHU</obj_property>
+         <obj_property name="ObjectShortName">i_controlBranch_fromE2ToHU</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/i_isZero" type="logic">
+         <obj_property name="ElementShortName">i_isZero</obj_property>
+         <obj_property name="ObjectShortName">i_isZero</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/i_controlIsBNQ" type="logic">
+         <obj_property name="ElementShortName">i_controlIsBNQ</obj_property>
+         <obj_property name="ObjectShortName">i_controlIsBNQ</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/i_post_bloqueo_1" type="logic">
+         <obj_property name="ElementShortName">i_post_bloqueo_1</obj_property>
+         <obj_property name="ObjectShortName">i_post_bloqueo_1</obj_property>
+         <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/i_reset" type="logic">
+         <obj_property name="ElementShortName">i_reset</obj_property>
+         <obj_property name="ObjectShortName">i_reset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/stall_PC_a" type="logic">
+         <obj_property name="ElementShortName">stall_PC_a</obj_property>
+         <obj_property name="ObjectShortName">stall_PC_a</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/stall_IFID_a" type="logic">
+         <obj_property name="ElementShortName">stall_IFID_a</obj_property>
+         <obj_property name="ObjectShortName">stall_IFID_a</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/stall_IDEX_a" type="logic">
+         <obj_property name="ElementShortName">stall_IDEX_a</obj_property>
+         <obj_property name="ObjectShortName">stall_IDEX_a</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/flush_EXMEM_a" type="logic">
+         <obj_property name="ElementShortName">flush_EXMEM_a</obj_property>
+         <obj_property name="ObjectShortName">flush_EXMEM_a</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/stall_PC_b" type="logic">
+         <obj_property name="ElementShortName">stall_PC_b</obj_property>
+         <obj_property name="ObjectShortName">stall_PC_b</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/stall_IFID_b" type="logic">
+         <obj_property name="ElementShortName">stall_IFID_b</obj_property>
+         <obj_property name="ObjectShortName">stall_IFID_b</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/REGFILE_ADDR_LEN" type="array">
+         <obj_property name="ElementShortName">REGFILE_ADDR_LEN[31:0]</obj_property>
+         <obj_property name="ObjectShortName">REGFILE_ADDR_LEN[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/LOW" type="logic">
+         <obj_property name="ElementShortName">LOW</obj_property>
+         <obj_property name="ObjectShortName">LOW</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u_HazardUnit/HIGH" type="logic">
+         <obj_property name="ElementShortName">HIGH</obj_property>
+         <obj_property name="ObjectShortName">HIGH</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group314" type="group">
+      <obj_property name="label">Modulo adder BEQ (imaginario)</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="group315" type="group">
+         <obj_property name="label">Sumador</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_Sumador/i_dataA" type="array">
+            <obj_property name="ElementShortName">i_dataA[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_dataA[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_Sumador/i_dataB" type="array">
+            <obj_property name="ElementShortName">i_dataB[31:0]</obj_property>
+            <obj_property name="ObjectShortName">i_dataB[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_Sumador/o_result" type="array">
+            <obj_property name="ElementShortName">o_result[31:0]</obj_property>
+            <obj_property name="ObjectShortName">o_result[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_Sumador/LEN" type="array">
+            <obj_property name="ElementShortName">LEN[31:0]</obj_property>
+            <obj_property name="ObjectShortName">LEN[31:0]</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group320" type="group">
+         <obj_property name="label">Branch control</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_E3_BranchControl/i_zeroBit" type="logic">
+            <obj_property name="ElementShortName">i_zeroBit</obj_property>
+            <obj_property name="ObjectShortName">i_zeroBit</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_E3_BranchControl/i_isBNEQ" type="logic">
+            <obj_property name="ElementShortName">i_isBNEQ</obj_property>
+            <obj_property name="ObjectShortName">i_isBNEQ</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_E3_BranchControl/i_isBranch" type="logic">
+            <obj_property name="ElementShortName">i_isBranch</obj_property>
+            <obj_property name="ObjectShortName">i_isBranch</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_E3_BranchControl/o_controlBranchAddressMux" type="logic">
+            <obj_property name="ElementShortName">o_controlBranchAddressMux</obj_property>
+            <obj_property name="ObjectShortName">o_controlBranchAddressMux</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group974" type="group">
+         <obj_property name="label">Subtractor</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_RestaMenos4/i_dataA" type="array">
+            <obj_property name="ElementShortName">i_dataA[15:0]</obj_property>
+            <obj_property name="ObjectShortName">i_dataA[15:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_RestaMenos4/i_dataB" type="array">
+            <obj_property name="ElementShortName">i_dataB[15:0]</obj_property>
+            <obj_property name="ObjectShortName">i_dataB[15:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_RestaMenos4/o_result" type="array">
+            <obj_property name="ElementShortName">o_result[15:0]</obj_property>
+            <obj_property name="ObjectShortName">o_result[15:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_RestaMenos4/LEN" type="array">
+            <obj_property name="ElementShortName">LEN[31:0]</obj_property>
+            <obj_property name="ObjectShortName">LEN[31:0]</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/i_instruction" type="array">
+         <obj_property name="ElementShortName">i_instruction[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_instruction[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group1637" type="group">
+      <obj_property name="label">Control Branch</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_E3_BranchControl/i_zeroBit" type="logic">
+         <obj_property name="ElementShortName">i_zeroBit</obj_property>
+         <obj_property name="ObjectShortName">i_zeroBit</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_E3_BranchControl/i_isBNEQ" type="logic">
+         <obj_property name="ElementShortName">i_isBNEQ</obj_property>
+         <obj_property name="ObjectShortName">i_isBNEQ</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_E3_BranchControl/i_isBranch" type="logic">
+         <obj_property name="ElementShortName">i_isBranch</obj_property>
+         <obj_property name="ObjectShortName">i_isBranch</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_E3_BranchControl/o_controlBranchAddressMux" type="logic">
+         <obj_property name="ElementShortName">o_controlBranchAddressMux</obj_property>
+         <obj_property name="ObjectShortName">o_controlBranchAddressMux</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group1642" type="group">
+      <obj_property name="label">Branch Predictor</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_E2_BranchPredictor/i_dataA" type="array">
+         <obj_property name="ElementShortName">i_dataA[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_dataA[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_E2_BranchPredictor/i_dataB" type="array">
+         <obj_property name="ElementShortName">i_dataB[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_dataB[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_E2_BranchPredictor/i_isBEQ" type="logic">
+         <obj_property name="ElementShortName">i_isBEQ</obj_property>
+         <obj_property name="ObjectShortName">i_isBEQ</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_E2_BranchPredictor/i_isBNQ" type="logic">
+         <obj_property name="ElementShortName">i_isBNQ</obj_property>
+         <obj_property name="ObjectShortName">i_isBNQ</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TopLevel_tb/TopLevel/u_Etapas/u_Etapa2_InstructionDecode/u1_E2_BranchPredictor/o_isZero" type="logic">
+         <obj_property name="ElementShortName">o_isZero</obj_property>
+         <obj_property name="ObjectShortName">o_isZero</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group779" type="group">
+      <obj_property name="label">JALR proceso address</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="group780" type="group">
+         <obj_property name="label">Sumador JALR</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
       </wvobject>
    </wvobject>
 </wave_config>

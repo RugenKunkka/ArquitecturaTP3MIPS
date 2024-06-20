@@ -5,8 +5,8 @@ module E2_ControlUnit
         input wire [32-1:0] i_instruction,
         //6 bits MSB
         input wire [6-1:0]  i_operationCode,// bits del 31-26 esto te indica el tipo de operacion por ejemplo si es R o de branch etc..
-        input wire [6-1:0]  i_bits20_16,//se usa en algunas instrucciones como JALR
-        input wire [6-1:0]  i_bits10_6,//se usa en algunas instrucciones como JALR
+        input wire [5-1:0]  i_bits20_16,//se usa en algunas instrucciones como JALR
+        input wire [5-1:0]  i_bits10_6,//se usa en algunas instrucciones como JALR
         input wire [15-1:0] i_bits20_6,//este rango de bits se usa para un registro en especifico (JR) 
         //6 bits LSB
         input wire [6-1:0]  i_functionCode,//bits del 5-0 este te dice que operacion es por ejemplo si es suma, un salto, resta, desplazamiento etc...
@@ -29,7 +29,7 @@ module E2_ControlUnit
         
         output reg          o_controlALUSrc,//selecciona la fuente del dato 2 para la ALU, tiene un multiplexor
         output reg          o_controlHalt,
-        output reg          o_isSLL_SRL_SRA,           
+        output reg          o_isSLL_SRL_SRA,
         //output reg o_controlisJALRBit31,//te dice si es la instruccion JALR especificamente para poder guardar la direccion de retorno (PC+4) en la posicion 31 de la memoria de registros
         input wire i_resetForHazard,
         input wire i_reset
