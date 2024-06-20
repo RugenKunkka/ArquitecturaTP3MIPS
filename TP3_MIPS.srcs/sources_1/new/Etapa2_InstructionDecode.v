@@ -94,6 +94,7 @@ module Etapa2_InstructionDecode
     )
     u_ControlUnit
     (
+        .i_instruction      (i_instruction),
         .i_operationCode    (i_instruction[31:26]),
         .i_bits20_16        (i_instruction[20:15]),
         .i_bits10_6         (i_instruction[11:6]), 

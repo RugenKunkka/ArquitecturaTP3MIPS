@@ -2,6 +2,7 @@
 
 module E2_ControlUnit
     (
+        input wire [32-1:0] i_instruction,
         //6 bits MSB
         input wire [6-1:0]  i_operationCode,// bits del 31-26 esto te indica el tipo de operacion por ejemplo si es R o de branch etc..
         input wire [6-1:0]  i_bits20_16,//se usa en algunas instrucciones como JALR
@@ -53,7 +54,24 @@ module E2_ControlUnit
             o_controlHalt       <= 0;
             o_isSLL_SRL_SRA     <= 0;
         end
-        
+        else if(i_instruction==32'b0) begin//NOP
+            o_controlIsBNEQ     <= 0;
+            o_controlIsBranch   <= 0;
+            o_controlIsJumpTipoR<= 0;
+            o_controlIsJump     <= 0;
+            o_controlRegWrite   <= 0;
+            o_controlMemWrite   <= 0;
+            o_controlMemRead    <= 0;
+            o_controlMemtoReg   <= 0;
+            o_controlRegDst     <= 0;
+            o_controlPC4WB      <= 0;
+            o_controlGpr31      <= 0;
+            o_controlWHBLS      <= 0;
+            o_controlSignedLoad <= 0;
+            o_controlALUSrc     <= 0;
+            o_controlHalt       <= 0;
+            o_isSLL_SRL_SRA     <= 0;
+        end
         
         else if(i_operationCode==6'b111111) begin//HALT
             o_controlRegDst<=0;
