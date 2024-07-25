@@ -159,6 +159,7 @@ module Etapa2_InstructionDecode
     wire [32-1:0] wire_o_dataBFromRegisterMemoryToMuxALU;
     wire [REGFILE_LEN-1:0] w_dataA;
     wire [REGFILE_LEN-1:0] w_dataACombinational;
+    wire [REGFILE_LEN-1:0] w_dataBCombinational;
     //wire o_wire_dataA
     E2_RegisterMemory
     #(
@@ -181,7 +182,8 @@ module Etapa2_InstructionDecode
         
         .o_dataA    (w_dataA),
         .o_dataB    (wire_o_dataBFromRegisterMemoryToMuxALU),
-        .o_dataACombinational (w_dataACombinational)
+        .o_dataACombinational (w_dataACombinational),
+        .o_dataBCombinational (w_dataBCombinational)
     );
     
     wire [32-1:0] wire_o_extendedDataFromExtensorDePalabraToMuxAluInputB;
@@ -422,8 +424,8 @@ module Etapa2_InstructionDecode
     )
     u1_E2_BranchPredictor
     (
-        .i_dataA (w_dataA),
-        .i_dataB (wire_o_dataBFromRegisterMemoryToMuxALU),    
+        .i_dataA (w_dataACombinational),
+        .i_dataB (w_dataBCombinational),    
         .i_isBEQ (o_wire_controlBranch),
         .i_isBNQ (o_wire_controlBNEQ),
         

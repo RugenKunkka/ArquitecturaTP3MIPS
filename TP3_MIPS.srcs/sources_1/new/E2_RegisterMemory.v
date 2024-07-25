@@ -19,6 +19,7 @@ module E2_RegisterMemory
         output reg [REGFILE_LEN-1:0] o_dataB,
         
         output reg [REGFILE_LEN-1:0] o_dataACombinational,
+        output reg [REGFILE_LEN-1:0] o_dataBCombinational,
     
         input wire i_RegWrite_fromControl,
         input wire i_clockIgnore_fromDU
@@ -60,6 +61,7 @@ module E2_RegisterMemory
     end
     always @(*) begin
         o_dataACombinational=registers[i_AddressLecturaA];
+        o_dataBCombinational=registers[i_AddressLecturaB];
     end
        
 endmodule
