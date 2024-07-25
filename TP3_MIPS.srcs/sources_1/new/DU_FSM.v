@@ -104,6 +104,7 @@ module DU_FSM
     localparam [4-1:0] SEND_DATMEM_STATE_B      = 4'b1100; //12
     localparam [4-1:0] SEND_DATMEM_STATE_C      = 4'b1101; //13
     localparam [4-1:0] SEND_DATMEM_STATE_D      = 4'b1110; //14
+    localparam [4-1:0] HALT_STATE               = 4'b1111; //15
 
   /*
         Internal Wires
@@ -145,6 +146,9 @@ module DU_FSM
 
     // For FSM
     reg [4-1:0] regCurrentState, regNextState;
+
+    // For Halt
+    reg reg_halt_detected_next,reg_halt_detected;
     
     /*
         Continuous Assignments
@@ -216,6 +220,9 @@ module DU_FSM
             // For FSM
             regCurrentState         <= IDLE_STATE;  
 
+            // For Halt
+            reg_halt_detected <= LOW;
+
         end
         else begin
 
@@ -251,6 +258,9 @@ module DU_FSM
 
             // For FSM
             regCurrentState          <= regNextState;
+
+            // For Halt
+             reg_halt_detected <= reg_halt_detected_next;
         end
     end
     
@@ -288,6 +298,9 @@ module DU_FSM
 
         // For FSM
         regNextState = regCurrentState;
+
+        // For Halt
+        reg_halt_detected_next = reg_halt_detected;
 
         case(regCurrentState)
             IDLE_STATE: begin
@@ -338,6 +351,7 @@ module DU_FSM
                     regClockIgnoreForInsMem_next = HIGH;
                     regClockIgnoreForRegFile_next = HIGH;
                     regClockIgnoreForDatMem_next =  HIGH;   
+                    reg_halt_detected_next = HIGH;
                 end else begin 
                     regClockIgnoreForPcAndLatches_next = HIGH;
                     regClockIgnoreForInsMem_next = HIGH;
@@ -348,10 +362,11 @@ module DU_FSM
             end 
             CONT_MODE_RUNNING_STATE: begin
                 if (i_halt_fromCUToDUFSM == HIGH )begin
-                    //regClockIgnoreForPcAndLatches_next = HIGH;
-                    //regClockIgnoreForInsMem_next = HIGH;
-                    //regClockIgnoreForRegFile_next = HIGH;
-                    //regClockIgnoreForDatMem_next =  HIGH;  
+                    regClockIgnoreForPcAndLatches_next = HIGH;
+                    regClockIgnoreForInsMem_next = HIGH;
+                    regClockIgnoreForRegFile_next = HIGH;
+                    regClockIgnoreForDatMem_next =  HIGH;  
+                    reg_halt_detected_next = HIGH;
                     regNextState = SEND_PC_STATE_A;   
                 end else begin
                     regClockIgnoreForPcAndLatches_next = LOW;
@@ -425,7 +440,11 @@ module DU_FSM
                     regClockIgnoreForDatMem_next =  HIGH;
                     reg_muxSel_fromDUFSMToDatMemMux_next = LOW;
                     regIndexToSend1_next = {INDEX_TO_SEND_LEN{ZERO}};
-                    regNextState = READY_STATE;
+                    if(reg_halt_detected == HIGH)begin
+                        regNextState = HALT_STATE;
+                    end else begin 
+                        regNextState = READY_STATE;
+                    end
                 end
             end
             SEND_DATMEM_STATE_B: begin // Dummy state to wait one clock cycle
@@ -445,6 +464,11 @@ module DU_FSM
             SEND_DATMEM_STATE_D: begin
                 if (i_txDone_fromTxToDUFSM)begin 
                     regNextState = SEND_DATMEM_STATE_C;
+                end
+            end
+            HALT_STATE: begin
+                if (i_rxDone_fromRxToDUFSM) begin
+                    regNextState = SEND_PC_STATE_A;
                 end
             end
         endcase  

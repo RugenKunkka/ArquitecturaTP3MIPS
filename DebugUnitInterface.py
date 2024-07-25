@@ -11,10 +11,10 @@ def setup_argparse():
     parser = argparse.ArgumentParser(description='A script to receive and print command-line parameters.')
 
     # Add command-line arguments with default values
-    parser.add_argument('--mode', type=str, default='CONT', help='Modo de Operacion del MIPS. (CONT or STEP)')
-    parser.add_argument('--port', type=str, default='COM4', help='Puerto de comunicacion serial.')
+    parser.add_argument('--mode', type=str, default='STEP', help='Modo de Operacion del MIPS. (CONT or STEP)')
+    parser.add_argument('--port', type=str, default='COM7', help='Puerto de comunicacion serial.')
     parser.add_argument('--baudrate', type=int, default=9600, help='Baud Rate de la comunicacion serial.')
-    parser.add_argument('--path', type=str, default=r"D:\Facultad\Arquitectura de computadoras\MIS_TPS\ArquitecturaTP3MIPS\pruebaJALR.hex"  , help='Path hacia el programa a cargar.')
+    parser.add_argument('--path', type=str, default=r"C:\Users\UserTest1\College\CompArq\16Julio\ArquitecturaTP3MIPS\Compilador\Pruebas\F_pruebaTipoRconFWparte1.hex32"  , help='Path hacia el programa a cargar.')
     parser.add_argument('--log', action='store_true', help='Para loggear la terminal')
     args = parser.parse_args()
     print(args)
@@ -136,7 +136,7 @@ def reformatear_archivo(archivo_entrada='datos.txt', archivo_salida='datos_forma
         "PC", "Reg0", "Reg1", "Reg2", "Reg3", "Reg4", "Reg5", "Reg6", "Reg7", "Reg8", "Reg9",
         "Reg10", "Reg11", "Reg12", "Reg13", "Reg14", "Reg15", "Reg16", "Reg17", "Reg18", "Reg19",
         "Reg20", "Reg21", "Reg22", "Reg23", "Reg24", "Reg25", "Reg26", "Reg27", "Reg28", "Reg29",
-        "Reg30", "Reg31", "Reg32", "Reg33", "Reg34", "Reg35", 
+        "Reg30", "Reg31", "Dat00", "Dat04", "Dat08", "Dat12", 
     ]
 
     try:
@@ -260,6 +260,8 @@ if __name__ == "__main__"   :
             primeraEjecucion=False
             if args.mode=='STEP' :
                 send_keyword(ser,STEPMOD_KW);
+            if args.mode=='CONT' :
+                send_keyword(ser,contModKeyword);
         
     except KeyboardInterrupt:
         print("\nCtrl+C pressed. Exiting the program.")
